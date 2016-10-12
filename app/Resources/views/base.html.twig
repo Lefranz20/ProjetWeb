@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <title>{% block title %}Annuaire Bien Etre{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="http://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/libraries/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/libraries/owl.carousel/assets/owl.carousel.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/libraries/colorbox/example1/colorbox.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/libraries/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/libraries/bootstrap-fileinput/fileinput.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/css/superlist.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<div class="page-wrapper">
+    {% block header %}{# non utilisé #}{% endblock %}
+    {% block body %}
+        {#
+            contenu principal:
+                - 1 colne de gauche divisée en 2 blocs (identification + catégories des services)
+                - 1 colne centrale divisé en trois blocs (Bandeau,Recherche et Pavés prestataire)
+        #}
+    {% endblock %}
+    {% block footer %}{# pied de page ici#}{% endblock %}
+
+    {% block javascripts %}
+        <script type="text/javascript" charset="UTF-8" src="http://maps.googleapis.com/maps-api-v3/api/js/26/7/intl/fr_ALL/common.js" style=""></script>
+        <script type="text/javascript" charset="UTF-8" src="http://maps.googleapis.com/maps-api-v3/api/js/26/7/intl/fr_ALL/util.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="http://maps.googleapis.com/maps-api-v3/api/js/26/7/intl/fr_ALL/stats.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing&sensor=false" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/jquery.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/map.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/collapse.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/carousel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/transition.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/dropdown.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/tooltip.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/tab.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-sass/javascripts/bootstrap/alert.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/colorbox/jquery.colorbox-min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/flot/jquery.flot.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/flot/jquery.flot.spline.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-select/bootstrap-select.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/jquery-google-map/infobox.js') }}" type="text/javascript" ></script>
+        <script src="{{ asset('assets/libraries/jquery-google-map/markerclusterer.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/jquery-google-map/jquery-google-map.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/owl.carousel/owl.carousel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/libraries/bootstrap-fileinput/fileinput.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/superlist.js') }}" type="text/javascript"></script>
+    {% endblock %}
+</div>
+</body>
 </html>

@@ -93,6 +93,7 @@ class Utilisateur
 
     /**
      * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateur")
+     *
      */
     private $localites;
 

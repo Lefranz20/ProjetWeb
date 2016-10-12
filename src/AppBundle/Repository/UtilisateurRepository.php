@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function search($a){
+        $qb = $this->createQueryBuilder('user');
+        $q = $qb->addSelect('user')
+            ->where('user.type = :t');
+        $q->setParameter('t',$a);
+        $q = $q->getQuery();
+        $q->getResult();
+    }
 }
