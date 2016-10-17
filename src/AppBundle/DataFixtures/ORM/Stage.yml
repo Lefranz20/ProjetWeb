@@ -1,0 +1,10 @@
+AppBundle\Entity\Stage:
+    Stage1:
+        nom: <name()>
+        description: <sentence($nbWords = 6, $variableNbWords = true)>
+        tarif: <randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL)>
+        infoComplementaire: <text($maxNbChars = 200)>
+        debut: <dateTimeThisCentury($max = 'now')>
+        fin: <dateTimeThisCentury($max = 'now')>
+        affichageDebut: <dateTimeThisCentury($max = 'now')>
+        affichageFin: <dateTimeThisCentury($max = 'now')>

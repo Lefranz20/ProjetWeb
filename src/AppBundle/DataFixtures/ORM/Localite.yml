@@ -1,0 +1,3 @@
+AppBundle\Entity\Localite:
+    Localite1:
+        localite: <city()>

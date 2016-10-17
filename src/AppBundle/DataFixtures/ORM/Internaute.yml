@@ -1,0 +1,5 @@
+AppBundle\Entity\Internaute:
+    Internaute1:
+        nom: <firstName()>
+        prenom: <lastname()>
+        newsletter: <boolean()>

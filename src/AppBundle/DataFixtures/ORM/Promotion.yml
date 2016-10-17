@@ -1,0 +1,9 @@
+AppBundle\Entity\Promotion:
+    promotion1:
+        nom: <name()>
+        description: <text($maxNbChars = 200)>
+        document: <name()>
+        debut: <dateTimeThisCentury($max = 'now')>
+        fin: <dateTimeThisCentury($max = 'now')>
+        affichageDebut: <dateTimeThisCentury($max = 'now')>
+        affichageFin: <dateTimeThisCentury($max = 'now')>

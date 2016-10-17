@@ -1,0 +1,11 @@
+AppBundle\Entity\Utilisateur:
+    utilisateur1:
+        email:  <email()>
+        motDePasse: <password()>
+        rueNumero: <buildingNumber()>
+        rue: <streetName()>
+        inscription: <dateTimeThisCentury($max = 'now')>
+        typeUtilisateur: "prestataire"
+        nombreEssai: <randomDigit()>
+        banni: <boolean()>
+        inscriptionConf: <boolean()>

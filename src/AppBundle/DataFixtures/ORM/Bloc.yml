@@ -1,0 +1,4 @@
+AppBundle\Entity\Bloc:
+    Bloc1:
+        nom : <name()>
+        description : <text($maxNbChars = 200)>

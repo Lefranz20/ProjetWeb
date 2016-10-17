@@ -1,0 +1,6 @@
+AppBundle\Entity\Commentaire:
+    Commentaire1:
+        cote: <randomDigit()>
+        titre: <jobTitle()>
+        contenu: <text($maxNbChars = 200)>
+        encodage:  <dateTimeThisCentury($max = 'now')>
