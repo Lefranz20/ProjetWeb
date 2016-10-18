@@ -13,9 +13,24 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('Frontend/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+
+        return $this->render('Frontend/Index.html.twig');
+    }
+    /**
+     * @Route("/apropos",name="apropos")
+     */
+    public function aproposAction(){
+        return $this->render('Frontend/apropos.html.twig');
+    }
+
+    /**
+     * @Route("/contact",name="contact")
+     */
+    public function contactAction(){
+        return $this->render('Frontend/contact.html.twig');
+    }
+
+    public function  bandeauAction(){
+        return $this->render('includes/bandeau.html.twig');
     }
 }

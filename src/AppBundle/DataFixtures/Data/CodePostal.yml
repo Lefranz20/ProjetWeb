@@ -1,3 +1,0 @@
-AppBundle\Entity\CodePostal:
-    codepostal:
-        cp: <postcode()>
