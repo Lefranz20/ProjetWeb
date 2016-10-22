@@ -1,4 +1,4 @@
 AppBundle\Entity\Abus:
     Abus1:
         description : <text($maxNbChars = 200)>
-        encodage : <dateTimeThisCentury($max = 'now')>
+        $dateEncodage : <dateTimeThisMonth($max = 'now')>

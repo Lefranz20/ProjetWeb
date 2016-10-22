@@ -31,17 +31,17 @@ class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="lien", type="string", length=255)
      */
-    private $nom;
+    private $lien;
 
     /**
-     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CategorieDeService",mappedBy="images")
      */
     private $categorie_services;
 
     /**
-     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Internaute",mappedBy="images")
      */
     private $internautes;
 
@@ -54,36 +54,11 @@ class Image
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Images
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
     }
 
     /**
@@ -108,6 +83,78 @@ class Image
     public function getTypeImage()
     {
         return $this->typeImage;
+    }
+
+    /**
+     * Set lien
+     *
+     * @param string $lien
+     *
+     * @return Image
+     */
+    public function setLien($lien)
+    {
+        $this->lien = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Get lien
+     *
+     * @return string
+     */
+    public function getLien()
+    {
+        return $this->lien;
+    }
+
+    /**
+     * Set categorieServices
+     *
+     * @param \AppBundle\Entity\CategorieDeService $categorieServices
+     *
+     * @return Image
+     */
+    public function setCategorieServices(\AppBundle\Entity\CategorieDeService $categorieServices = null)
+    {
+        $this->categorie_services = $categorieServices;
+
+        return $this;
+    }
+
+    /**
+     * Get categorieServices
+     *
+     * @return \AppBundle\Entity\CategorieDeService
+     */
+    public function getCategorieServices()
+    {
+        return $this->categorie_services;
+    }
+
+    /**
+     * Set internautes
+     *
+     * @param \AppBundle\Entity\Internaute $internautes
+     *
+     * @return Image
+     */
+    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
+    {
+        $this->internautes = $internautes;
+
+        return $this;
+    }
+
+    /**
+     * Get internautes
+     *
+     * @return \AppBundle\Entity\Internaute
+     */
+    public function getInternautes()
+    {
+        return $this->internautes;
     }
 
     /**

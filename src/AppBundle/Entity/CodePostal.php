@@ -25,20 +25,29 @@ class CodePostal
     /**
      * @var string
      *
-     * @ORM\Column(name="cp", type="string", length=255, unique=true)
+     * @ORM\Column(name="code_postal", type="string", length=255, unique=true)
      */
-    private $cp;
+    private $codePostal;
 
     /**
      * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="codePostals")
+     *
      */
     private $utilisateurs;
 
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -46,34 +55,27 @@ class CodePostal
     }
 
     /**
-     * Set cp
+     * Set codePostal
      *
-     * @param string $cp
+     * @param string $codePostal
      *
      * @return CodePostal
      */
-    public function setCp($cp)
+    public function setCodePostal($codePostal)
     {
-        $this->cp = $cp;
+        $this->codePostal = $codePostal;
 
         return $this;
     }
 
     /**
-     * Get cp
+     * Get codePostal
      *
      * @return string
      */
-    public function getCp()
+    public function getCodePostal()
     {
-        return $this->cp;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->codePostal;
     }
 
     /**

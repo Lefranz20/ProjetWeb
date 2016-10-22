@@ -31,6 +31,21 @@ class DefaultController extends Controller
     }
 
     public function  bandeauAction(){
-        return $this->render('includes/bandeau.html.twig');
+        return $this->render(':Blocs:bandeau.html.twig');
+    }
+
+    public function rechercheAction(){
+        return $this->render(':Blocs:recherche.html.twig');
+    }
+    public  function prestatairesAction(){
+        /*
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Prestataire');
+        $prestataires = $repo->findLastPrestataires();
+        */
+
+        $prestataires = $this->getDoctrine()->getRepository('AppBundle:Prestataire')->findLastPrestataires();
+        dump($prestataires);
+        return $this->render(':Blocs:prestataires.html.twig',array('prestaires'=>$prestataires));
     }
 }

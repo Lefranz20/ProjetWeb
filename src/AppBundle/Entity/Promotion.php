@@ -29,7 +29,7 @@ class Promotion
     private $nom;
 
     /**
-     * @var string
+     * @var text
      *
      * @ORM\Column(name="description", type="text")
      */
@@ -45,33 +45,34 @@ class Promotion
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="debut", type="date")
+     * @ORM\Column(name="date_debut", type="date")
      */
-    private $debut;
+    private $dateDebut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fin", type="date")
+     * @ORM\Column(name="date_fin", type="date")
      */
-    private $fin;
+    private $dateFin;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="affichageDebut", type="date")
+     * @ORM\Column(name="date_affichage_debut", type="date")
      */
-    private $affichageDebut;
+    private $dateAffichageDebut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="affichageFin", type="date")
+     * @ORM\Column(name="date_affichage_fin", type="date")
      */
-    private $affichageFin;
+    private $dateAffichageFin;
 
     /**
      *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="promotion")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $prestataires;
 
@@ -81,10 +82,11 @@ class Promotion
     private $categories_services;
 
 
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -164,99 +166,99 @@ class Promotion
     }
 
     /**
-     * Set debut
+     * Set dateDebut
      *
-     * @param \DateTime $debut
+     * @param \DateTime $dateDebut
      *
      * @return Promotion
      */
-    public function setDebut($debut)
+    public function setDateDebut($dateDebut)
     {
-        $this->debut = $debut;
+        $this->dateDebut = $dateDebut;
 
         return $this;
     }
 
     /**
-     * Get debut
+     * Get dateDebut
      *
      * @return \DateTime
      */
-    public function getDebut()
+    public function getDateDebut()
     {
-        return $this->debut;
+        return $this->dateDebut;
     }
 
     /**
-     * Set fin
+     * Set dateFin
      *
-     * @param \DateTime $fin
+     * @param \DateTime $dateFin
      *
      * @return Promotion
      */
-    public function setFin($fin)
+    public function setDateFin($dateFin)
     {
-        $this->fin = $fin;
+        $this->dateFin = $dateFin;
 
         return $this;
     }
 
     /**
-     * Get fin
+     * Get dateFin
      *
      * @return \DateTime
      */
-    public function getFin()
+    public function getDateFin()
     {
-        return $this->fin;
+        return $this->dateFin;
     }
 
     /**
-     * Set affichageDebut
+     * Set dateAffichageDebut
      *
-     * @param \DateTime $affichageDebut
+     * @param \DateTime $dateAffichageDebut
      *
      * @return Promotion
      */
-    public function setAffichageDebut($affichageDebut)
+    public function setDateAffichageDebut($dateAffichageDebut)
     {
-        $this->affichageDebut = $affichageDebut;
+        $this->dateAffichageDebut = $dateAffichageDebut;
 
         return $this;
     }
 
     /**
-     * Get affichageDebut
+     * Get dateAffichageDebut
      *
      * @return \DateTime
      */
-    public function getAffichageDebut()
+    public function getDateAffichageDebut()
     {
-        return $this->affichageDebut;
+        return $this->dateAffichageDebut;
     }
 
     /**
-     * Set affichageFin
+     * Set dateAffichageFin
      *
-     * @param \DateTime $affichageFin
+     * @param \DateTime $dateAffichageFin
      *
      * @return Promotion
      */
-    public function setAffichageFin($affichageFin)
+    public function setDateAffichageFin($dateAffichageFin)
     {
-        $this->affichageFin = $affichageFin;
+        $this->dateAffichageFin = $dateAffichageFin;
 
         return $this;
     }
 
     /**
-     * Get affichageFin
+     * Get dateAffichageFin
      *
      * @return \DateTime
      */
-    public function getAffichageFin()
+    public function getDateAffichageFin()
     {
-        return $this->affichageFin;
+        return $this->dateAffichageFin;
     }
 
     /**
@@ -266,7 +268,7 @@ class Promotion
      *
      * @return Promotion
      */
-    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires = null)
+    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires)
     {
         $this->prestataires = $prestataires;
 

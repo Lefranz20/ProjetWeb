@@ -30,6 +30,13 @@ class Prestataire
     private $nom;
 
     /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="web", type="string", length=255)
@@ -39,9 +46,9 @@ class Prestataire
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email_de_contact", type="string", length=255)
      */
-    private $email;
+    private $emailDeContact;
 
     /**
      * @var string
@@ -53,24 +60,24 @@ class Prestataire
     /**
      * @var string
      *
-     * @ORM\Column(name="NumeroTVA", type="string", length=255)
+     * @ORM\Column(name="numero_tva", type="string", length=255)
      */
-    private $numeroTVA;
+    private $numeroTva;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataires")
-     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      */
     private $utilisateurs;
 
     /**
-     *@ORM\OneToMany(targetEntity="Stage",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataires")
      */
     private $stages;
 
     /**
-     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataires")
      */
     private $promotion;
 
@@ -80,26 +87,39 @@ class Prestataire
     private $categorie_services;
 
     /**
-     *@ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataires")
      */
     private $commentaires;
 
     /**
-     *@ORM\OneToMany(targetEntity="Image",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataires")
      */
     private $images;
 
     /**
-     *@ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataires")
+     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataires")
      * @ORM\JoinTable(name="favori")
      */
     private $internautes;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->promotion = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categorie_services = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -131,6 +151,30 @@ class Prestataire
     }
 
     /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Prestataire
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * Set web
      *
      * @param string $web
@@ -155,27 +199,27 @@ class Prestataire
     }
 
     /**
-     * Set email
+     * Set emailDeContact
      *
-     * @param string $email
+     * @param string $emailDeContact
      *
      * @return Prestataire
      */
-    public function setEmail($email)
+    public function setEmailDeContact($emailDeContact)
     {
-        $this->email = $email;
+        $this->emailDeContact = $emailDeContact;
 
         return $this;
     }
 
     /**
-     * Get email
+     * Get emailDeContact
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmailDeContact()
     {
-        return $this->email;
+        return $this->emailDeContact;
     }
 
     /**
@@ -203,27 +247,27 @@ class Prestataire
     }
 
     /**
-     * Set numeroTVA
+     * Set numeroTva
      *
-     * @param string $numeroTVA
+     * @param string $numeroTva
      *
      * @return Prestataire
      */
-    public function setNumeroTVA($numeroTVA)
+    public function setNumeroTva($numeroTva)
     {
-        $this->numeroTVA = $numeroTVA;
+        $this->numeroTva = $numeroTva;
 
         return $this;
     }
 
     /**
-     * Get numeroTVA
+     * Get numeroTva
      *
      * @return string
      */
-    public function getNumeroTVA()
+    public function getNumeroTva()
     {
-        return $this->numeroTVA;
+        return $this->numeroTva;
     }
 
     /**
@@ -233,7 +277,7 @@ class Prestataire
      *
      * @return Prestataire
      */
-    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs = null)
+    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
     {
         $this->utilisateurs = $utilisateurs;
 
@@ -248,14 +292,6 @@ class Prestataire
     public function getUtilisateurs()
     {
         return $this->utilisateurs;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->promotion = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

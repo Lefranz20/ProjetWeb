@@ -3,4 +3,4 @@ AppBundle\Entity\Commentaire:
         cote: <randomDigit()>
         titre: <jobTitle()>
         contenu: <text($maxNbChars = 200)>
-        encodage:  <dateTimeThisCentury($max = 'now')>
+        dateEncodage:  <dateTimeThisMonth($max = 'now')>

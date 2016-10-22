@@ -1,4 +1,4 @@
 AppBundle\Entity\Image:
     Image1:
         typeImage: <name()>
-        nom : <imageUrl($width = 640, $height = 480, 'cats', true, 'Faker')>
+        lien : <imageUrl($width = 640, $height = 480, 'cats', true, 'Faker')>

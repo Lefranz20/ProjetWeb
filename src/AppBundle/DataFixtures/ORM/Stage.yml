@@ -4,7 +4,7 @@ AppBundle\Entity\Stage:
         description: <sentence($nbWords = 6, $variableNbWords = true)>
         tarif: <randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL)>
         infoComplementaire: <text($maxNbChars = 200)>
-        debut: <dateTimeThisCentury($max = 'now')>
-        fin: <dateTimeThisCentury($max = 'now')>
-        affichageDebut: <dateTimeThisCentury($max = 'now')>
-        affichageFin: <dateTimeThisCentury($max = 'now')>
+        dateDebut: <dateTimeThisMonth($max = 'now')>
+        dateFin: <dateTimeThisMonth($max = 'now')>
+        dateAffichageDebut: <dateTimeThisMonth($max = 'now')>
+        dateAffichageFin: <dateTimeThisMonth($max = 'now')>

@@ -29,12 +29,12 @@ class Position
     private $ordre;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="position_blocs")
+     *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="positions")
      */
     private $blocs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="position_internautes")
+     * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="positions")
      */
     private $internautes;
 

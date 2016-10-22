@@ -1,5 +1,5 @@
 AppBundle\Entity\Newsletter:
     Newsletter1:
         titre: <sentence($nbWords = 6, $variableNbWords = true)>
-        publicationDate: <dateTimeThisCentury($max = 'now')>
-        documentPdf: <fileExtension()>
+        datePublication: <dateTimeThisMonth($max = 'now')>
+        typeDocument: <fileExtension()>

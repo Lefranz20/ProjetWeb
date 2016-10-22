@@ -39,13 +39,13 @@ class Internaute
     /**
      * @var bool
      *
-     * @ORM\Column(name="newsletter", type="boolean")
+     * @ORM\Column(name="inscription_newsletter", type="boolean")
      */
-    private $newsletter;
+    private $inscriptionNewsletter;
 
     /**
      * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internautes")
-     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
      */
     private $utilisateurs;
@@ -61,7 +61,7 @@ class Internaute
     private $commentaires;
 
     /**
-     *@ORM\OneToOne(targetEntity="Image",mappedBy="internautes")
+     *@ORM\OneToOne(targetEntity="Image",inversedBy="internautes")
      */
     private $images;
 
@@ -75,13 +75,23 @@ class Internaute
     /**
      *@ORM\OneToMany(targetEntity="Position",mappedBy="internautes")
      */
-    private $positions_internautes;
+    private $positions;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -137,27 +147,27 @@ class Internaute
     }
 
     /**
-     * Set newsletter
+     * Set inscriptionNewsletter
      *
-     * @param boolean $newsletter
+     * @param boolean $inscriptionNewsletter
      *
      * @return Internaute
      */
-    public function setNewsletter($newsletter)
+    public function setInscriptionNewsletter($inscriptionNewsletter)
     {
-        $this->newsletter = $newsletter;
+        $this->inscriptionNewsletter = $inscriptionNewsletter;
 
         return $this;
     }
 
     /**
-     * Get newsletter
+     * Get inscriptionNewsletter
      *
-     * @return bool
+     * @return boolean
      */
-    public function getNewsletter()
+    public function getInscriptionNewsletter()
     {
-        return $this->newsletter;
+        return $this->inscriptionNewsletter;
     }
 
     /**
@@ -167,7 +177,7 @@ class Internaute
      *
      * @return Internaute
      */
-    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs = null)
+    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
     {
         $this->utilisateurs = $utilisateurs;
 
@@ -182,13 +192,6 @@ class Internaute
     public function getUtilisateurs()
     {
         return $this->utilisateurs;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -318,36 +321,36 @@ class Internaute
     }
 
     /**
-     * Add positionsInternaute
+     * Add position
      *
-     * @param \AppBundle\Entity\Position $positionsInternaute
+     * @param \AppBundle\Entity\Position $position
      *
      * @return Internaute
      */
-    public function addPositionsInternaute(\AppBundle\Entity\Position $positionsInternaute)
+    public function addPosition(\AppBundle\Entity\Position $position)
     {
-        $this->positions_internautes[] = $positionsInternaute;
+        $this->positions[] = $position;
 
         return $this;
     }
 
     /**
-     * Remove positionsInternaute
+     * Remove position
      *
-     * @param \AppBundle\Entity\Position $positionsInternaute
+     * @param \AppBundle\Entity\Position $position
      */
-    public function removePositionsInternaute(\AppBundle\Entity\Position $positionsInternaute)
+    public function removePosition(\AppBundle\Entity\Position $position)
     {
-        $this->positions_internautes->removeElement($positionsInternaute);
+        $this->positions->removeElement($position);
     }
 
     /**
-     * Get positionsInternautes
+     * Get positions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPositionsInternautes()
+    public function getPositions()
     {
-        return $this->positions_internautes;
+        return $this->positions;
     }
 }

@@ -29,7 +29,7 @@ class CategorieDeService
     private $nom;
 
     /**
-     * @var string
+     * @var text
      *
      * @ORM\Column(name="description", type="text")
      */
@@ -38,7 +38,7 @@ class CategorieDeService
     /**
      * @var bool
      *
-     * @ORM\Column(name="enAvant", type="boolean")
+     * @ORM\Column(name="en_avant", type="boolean")
      */
     private $enAvant;
 
@@ -61,7 +61,7 @@ class CategorieDeService
     private $promotions;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image",mappedBy="categorie_services")
+     * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_services")
      */
     private $images;
 

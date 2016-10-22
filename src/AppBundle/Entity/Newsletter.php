@@ -31,22 +31,22 @@ class Newsletter
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="publicationDate", type="date")
+     * @ORM\Column(name="date_publication", type="date")
      */
-    private $publicationDate;
+    private $datePublication;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="documentPdf", type="string", length=255)
+     * @ORM\Column(name="type_document", type="string", length=255)
      */
-    private $documentPdf;
+    private $typeDocument;
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -78,50 +78,50 @@ class Newsletter
     }
 
     /**
-     * Set publicationDate
+     * Set datePublication
      *
-     * @param \DateTime $publicationDate
+     * @param \DateTime $datePublication
      *
      * @return Newsletter
      */
-    public function setPublicationDate($publicationDate)
+    public function setDatePublication($datePublication)
     {
-        $this->publicationDate = $publicationDate;
+        $this->datePublication = $datePublication;
 
         return $this;
     }
 
     /**
-     * Get publicationDate
+     * Get datePublication
      *
      * @return \DateTime
      */
-    public function getPublicationDate()
+    public function getDatePublication()
     {
-        return $this->publicationDate;
+        return $this->datePublication;
     }
 
     /**
-     * Set documentPdf
+     * Set typeDocument
      *
-     * @param string $documentPdf
+     * @param string $typeDocument
      *
      * @return Newsletter
      */
-    public function setDocumentPdf($documentPdf)
+    public function setTypeDocument($typeDocument)
     {
-        $this->documentPdf = $documentPdf;
+        $this->typeDocument = $typeDocument;
 
         return $this;
     }
 
     /**
-     * Get documentPdf
+     * Get typeDocument
      *
      * @return string
      */
-    public function getDocumentPdf()
+    public function getTypeDocument()
     {
-        return $this->documentPdf;
+        return $this->typeDocument;
     }
 }

@@ -22,21 +22,22 @@ class Abus
     private $id;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="encodage", type="date")
+     * @ORM\Column(name="date_encodage", type="date")
      */
-    private $encodage;
+    private $dateEncodage;
 
     /**
      *@ORM\ManyToOne(targetEntity="Commentaire",inversedBy="abus")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $commentaires;
 
@@ -46,10 +47,11 @@ class Abus
     private $internautes;
 
 
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -81,27 +83,27 @@ class Abus
     }
 
     /**
-     * Set encodage
+     * Set dateEncodage
      *
-     * @param \DateTime $encodage
+     * @param \DateTime $dateEncodage
      *
      * @return Abus
      */
-    public function setEncodage($encodage)
+    public function setDateEncodage($dateEncodage)
     {
-        $this->encodage = $encodage;
+        $this->dateEncodage = $dateEncodage;
 
         return $this;
     }
 
     /**
-     * Get encodage
+     * Get dateEncodage
      *
      * @return \DateTime
      */
-    public function getEncodage()
+    public function getDateEncodage()
     {
-        return $this->encodage;
+        return $this->dateEncodage;
     }
 
     /**
@@ -111,7 +113,7 @@ class Abus
      *
      * @return Abus
      */
-    public function setCommentaires(\AppBundle\Entity\Commentaire $commentaires = null)
+    public function setCommentaires(\AppBundle\Entity\Commentaire $commentaires)
     {
         $this->commentaires = $commentaires;
 

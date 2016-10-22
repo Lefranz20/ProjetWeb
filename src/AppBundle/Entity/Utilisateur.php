@@ -32,14 +32,14 @@ class Utilisateur
     /**
      * @var string
      *
-     * @ORM\Column(name="motDePasse", type="string", length=255)
+     * @ORM\Column(name="mot_de_passe", type="string", length=255)
      */
     private $motDePasse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rueNumero", type="string", length=255)
+     * @ORM\Column(name="rue_numero", type="string", length=255)
      */
     private $rueNumero;
 
@@ -54,21 +54,21 @@ class Utilisateur
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="inscription", type="date", length=255)
+     * @ORM\Column(name="date_inscription", type="date", length=255)
      */
-    private $inscription;
+    private $dateInscription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="typeUtilisateur", type="string", length=255)
+     * @ORM\Column(name="type_utilisateur", type="string", length=255)
      */
     private $typeUtilisateur;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nombreEssai", type="integer")
+     * @ORM\Column(name="nombre_essai", type="integer")
      */
     private $nombreEssai;
 
@@ -82,23 +82,25 @@ class Utilisateur
     /**
      * @var bool
      *
-     * @ORM\Column(name="inscriptionConf", type="boolean")
+     * @ORM\Column(name="inscription_conf", type="boolean")
      */
     private $inscriptionConf;
 
     /**
      * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs")
+     *@ORM\JoinColumn(nullable=false)
      */
     private $codePostals;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateur")
-     *
+     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs")
+     *@ORM\JoinColumn(nullable=false)
      */
     private $localites;
 
     /**
      * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateurs")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $communes;
 
@@ -113,9 +115,18 @@ class Utilisateur
     private $prestataires;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -219,27 +230,27 @@ class Utilisateur
     }
 
     /**
-     * Set inscription
+     * Set dateInscription
      *
-     * @param \DateTime $date
+     * @param \DateTime $dateInscription
      *
      * @return Utilisateur
      */
-    public function setInscription($inscription)
+    public function setDateInscription($dateInscription)
     {
-        $this->inscription = $inscription;
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }
 
     /**
-     * Get inscription
+     * Get dateInscription
      *
      * @return \DateTime
      */
-    public function getInscription()
+    public function getDateInscription()
     {
-        return $this->inscription;
+        return $this->dateInscription;
     }
 
     /**
@@ -283,7 +294,7 @@ class Utilisateur
     /**
      * Get nombreEssai
      *
-     * @return int
+     * @return integer
      */
     public function getNombreEssai()
     {
@@ -307,7 +318,7 @@ class Utilisateur
     /**
      * Get banni
      *
-     * @return bool
+     * @return boolean
      */
     public function getBanni()
     {
@@ -331,87 +342,11 @@ class Utilisateur
     /**
      * Get inscriptionConf
      *
-     * @return bool
+     * @return boolean
      */
     public function getInscriptionConf()
     {
         return $this->inscriptionConf;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add internaute
-     *
-     * @param \AppBundle\Entity\Internaute $internaute
-     *
-     * @return Utilisateur
-     */
-    public function addInternaute(\AppBundle\Entity\Internaute $internaute)
-    {
-        $this->internautes[] = $internaute;
-
-        return $this;
-    }
-
-    /**
-     * Remove internaute
-     *
-     * @param \AppBundle\Entity\Internaute $internaute
-     */
-    public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
-    {
-        $this->internautes->removeElement($internaute);
-    }
-
-    /**
-     * Get internautes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getInternautes()
-    {
-        return $this->internautes;
-    }
-
-    /**
-     * Add prestataire
-     *
-     * @param \AppBundle\Entity\Prestataire $prestataire
-     *
-     * @return Utilisateur
-     */
-    public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
-    {
-        $this->prestataires[] = $prestataire;
-
-        return $this;
-    }
-
-    /**
-     * Remove prestataire
-     *
-     * @param \AppBundle\Entity\Prestataire $prestataire
-     */
-    public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
-    {
-        $this->prestataires->removeElement($prestataire);
-    }
-
-    /**
-     * Get prestataires
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrestataires()
-    {
-        return $this->prestataires;
     }
 
     /**
@@ -484,5 +419,73 @@ class Utilisateur
     public function getCommunes()
     {
         return $this->communes;
+    }
+
+    /**
+     * Add internaute
+     *
+     * @param \AppBundle\Entity\Internaute $internaute
+     *
+     * @return Utilisateur
+     */
+    public function addInternaute(\AppBundle\Entity\Internaute $internaute)
+    {
+        $this->internautes[] = $internaute;
+
+        return $this;
+    }
+
+    /**
+     * Remove internaute
+     *
+     * @param \AppBundle\Entity\Internaute $internaute
+     */
+    public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
+    {
+        $this->internautes->removeElement($internaute);
+    }
+
+    /**
+     * Get internautes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInternautes()
+    {
+        return $this->internautes;
+    }
+
+    /**
+     * Add prestataire
+     *
+     * @param \AppBundle\Entity\Prestataire $prestataire
+     *
+     * @return Utilisateur
+     */
+    public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
+    {
+        $this->prestataires[] = $prestataire;
+
+        return $this;
+    }
+
+    /**
+     * Remove prestataire
+     *
+     * @param \AppBundle\Entity\Prestataire $prestataire
+     */
+    public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
+    {
+        $this->prestataires->removeElement($prestataire);
+    }
+
+    /**
+     * Get prestataires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrestataires()
+    {
+        return $this->prestataires;
     }
 }

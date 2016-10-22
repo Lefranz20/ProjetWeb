@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}{% include 'includes/header.html.twig' %}{% endblock %}
+
+{% block body %}
+    <div class="main ">
+        <div class="main-inner">
+            <div class="container">
+                <div class="content">
+                    {% block bandeau %}{#bloc bandeau#}{% endblock %}
+                    {% block principal %} {# bloc principal#}
+                        {% block recherche %} {# bloc affiché sur la page d'accueil#}{% endblock %}
+                        {% block prestataires %} {# bloc affichant les 4 derniers prestataires(choix de l'internaute)
+                                                    ou les 4 derniers prestatires inscripts  + service du mois#}
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}{% include 'includes/footer.html.twig' %}{% endblock %}

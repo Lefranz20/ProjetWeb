@@ -36,18 +36,18 @@ class Commentaire
     private $titre;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="contenu", type="text")
      */
     private $contenu;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="encodage", type="date")
+     * @ORM\Column(name="date_encodage", type="date")
      */
-    private $encodage;
+    private $dateEncodage;
 
     /**
      * @ORM\OneToMany(targetEntity="Abus",mappedBy="commentaires")
@@ -56,19 +56,28 @@ class Commentaire
 
     /**
      *@ORM\ManyToOne(targetEntity="Internaute",inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $internautes;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prestataire",inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $prestataires;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -92,7 +101,7 @@ class Commentaire
     /**
      * Get cote
      *
-     * @return int
+     * @return integer
      */
     public function getCote()
     {
@@ -148,34 +157,27 @@ class Commentaire
     }
 
     /**
-     * Set encodage
+     * Set dateEncodage
      *
-     * @param \DateTime $encodage
+     * @param \DateTime $dateEncodage
      *
      * @return Commentaire
      */
-    public function setEncodage($encodage)
+    public function setDateEncodage($dateEncodage)
     {
-        $this->encodage = $encodage;
+        $this->dateEncodage = $dateEncodage;
 
         return $this;
     }
 
     /**
-     * Get encodage
+     * Get dateEncodage
      *
      * @return \DateTime
      */
-    public function getEncodage()
+    public function getDateEncodage()
     {
-        return $this->encodage;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->dateEncodage;
     }
 
     /**
@@ -219,7 +221,7 @@ class Commentaire
      *
      * @return Commentaire
      */
-    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
+    public function setInternautes(\AppBundle\Entity\Internaute $internautes)
     {
         $this->internautes = $internautes;
 
@@ -243,7 +245,7 @@ class Commentaire
      *
      * @return Commentaire
      */
-    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires = null)
+    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires)
     {
         $this->prestataires = $prestataires;
 

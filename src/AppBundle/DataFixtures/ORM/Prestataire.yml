@@ -1,7 +1,8 @@
 AppBundle\Entity\Prestataire:
     Prestataire1:
         nom: <name($gender = null|'male'|'female')>
+        description: <sentence($nbWords = 6, $variableNbWords = true)>
         web: <url()>
-        email: <email()>
+        emailDeContact: <email()>
         telephone: <e164PhoneNumber()>
-        numeroTVA: <swiftBicNumber()>
+        numeroTva: <swiftBicNumber()>

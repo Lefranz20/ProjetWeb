@@ -1,0 +1,4 @@
+AppBundle\Entity\Position:
+    Position1:
+        ordre: <randomDigit()>
+

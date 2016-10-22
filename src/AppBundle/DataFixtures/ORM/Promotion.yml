@@ -3,7 +3,7 @@ AppBundle\Entity\Promotion:
         nom: <name()>
         description: <text($maxNbChars = 200)>
         document: <name()>
-        debut: <dateTimeThisCentury($max = 'now')>
-        fin: <dateTimeThisCentury($max = 'now')>
-        affichageDebut: <dateTimeThisCentury($max = 'now')>
-        affichageFin: <dateTimeThisCentury($max = 'now')>
+        dateDebut: <dateTimeThisMonth($max = 'now')>
+        dateFin: <dateTimeThisMonth($max = 'now')>
+        dateAffichageDebut: <dateTimeThisMonth($max = 'now')>
+        dateAffichageFin: <dateTimeThisMonth($max = 'now')>

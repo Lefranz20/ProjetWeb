@@ -1,0 +1,52 @@
+{#le bloc recherche:
+    permet d'effectuer une recherche par type de service et/ou par lieu et/ou par prestataire
+    le résultat de la recherche devra etre paginé
+    - si recherche uniquement par type de service alors prévoir une route << prestataire-search/{service_id}>>
+    - si recherche uniquement par Lieu alors prévoir une route << prestataire-search/{lieu} >>
+    - si recherche uniquement par prestataire alors prévoir une route << type-de-service-search/{pretataire_id}>>#}
+
+<form class="filter" method="post" action="?">
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <select class="form-control bs-select-hidden" title="Select Location">
+                    <option class="bs-title-option" value="">Services</option>
+                    <option>Bronx</option>
+                    <option>Brooklyn</option>
+                    <option>Manhattan</option>
+                    <option>Staten Island</option>
+                    <option>Queens</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <select class="form-control bs-select-hidden" title="Select Location">
+                    <option class="bs-title-option" value="">Localité</option>
+                    <option>Bronx</option>
+                    <option>Brooklyn</option>
+                    <option>Manhattan</option>
+                    <option>Staten Island</option>
+                    <option>Queens</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <select class="form-control bs-select-hidden" title="Select Category">
+                    <option class="bs-title-option" value="">Prestataire</option>
+                    <option value="">Automotive</option>
+                    <option value="">Jobs</option>
+                    <option value="">Nightlife</option>
+                    <option value="">Services</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-offset-8 col-sm-4">
+            <button class="btn btn-primary" type="submit">Recherche</button>
+        </div>
+    </div>
+</form>
