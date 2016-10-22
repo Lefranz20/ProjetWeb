@@ -1,0 +1,138 @@
+
+{% for p in prestaires%}
+    <h1>dump() sur Prestataire</h1>
+    {{ dump(p) }}
+    <h1>dump() sur stage dans prestataire</h1>
+    {{ dump(p.stages) }}
+{% endfor %}
+<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card-simple" data-background-image="{{ asset('assets/img/tmp/product-1.jpg') }}" style="background-image: url('{{ asset('assets/img/tmp/product-1.jpg') }}');">
+        <div class="card-simple-background">
+            <div class="card-simple-content">
+                <h2>
+                    <a href="listing-detail.html">Presta + logo au survol</a>
+                    {#pavé affichant le prestataire:
+                    le logo du prestataire est affiché et au survol de celui-ci le nom et le lien vers la derscription
+                    apparaissent#}
+                </h2>
+                <div class="card-simple-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <div class="card-simple-actions">
+                    <a class="fa fa-star-o" href="#"></a>
+                    <a class="fa fa-search" href="listing-detail.html"></a>
+                    <a class="fa fa-heart-o" href="#"></a>
+                </div>
+            </div>
+            <div class="card-simple-label">Massage</div>
+            <div class="card-simple-price"> Fiche du prestataire >></div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card-simple" data-background-image="{{ asset('assets/img/tmp/product-1.jpg') }}" style="background-image: url('{{ asset('assets/img/tmp/product-1.jpg') }}');">
+        <div class="card-simple-background">
+            <div class="card-simple-content">
+                <h2>
+                    <a href="listing-detail.html">Prestataire 2</a>
+                </h2>
+                <div class="card-simple-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <div class="card-simple-actions">
+                    <a class="fa fa-star-o" href="#"></a>
+                    <a class="fa fa-search" href="listing-detail.html"></a>
+                    <a class="fa fa-heart-o" href="#"></a>
+                </div>
+            </div>
+            <div class="card-simple-label">Massage</div>
+            <div class="card-simple-price">Detail >></div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card-simple" data-background-image="{{ asset('assets/img/tmp/product-1.jpg') }}" style="background-image: url('{{ asset('assets/img/tmp/product-1.jpg') }}');">
+        <div class="card-simple-background">
+            <div class="card-simple-content">
+                <h2>
+                    <a href="listing-detail.html">Prestataire 3</a>
+                </h2>
+                <div class="card-simple-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <div class="card-simple-actions">
+                    <a class="fa fa-star-o" href="#"></a>
+                    <a class="fa fa-search" href="listing-detail.html"></a>
+                    <a class="fa fa-heart-o" href="#"></a>
+                </div>
+            </div>
+            <div class="card-simple-label">Massage</div>
+            <div class="card-simple-price">Detail >></div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card-simple" data-background-image="{{ asset('assets/img/tmp/product-1.jpg') }}" style="background-image: url('{{ asset('assets/img/tmp/product-1.jpg') }}');">
+        <div class="card-simple-background">
+            <div class="card-simple-content">
+                <h2>
+                    <a href="listing-detail.html">Prestataire 4</a>
+                </h2>
+                <div class="card-simple-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <div class="card-simple-actions">
+                    <a class="fa fa-star-o" href="#"></a>
+                    <a class="fa fa-search" href="listing-detail.html"></a>
+                    <a class="fa fa-heart-o" href="#"></a>
+                </div>
+            </div>
+            <div class="card-simple-label">Massage</div>
+            <div class="card-simple-price">Detail >></div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="card-simple" data-background-image="{{ asset('assets/img/tmp/product-1.jpg') }}" style="background-image: url('{{ asset('assets/img/tmp/product-1.jpg') }}');">
+        <div class="card-simple-background">
+            <div class="card-simple-content">
+                <h2>
+                    <a href="listing-detail.html">Service du Mois</a>
+                    {#pavé affichant le service du mois ou service à la une:
+                    le pavé affiche le nom du service, si clique sur le pavé alors on affiche
+                    la fiche descriptive du service #}
+                </h2>
+                <div class="card-simple-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <div class="card-simple-actions">
+                    <a class="fa fa-star-o" href="#"></a>
+                    <a class="fa fa-search" href="listing-detail.html"></a>
+                    <a class="fa fa-heart-o" href="#"></a>
+                </div>
+            </div>
+            <div class="card-simple-label">Massage</div>
+            <div class="card-simple-price">Detail >></div>
+        </div>
+    </div>
+</div>
