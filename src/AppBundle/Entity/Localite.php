@@ -29,15 +29,22 @@ class Localite
     private $localite;
 
     /**
-     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="localites")
+     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="localite")
      */
-    private $utilisateurs;
+    private $utilisateur;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -67,13 +74,6 @@ class Localite
     {
         return $this->localite;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add utilisateur
@@ -84,7 +84,7 @@ class Localite
      */
     public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs[] = $utilisateur;
+        $this->utilisateur[] = $utilisateur;
 
         return $this;
     }
@@ -96,16 +96,16 @@ class Localite
      */
     public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs->removeElement($utilisateur);
+        $this->utilisateur->removeElement($utilisateur);
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 }

@@ -66,55 +66,53 @@ class Prestataire
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataires")
+     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataire")
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      */
-    private $utilisateurs;
+    private $utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataire")
      */
-    private $stages;
+    private $stage;
 
     /**
-     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataire")
      */
     private $promotion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataires")
+     * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataire")
      */
-    private $categorie_services;
+    private $categorie_service;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataire")
      */
-    private $commentaires;
+    private $commentaire;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataire")
      */
-    private $images;
+    private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataires")
+     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataire")
      * @ORM\JoinTable(name="favori")
      */
-    private $internautes;
+    private $internaute;
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->stage = new \Doctrine\Common\Collections\ArrayCollection();
         $this->promotion = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categorie_services = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categorie_service = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->internaute = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
 
     /**
      * Get id
@@ -271,27 +269,27 @@ class Prestataire
     }
 
     /**
-     * Set utilisateurs
+     * Set utilisateur
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurs
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return Prestataire
      */
-    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs = $utilisateurs;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 
     /**
@@ -303,7 +301,7 @@ class Prestataire
      */
     public function addStage(\AppBundle\Entity\Stage $stage)
     {
-        $this->stages[] = $stage;
+        $this->stage[] = $stage;
 
         return $this;
     }
@@ -315,17 +313,17 @@ class Prestataire
      */
     public function removeStage(\AppBundle\Entity\Stage $stage)
     {
-        $this->stages->removeElement($stage);
+        $this->stage->removeElement($stage);
     }
 
     /**
-     * Get stages
+     * Get stage
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getStages()
+    public function getStage()
     {
-        return $this->stages;
+        return $this->stage;
     }
 
     /**
@@ -371,7 +369,7 @@ class Prestataire
      */
     public function addCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
     {
-        $this->categorie_services[] = $categorieService;
+        $this->categorie_service[] = $categorieService;
 
         return $this;
     }
@@ -383,17 +381,17 @@ class Prestataire
      */
     public function removeCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
     {
-        $this->categorie_services->removeElement($categorieService);
+        $this->categorie_service->removeElement($categorieService);
     }
 
     /**
-     * Get categorieServices
+     * Get categorieService
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategorieServices()
+    public function getCategorieService()
     {
-        return $this->categorie_services;
+        return $this->categorie_service;
     }
 
     /**
@@ -405,7 +403,7 @@ class Prestataire
      */
     public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaires[] = $commentaire;
+        $this->commentaire[] = $commentaire;
 
         return $this;
     }
@@ -417,17 +415,17 @@ class Prestataire
      */
     public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaires->removeElement($commentaire);
+        $this->commentaire->removeElement($commentaire);
     }
 
     /**
-     * Get commentaires
+     * Get commentaire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCommentaires()
+    public function getCommentaire()
     {
-        return $this->commentaires;
+        return $this->commentaire;
     }
 
     /**
@@ -439,7 +437,7 @@ class Prestataire
      */
     public function addImage(\AppBundle\Entity\Image $image)
     {
-        $this->images[] = $image;
+        $this->image[] = $image;
 
         return $this;
     }
@@ -451,17 +449,17 @@ class Prestataire
      */
     public function removeImage(\AppBundle\Entity\Image $image)
     {
-        $this->images->removeElement($image);
+        $this->image->removeElement($image);
     }
 
     /**
-     * Get images
+     * Get image
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImages()
+    public function getImage()
     {
-        return $this->images;
+        return $this->image;
     }
 
     /**
@@ -473,7 +471,7 @@ class Prestataire
      */
     public function addInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes[] = $internaute;
+        $this->internaute[] = $internaute;
 
         return $this;
     }
@@ -485,16 +483,16 @@ class Prestataire
      */
     public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes->removeElement($internaute);
+        $this->internaute->removeElement($internaute);
     }
 
     /**
-     * Get internautes
+     * Get internaute
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getInternautes()
+    public function getInternaute()
     {
-        return $this->internautes;
+        return $this->internaute;
     }
 }

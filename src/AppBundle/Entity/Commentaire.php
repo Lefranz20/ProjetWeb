@@ -45,26 +45,27 @@ class Commentaire
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_encodage", type="date")
+     * @ORM\Column(name="date_encodage", type="datetime")
      */
     private $dateEncodage;
 
     /**
-     * @ORM\OneToMany(targetEntity="Abus",mappedBy="commentaires")
+     * @ORM\OneToMany(targetEntity="Abus",mappedBy="commentaire")
      */
     private $abus;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Internaute",inversedBy="commentaires")
+     *@ORM\ManyToOne(targetEntity="Internaute",inversedBy="commentaire")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $internautes;
+    private $internaute;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Prestataire",inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="Prestataire",inversedBy="commentaire")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $prestataires;
+    private $prestataire;
+
 
     /**
      * Constructor
@@ -215,50 +216,50 @@ class Commentaire
     }
 
     /**
-     * Set internautes
+     * Set internaute
      *
-     * @param \AppBundle\Entity\Internaute $internautes
+     * @param \AppBundle\Entity\Internaute $internaute
      *
      * @return Commentaire
      */
-    public function setInternautes(\AppBundle\Entity\Internaute $internautes)
+    public function setInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes = $internautes;
+        $this->internaute = $internaute;
 
         return $this;
     }
 
     /**
-     * Get internautes
+     * Get internaute
      *
      * @return \AppBundle\Entity\Internaute
      */
-    public function getInternautes()
+    public function getInternaute()
     {
-        return $this->internautes;
+        return $this->internaute;
     }
 
     /**
-     * Set prestataires
+     * Set prestataire
      *
-     * @param \AppBundle\Entity\Prestataire $prestataires
+     * @param \AppBundle\Entity\Prestataire $prestataire
      *
      * @return Commentaire
      */
-    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires)
+    public function setPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires = $prestataires;
+        $this->prestataire = $prestataire;
 
         return $this;
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \AppBundle\Entity\Prestataire
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 }

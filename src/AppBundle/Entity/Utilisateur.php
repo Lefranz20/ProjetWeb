@@ -54,7 +54,7 @@ class Utilisateur
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_inscription", type="date", length=255)
+     * @ORM\Column(name="date_inscription", type="datetime", length=255)
      */
     private $dateInscription;
 
@@ -87,40 +87,40 @@ class Utilisateur
     private $inscriptionConf;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateur")
      *@ORM\JoinColumn(nullable=false)
      */
-    private $codePostals;
+    private $codePostal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateur")
      *@ORM\JoinColumn(nullable=false)
      */
-    private $localites;
+    private $localite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateur")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $communes;
+    private $commune;
 
     /**
-     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateur")
      */
-    private $internautes;
+    private $internaute;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateur")
      */
-    private $prestataires;
+    private $prestataire;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->internaute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -350,75 +350,75 @@ class Utilisateur
     }
 
     /**
-     * Set codePostals
+     * Set codePostal
      *
-     * @param \AppBundle\Entity\CodePostal $codePostals
+     * @param \AppBundle\Entity\CodePostal $codePostal
      *
      * @return Utilisateur
      */
-    public function setCodePostals(\AppBundle\Entity\CodePostal $codePostals = null)
+    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal)
     {
-        $this->codePostals = $codePostals;
+        $this->codePostal = $codePostal;
 
         return $this;
     }
 
     /**
-     * Get codePostals
+     * Get codePostal
      *
      * @return \AppBundle\Entity\CodePostal
      */
-    public function getCodePostals()
+    public function getCodePostal()
     {
-        return $this->codePostals;
+        return $this->codePostal;
     }
 
     /**
-     * Set localites
+     * Set localite
      *
-     * @param \AppBundle\Entity\Localite $localites
+     * @param \AppBundle\Entity\Localite $localite
      *
      * @return Utilisateur
      */
-    public function setLocalites(\AppBundle\Entity\Localite $localites = null)
+    public function setLocalite(\AppBundle\Entity\Localite $localite)
     {
-        $this->localites = $localites;
+        $this->localite = $localite;
 
         return $this;
     }
 
     /**
-     * Get localites
+     * Get localite
      *
      * @return \AppBundle\Entity\Localite
      */
-    public function getLocalites()
+    public function getLocalite()
     {
-        return $this->localites;
+        return $this->localite;
     }
 
     /**
-     * Set communes
+     * Set commune
      *
-     * @param \AppBundle\Entity\Commune $communes
+     * @param \AppBundle\Entity\Commune $commune
      *
      * @return Utilisateur
      */
-    public function setCommunes(\AppBundle\Entity\Commune $communes = null)
+    public function setCommune(\AppBundle\Entity\Commune $commune)
     {
-        $this->communes = $communes;
+        $this->commune = $commune;
 
         return $this;
     }
 
     /**
-     * Get communes
+     * Get commune
      *
      * @return \AppBundle\Entity\Commune
      */
-    public function getCommunes()
+    public function getCommune()
     {
-        return $this->communes;
+        return $this->commune;
     }
 
     /**
@@ -430,7 +430,7 @@ class Utilisateur
      */
     public function addInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes[] = $internaute;
+        $this->internaute[] = $internaute;
 
         return $this;
     }
@@ -442,17 +442,17 @@ class Utilisateur
      */
     public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes->removeElement($internaute);
+        $this->internaute->removeElement($internaute);
     }
 
     /**
-     * Get internautes
+     * Get internaute
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getInternautes()
+    public function getInternaute()
     {
-        return $this->internautes;
+        return $this->internaute;
     }
 
     /**
@@ -464,7 +464,7 @@ class Utilisateur
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires[] = $prestataire;
+        $this->prestataire[] = $prestataire;
 
         return $this;
     }
@@ -476,16 +476,16 @@ class Utilisateur
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires->removeElement($prestataire);
+        $this->prestataire->removeElement($prestataire);
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 }

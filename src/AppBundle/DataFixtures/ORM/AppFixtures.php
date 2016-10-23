@@ -14,7 +14,7 @@ class AppFixtures extends AbstractLoader
         return  array(
             __DIR__ . '/CodePostal.yml',
             __DIR__ . '/Localite.yml',
-            __DIR__ . '/Commune.yml',
+            __DIR__ . '/Commune.yml',/*
            __DIR__ . '/Utilisateur.yml',
             __DIR__ . '/Prestataire.yml',
             __DIR__ . '/Internaute.yml',
@@ -26,7 +26,7 @@ class AppFixtures extends AbstractLoader
             __DIR__ . '/Position.yml',
             __DIR__ . '/Promotion.yml',
             __DIR__ . '/Image.yml',
-            __DIR__ . '/Newsletter.yml',
+            __DIR__ . '/Newsletter.yml',*/
 
         );
     }

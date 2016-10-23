@@ -44,38 +44,38 @@ class Internaute
     private $inscriptionNewsletter;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internautes")
+     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internaute")
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
      */
-    private $utilisateurs;
+    private $utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Abus",mappedBy="internautes")
+     * @ORM\OneToMany(targetEntity="Abus",mappedBy="internaute")
      */
     private $abus;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="internautes")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="internaute")
      */
-    private $commentaires;
+    private $commentaire;
 
     /**
-     *@ORM\OneToOne(targetEntity="Image",inversedBy="internautes")
+     *@ORM\OneToOne(targetEntity="Image",inversedBy="internaute")
      */
-    private $images;
+    private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internautes")
+     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internaute")
      * @ORM\JoinTable(name="favori")
      *
      */
-    private $prestataires;
+    private $prestataire;
 
     /**
-     *@ORM\OneToMany(targetEntity="Position",mappedBy="internautes")
+     *@ORM\OneToMany(targetEntity="Position",mappedBy="internaute")
      */
-    private $positions;
+    private $position;
 
     /**
      * Constructor
@@ -83,9 +83,9 @@ class Internaute
     public function __construct()
     {
         $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->position = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -171,27 +171,27 @@ class Internaute
     }
 
     /**
-     * Set utilisateurs
+     * Set utilisateur
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurs
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return Internaute
      */
-    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs = $utilisateurs;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 
     /**
@@ -237,7 +237,7 @@ class Internaute
      */
     public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaires[] = $commentaire;
+        $this->commentaire[] = $commentaire;
 
         return $this;
     }
@@ -249,41 +249,41 @@ class Internaute
      */
     public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaires->removeElement($commentaire);
+        $this->commentaire->removeElement($commentaire);
     }
 
     /**
-     * Get commentaires
+     * Get commentaire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCommentaires()
+    public function getCommentaire()
     {
-        return $this->commentaires;
+        return $this->commentaire;
     }
 
     /**
-     * Set images
+     * Set image
      *
-     * @param \AppBundle\Entity\Image $images
+     * @param \AppBundle\Entity\Image $image
      *
      * @return Internaute
      */
-    public function setImages(\AppBundle\Entity\Image $images = null)
+    public function setImage(\AppBundle\Entity\Image $image = null)
     {
-        $this->images = $images;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get images
+     * Get image
      *
      * @return \AppBundle\Entity\Image
      */
-    public function getImages()
+    public function getImage()
     {
-        return $this->images;
+        return $this->image;
     }
 
     /**
@@ -295,7 +295,7 @@ class Internaute
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires[] = $prestataire;
+        $this->prestataire[] = $prestataire;
 
         return $this;
     }
@@ -307,17 +307,17 @@ class Internaute
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires->removeElement($prestataire);
+        $this->prestataire->removeElement($prestataire);
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 
     /**
@@ -329,7 +329,7 @@ class Internaute
      */
     public function addPosition(\AppBundle\Entity\Position $position)
     {
-        $this->positions[] = $position;
+        $this->position[] = $position;
 
         return $this;
     }
@@ -341,16 +341,16 @@ class Internaute
      */
     public function removePosition(\AppBundle\Entity\Position $position)
     {
-        $this->positions->removeElement($position);
+        $this->position->removeElement($position);
     }
 
     /**
-     * Get positions
+     * Get position
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPositions()
+    public function getPosition()
     {
-        return $this->positions;
+        return $this->position;
     }
 }

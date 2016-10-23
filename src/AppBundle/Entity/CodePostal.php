@@ -30,10 +30,10 @@ class CodePostal
     private $codePostal;
 
     /**
-     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="codePostals")
+     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="codePostal")
      *
      */
-    private $utilisateurs;
+    private $utilisateur;
 
 
     /**
@@ -41,8 +41,9 @@ class CodePostal
      */
     public function __construct()
     {
-        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -87,7 +88,7 @@ class CodePostal
      */
     public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs[] = $utilisateur;
+        $this->utilisateur[] = $utilisateur;
 
         return $this;
     }
@@ -99,16 +100,16 @@ class CodePostal
      */
     public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs->removeElement($utilisateur);
+        $this->utilisateur->removeElement($utilisateur);
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 }

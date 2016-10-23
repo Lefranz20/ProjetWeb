@@ -29,20 +29,20 @@ class Position
     private $ordre;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="positions")
+     *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="position")
      */
-    private $blocs;
+    private $bloc;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="positions")
+     * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="position")
      */
-    private $internautes;
+    private $internaute;
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +66,7 @@ class Position
     /**
      * Get ordre
      *
-     * @return int
+     * @return integer
      */
     public function getOrdre()
     {
@@ -74,50 +74,50 @@ class Position
     }
 
     /**
-     * Set blocs
+     * Set bloc
      *
-     * @param \AppBundle\Entity\Bloc $blocs
+     * @param \AppBundle\Entity\Bloc $bloc
      *
      * @return Position
      */
-    public function setBlocs(\AppBundle\Entity\Bloc $blocs = null)
+    public function setBloc(\AppBundle\Entity\Bloc $bloc = null)
     {
-        $this->blocs = $blocs;
+        $this->bloc = $bloc;
 
         return $this;
     }
 
     /**
-     * Get blocs
+     * Get bloc
      *
      * @return \AppBundle\Entity\Bloc
      */
-    public function getBlocs()
+    public function getBloc()
     {
-        return $this->blocs;
+        return $this->bloc;
     }
 
     /**
-     * Set internautes
+     * Set internaute
      *
-     * @param \AppBundle\Entity\Internaute $internautes
+     * @param \AppBundle\Entity\Internaute $internaute
      *
      * @return Position
      */
-    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
+    public function setInternaute(\AppBundle\Entity\Internaute $internaute = null)
     {
-        $this->internautes = $internautes;
+        $this->internaute = $internaute;
 
         return $this;
     }
 
     /**
-     * Get internautes
+     * Get internaute
      *
      * @return \AppBundle\Entity\Internaute
      */
-    public function getInternautes()
+    public function getInternaute()
     {
-        return $this->internautes;
+        return $this->internaute;
     }
 }

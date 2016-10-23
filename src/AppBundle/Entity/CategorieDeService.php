@@ -50,26 +50,35 @@ class CategorieDeService
     private $valide;
 
     /**
-     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_services")
+     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_service")
      *
      */
-    private $prestataires;
+    private $prestataire;
 
     /**
-     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_services")
+     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_service")
      */
-    private $promotions;
+    private $promotion;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_services")
+     * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_service")
      */
-    private $images;
+    private $image;
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->promotion = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -141,7 +150,7 @@ class CategorieDeService
     /**
      * Get enAvant
      *
-     * @return bool
+     * @return boolean
      */
     public function getEnAvant()
     {
@@ -165,19 +174,11 @@ class CategorieDeService
     /**
      * Get valide
      *
-     * @return bool
+     * @return boolean
      */
     public function getValide()
     {
         return $this->valide;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -189,7 +190,7 @@ class CategorieDeService
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires[] = $prestataire;
+        $this->prestataire[] = $prestataire;
 
         return $this;
     }
@@ -201,17 +202,17 @@ class CategorieDeService
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires->removeElement($prestataire);
+        $this->prestataire->removeElement($prestataire);
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 
     /**
@@ -223,7 +224,7 @@ class CategorieDeService
      */
     public function addPromotion(\AppBundle\Entity\Promotion $promotion)
     {
-        $this->promotions[] = $promotion;
+        $this->promotion[] = $promotion;
 
         return $this;
     }
@@ -235,40 +236,40 @@ class CategorieDeService
      */
     public function removePromotion(\AppBundle\Entity\Promotion $promotion)
     {
-        $this->promotions->removeElement($promotion);
+        $this->promotion->removeElement($promotion);
     }
 
     /**
-     * Get promotions
+     * Get promotion
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPromotions()
+    public function getPromotion()
     {
-        return $this->promotions;
+        return $this->promotion;
     }
 
     /**
-     * Set images
+     * Set image
      *
-     * @param \AppBundle\Entity\Image $images
+     * @param \AppBundle\Entity\Image $image
      *
      * @return CategorieDeService
      */
-    public function setImages(\AppBundle\Entity\Image $images = null)
+    public function setImage(\AppBundle\Entity\Image $image = null)
     {
-        $this->images = $images;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get images
+     * Get image
      *
      * @return \AppBundle\Entity\Image
      */
-    public function getImages()
+    public function getImage()
     {
-        return $this->images;
+        return $this->image;
     }
 }

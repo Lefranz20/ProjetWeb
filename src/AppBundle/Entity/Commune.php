@@ -30,16 +30,23 @@ class Commune
     private $commune;
 
     /**
-     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="communes")
+     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="commune")
      */
-    private $utilisateurs;
+    private $utilisateur;
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -69,13 +76,6 @@ class Commune
     {
         return $this->commune;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add utilisateur
@@ -86,7 +86,7 @@ class Commune
      */
     public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs[] = $utilisateur;
+        $this->utilisateur[] = $utilisateur;
 
         return $this;
     }
@@ -98,16 +98,16 @@ class Commune
      */
     public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs->removeElement($utilisateur);
+        $this->utilisateur->removeElement($utilisateur);
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 }

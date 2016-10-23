@@ -31,7 +31,7 @@ class Newsletter
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_publication", type="date")
+     * @ORM\Column(name="date_publication", type="datetime")
      */
     private $datePublication;
 

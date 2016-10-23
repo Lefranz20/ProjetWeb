@@ -31,7 +31,7 @@ class Abus
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_encodage", type="date")
+     * @ORM\Column(name="date_encodage", type="datetime")
      */
     private $dateEncodage;
 
@@ -39,12 +39,12 @@ class Abus
      *@ORM\ManyToOne(targetEntity="Commentaire",inversedBy="abus")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $commentaires;
+    private $commentaire;
 
     /**
      *@ORM\ManyToOne(targetEntity="Internaute",inversedBy="abus")
      */
-    private $internautes;
+    private $internaute;
 
 
 
@@ -107,50 +107,50 @@ class Abus
     }
 
     /**
-     * Set commentaires
+     * Set commentaire
      *
-     * @param \AppBundle\Entity\Commentaire $commentaires
+     * @param \AppBundle\Entity\Commentaire $commentaire
      *
      * @return Abus
      */
-    public function setCommentaires(\AppBundle\Entity\Commentaire $commentaires)
+    public function setCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaires = $commentaires;
+        $this->commentaire = $commentaire;
 
         return $this;
     }
 
     /**
-     * Get commentaires
+     * Get commentaire
      *
      * @return \AppBundle\Entity\Commentaire
      */
-    public function getCommentaires()
+    public function getCommentaire()
     {
-        return $this->commentaires;
+        return $this->commentaire;
     }
 
     /**
-     * Set internautes
+     * Set internaute
      *
-     * @param \AppBundle\Entity\Internaute $internautes
+     * @param \AppBundle\Entity\Internaute $internaute
      *
      * @return Abus
      */
-    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
+    public function setInternaute(\AppBundle\Entity\Internaute $internaute = null)
     {
-        $this->internautes = $internautes;
+        $this->internaute = $internaute;
 
         return $this;
     }
 
     /**
-     * Get internautes
+     * Get internaute
      *
      * @return \AppBundle\Entity\Internaute
      */
-    public function getInternautes()
+    public function getInternaute()
     {
-        return $this->internautes;
+        return $this->internaute;
     }
 }
