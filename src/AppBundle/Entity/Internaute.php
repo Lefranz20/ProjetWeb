@@ -51,38 +51,40 @@ class Internaute
     private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internaute")
+     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internautes")
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
      */
-    private $utilisateur;
+    private $utilisateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Abus",mappedBy="internaute")
+     * @ORM\OneToMany(targetEntity="Abus",mappedBy="internautes")
      */
     private $abus;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="internaute")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="internautes")
      */
-    private $commentaire;
+    private $commentaires;
 
     /**
-     *@ORM\OneToOne(targetEntity="Image",inversedBy="internaute")
+     *@ORM\OneToOne(targetEntity="Image",inversedBy="internautes")
+     * @ORM\JoinColumn(name="image_id",referencedColumnName="id")
      */
-    private $image;
+    private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internaute")
+     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internautes")
      * @ORM\JoinTable(name="favori")
      *
      */
-    private $prestataire;
+    private $prestataires;
 
     /**
-     *@ORM\OneToMany(targetEntity="Position",mappedBy="internaute")
+     *@ORM\OneToMany(targetEntity="Position",mappedBy="internautes")
      */
-    private $position;
+    private $positions;
+
 
     /**
      * Constructor
@@ -90,9 +92,9 @@ class Internaute
     public function __construct()
     {
         $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->position = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateInscription = new \DateTime();
     }
 
@@ -179,27 +181,51 @@ class Internaute
     }
 
     /**
-     * Set utilisateur
+     * Set dateInscription
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     * @param \DateTime $dateInscription
      *
      * @return Internaute
      */
-    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    public function setDateInscription($dateInscription)
     {
-        $this->utilisateur = $utilisateur;
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }
 
     /**
-     * Get utilisateur
+     * Get dateInscription
+     *
+     * @return \DateTime
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
+    }
+
+    /**
+     * Set utilisateurs
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateurs
+     *
+     * @return Internaute
+     */
+    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
+    {
+        $this->utilisateurs = $utilisateurs;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateurs
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateur()
+    public function getUtilisateurs()
     {
-        return $this->utilisateur;
+        return $this->utilisateurs;
     }
 
     /**
@@ -245,7 +271,7 @@ class Internaute
      */
     public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaire[] = $commentaire;
+        $this->commentaires[] = $commentaire;
 
         return $this;
     }
@@ -257,41 +283,41 @@ class Internaute
      */
     public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaire->removeElement($commentaire);
+        $this->commentaires->removeElement($commentaire);
     }
 
     /**
-     * Get commentaire
+     * Get commentaires
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCommentaire()
+    public function getCommentaires()
     {
-        return $this->commentaire;
+        return $this->commentaires;
     }
 
     /**
-     * Set image
+     * Set images
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param \AppBundle\Entity\Image $images
      *
      * @return Internaute
      */
-    public function setImage(\AppBundle\Entity\Image $image = null)
+    public function setImages(\AppBundle\Entity\Image $images = null)
     {
-        $this->image = $image;
+        $this->images = $images;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get images
      *
      * @return \AppBundle\Entity\Image
      */
-    public function getImage()
+    public function getImages()
     {
-        return $this->image;
+        return $this->images;
     }
 
     /**
@@ -303,7 +329,7 @@ class Internaute
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataire[] = $prestataire;
+        $this->prestataires[] = $prestataire;
 
         return $this;
     }
@@ -315,17 +341,17 @@ class Internaute
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataire->removeElement($prestataire);
+        $this->prestataires->removeElement($prestataire);
     }
 
     /**
-     * Get prestataire
+     * Get prestataires
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataire()
+    public function getPrestataires()
     {
-        return $this->prestataire;
+        return $this->prestataires;
     }
 
     /**
@@ -337,7 +363,7 @@ class Internaute
      */
     public function addPosition(\AppBundle\Entity\Position $position)
     {
-        $this->position[] = $position;
+        $this->positions[] = $position;
 
         return $this;
     }
@@ -349,40 +375,16 @@ class Internaute
      */
     public function removePosition(\AppBundle\Entity\Position $position)
     {
-        $this->position->removeElement($position);
+        $this->positions->removeElement($position);
     }
 
     /**
-     * Get position
+     * Get positions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPosition()
+    public function getPositions()
     {
-        return $this->position;
-    }
-
-    /**
-     * Set dateInscription
-     *
-     * @param \DateTime $dateInscription
-     *
-     * @return Internaute
-     */
-    public function setDateInscription($dateInscription)
-    {
-        $this->dateInscription = $dateInscription;
-
-        return $this;
-    }
-
-    /**
-     * Get dateInscription
-     *
-     * @return \DateTime
-     */
-    public function getDateInscription()
-    {
-        return $this->dateInscription;
+        return $this->positions;
     }
 }

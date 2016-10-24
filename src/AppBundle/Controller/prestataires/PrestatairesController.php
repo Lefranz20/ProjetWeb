@@ -11,23 +11,41 @@ use Symfony\Component\HttpFoundation\Request;
 class PrestatairesController extends Controller {
 
     /**
-     * @Route("/prestataires",name="listes_prestataires")
+     * @Route("/prestataires",name="liste_prestataire")
      */
-    public function listAction(){
-        return $this->render(':prestataire:listing.html.twig');
-
+    public function listAction()
+    {
+        return $this->render('list.html.twig');
     }
+
     /**
-     * @Route("/prestataires/{prestataireId}",name="detail_prestaire")
+     * @Route("/prestataire/{slug}",name="show_prestaire")
      */
-    public function detailAction($prestataireId){
+    public function showAction($slug)
+    {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Prestataire');
-        $pretataire = $repo->find($prestataireId);
+        $pretataire = $repo->findOneBy(array('slug'=>$slug));
         if(!$pretataire){
             $error = array('msg'=>'pas de détail pour ce prestataire.');
             return $this->render('error-404.html.twig',['error'=>$error]);
         }else{
-            return $this->render(':prestataire:listing-detail.html.twig');
+            return $this->render(':prestataire:show.html.twig');
         }
+    }
+
+    /**
+     * @Route("/prestataire/ajout/{prestataireId}" , name="add_prestataire")
+     */
+    public function addAction($prestataireId)
+    {
+        return $this->render(':prestataire:add.html.twig');
+    }
+
+    /**
+     * @Route("/prestataire/update/{prestataireId}")
+     */
+    public function updateAction($prestataireId)
+    {
+        return $this->render(':prestataire:update.html.twig');
     }
 } 

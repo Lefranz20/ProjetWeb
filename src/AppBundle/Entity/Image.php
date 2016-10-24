@@ -36,19 +36,20 @@ class Image
     private $lien;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CategorieDeService",mappedBy="image")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CategorieDeService",mappedBy="images")
      */
-    private $categorie_service;
+    private $categorie_services;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Internaute",mappedBy="image")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Internaute",mappedBy="images")
      */
-    private $internaute;
+    private $internautes;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="image")
+     *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="images")
      */
-    private $prestataire;
+    private $prestataires;
+
 
 
     /**
@@ -110,74 +111,74 @@ class Image
     }
 
     /**
-     * Set categorieService
+     * Set categorieServices
      *
-     * @param \AppBundle\Entity\CategorieDeService $categorieService
+     * @param \AppBundle\Entity\CategorieDeService $categorieServices
      *
      * @return Image
      */
-    public function setCategorieService(\AppBundle\Entity\CategorieDeService $categorieService = null)
+    public function setCategorieServices(\AppBundle\Entity\CategorieDeService $categorieServices = null)
     {
-        $this->categorie_service = $categorieService;
+        $this->categorie_services = $categorieServices;
 
         return $this;
     }
 
     /**
-     * Get categorieService
+     * Get categorieServices
      *
      * @return \AppBundle\Entity\CategorieDeService
      */
-    public function getCategorieService()
+    public function getCategorieServices()
     {
-        return $this->categorie_service;
+        return $this->categorie_services;
     }
 
     /**
-     * Set internaute
+     * Set internautes
      *
-     * @param \AppBundle\Entity\Internaute $internaute
+     * @param \AppBundle\Entity\Internaute $internautes
      *
      * @return Image
      */
-    public function setInternaute(\AppBundle\Entity\Internaute $internaute = null)
+    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
     {
-        $this->internaute = $internaute;
+        $this->internautes = $internautes;
 
         return $this;
     }
 
     /**
-     * Get internaute
+     * Get internautes
      *
      * @return \AppBundle\Entity\Internaute
      */
-    public function getInternaute()
+    public function getInternautes()
     {
-        return $this->internaute;
+        return $this->internautes;
     }
 
     /**
-     * Set prestataire
+     * Set prestataires
      *
-     * @param \AppBundle\Entity\Prestataire $prestataire
+     * @param \AppBundle\Entity\Prestataire $prestataires
      *
      * @return Image
      */
-    public function setPrestataire(\AppBundle\Entity\Prestataire $prestataire = null)
+    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires = null)
     {
-        $this->prestataire = $prestataire;
+        $this->prestataires = $prestataires;
 
         return $this;
     }
 
     /**
-     * Get prestataire
+     * Get prestataires
      *
      * @return \AppBundle\Entity\Prestataire
      */
-    public function getPrestataire()
+    public function getPrestataires()
     {
-        return $this->prestataire;
+        return $this->prestataires;
     }
 }

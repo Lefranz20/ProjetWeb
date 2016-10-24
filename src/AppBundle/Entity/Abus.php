@@ -37,15 +37,16 @@ class Abus
 
     /**
      *@ORM\ManyToOne(targetEntity="Commentaire",inversedBy="abus")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="commentaire_id",referencedColumnName="id",nullable=false)
+     *
      */
-    private $commentaire;
+    private $commentaires;
 
     /**
      *@ORM\ManyToOne(targetEntity="Internaute",inversedBy="abus")
+     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id")
      */
-    private $internaute;
-
+    private $internautes;
 
 
     /**
@@ -107,50 +108,55 @@ class Abus
     }
 
     /**
-     * Set commentaire
+     * Set commentaires
      *
-     * @param \AppBundle\Entity\Commentaire $commentaire
+     * @param \AppBundle\Entity\Commentaire $commentaires
      *
      * @return Abus
      */
-    public function setCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    public function setCommentaires(\AppBundle\Entity\Commentaire $commentaires)
     {
-        $this->commentaire = $commentaire;
+        $this->commentaires = $commentaires;
 
         return $this;
     }
 
     /**
-     * Get commentaire
+     * Get commentaires
      *
      * @return \AppBundle\Entity\Commentaire
      */
-    public function getCommentaire()
+    public function getCommentaires()
     {
-        return $this->commentaire;
+        return $this->commentaires;
     }
 
     /**
-     * Set internaute
+     * Set internautes
      *
-     * @param \AppBundle\Entity\Internaute $internaute
+     * @param \AppBundle\Entity\Internaute $internautes
      *
      * @return Abus
      */
-    public function setInternaute(\AppBundle\Entity\Internaute $internaute = null)
+    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
     {
-        $this->internaute = $internaute;
+        $this->internautes = $internautes;
 
         return $this;
     }
 
     /**
-     * Get internaute
+     * Get internautes
      *
      * @return \AppBundle\Entity\Internaute
      */
-    public function getInternaute()
+    public function getInternautes()
     {
-        return $this->internaute;
+        return $this->internautes;
+    }
+
+    public function __construct()
+    {
+        $this->dateEncodage = new \DateTime();
     }
 }

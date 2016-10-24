@@ -29,14 +29,16 @@ class Position
     private $ordre;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="position")
+     *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="positions")
+     * @ORM\JoinColumn(name="bloc_id",referencedColumnName="id")
      */
-    private $bloc;
+    private $blocs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="position")
+     * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="positions")
+     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id")
      */
-    private $internaute;
+    private $internautes;
 
 
     /**
@@ -74,50 +76,50 @@ class Position
     }
 
     /**
-     * Set bloc
+     * Set blocs
      *
-     * @param \AppBundle\Entity\Bloc $bloc
+     * @param \AppBundle\Entity\Bloc $blocs
      *
      * @return Position
      */
-    public function setBloc(\AppBundle\Entity\Bloc $bloc = null)
+    public function setBlocs(\AppBundle\Entity\Bloc $blocs = null)
     {
-        $this->bloc = $bloc;
+        $this->blocs = $blocs;
 
         return $this;
     }
 
     /**
-     * Get bloc
+     * Get blocs
      *
      * @return \AppBundle\Entity\Bloc
      */
-    public function getBloc()
+    public function getBlocs()
     {
-        return $this->bloc;
+        return $this->blocs;
     }
 
     /**
-     * Set internaute
+     * Set internautes
      *
-     * @param \AppBundle\Entity\Internaute $internaute
+     * @param \AppBundle\Entity\Internaute $internautes
      *
      * @return Position
      */
-    public function setInternaute(\AppBundle\Entity\Internaute $internaute = null)
+    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
     {
-        $this->internaute = $internaute;
+        $this->internautes = $internautes;
 
         return $this;
     }
 
     /**
-     * Get internaute
+     * Get internautes
      *
      * @return \AppBundle\Entity\Internaute
      */
-    public function getInternaute()
+    public function getInternautes()
     {
-        return $this->internaute;
+        return $this->internautes;
     }
 }

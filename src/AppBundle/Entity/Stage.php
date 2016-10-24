@@ -78,10 +78,11 @@ class Stage
     private $dateAffichageFin;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="stage")
-     * @ORM\JoinColumn(nullable=false)
+     *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="stages")
+     * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id",nullable=false)
      */
-    private $prestataire;
+    private $prestataires;
+
 
 
     /**
@@ -287,26 +288,26 @@ class Stage
     }
 
     /**
-     * Set prestataire
+     * Set prestataires
      *
-     * @param \AppBundle\Entity\Prestataire $prestataire
+     * @param \AppBundle\Entity\Prestataire $prestataires
      *
      * @return Stage
      */
-    public function setPrestataire(\AppBundle\Entity\Prestataire $prestataire)
+    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires)
     {
-        $this->prestataire = $prestataire;
+        $this->prestataires = $prestataires;
 
         return $this;
     }
 
     /**
-     * Get prestataire
+     * Get prestataires
      *
      * @return \AppBundle\Entity\Prestataire
      */
-    public function getPrestataire()
+    public function getPrestataires()
     {
-        return $this->prestataire;
+        return $this->prestataires;
     }
 }

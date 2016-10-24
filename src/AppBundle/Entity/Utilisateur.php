@@ -87,41 +87,42 @@ class Utilisateur
     private $inscriptionConf;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateur")
-     *@ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs")
+     *@ORM\JoinColumn(name="code_postal_id",referencedColumnName="id",nullable=false)
      */
-    private $codePostal;
+    private $codePostals;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateur")
-     *@ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs")
+     *@ORM\JoinColumn(name="localite_id",referencedColumnName="id",nullable=false)
      */
-    private $localite;
+    private $localites;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateur")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateurs")
+     * @ORM\JoinColumn(name="commune_id",referencedColumnName="id",nullable=false)
      */
-    private $commune;
+    private $communes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateurs")
      */
-    private $internaute;
+    private $internautes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateurs")
      */
-    private $prestataire;
+    private $prestataires;
+
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->internaute = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateInscription=new \DateTime();
+        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateInscription = new \DateTime();
     }
 
     /**
@@ -237,14 +238,12 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-
     public function setDateInscription($dateInscription)
     {
         $this->dateInscription = $dateInscription;
 
         return $this;
     }
-
 
     /**
      * Get dateInscription
@@ -353,75 +352,75 @@ class Utilisateur
     }
 
     /**
-     * Set codePostal
+     * Set codePostals
      *
-     * @param \AppBundle\Entity\CodePostal $codePostal
+     * @param \AppBundle\Entity\CodePostal $codePostals
      *
      * @return Utilisateur
      */
-    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal)
+    public function setCodePostals(\AppBundle\Entity\CodePostal $codePostals)
     {
-        $this->codePostal = $codePostal;
+        $this->codePostals = $codePostals;
 
         return $this;
     }
 
     /**
-     * Get codePostal
+     * Get codePostals
      *
      * @return \AppBundle\Entity\CodePostal
      */
-    public function getCodePostal()
+    public function getCodePostals()
     {
-        return $this->codePostal;
+        return $this->codePostals;
     }
 
     /**
-     * Set localite
+     * Set localites
      *
-     * @param \AppBundle\Entity\Localite $localite
+     * @param \AppBundle\Entity\Localite $localites
      *
      * @return Utilisateur
      */
-    public function setLocalite(\AppBundle\Entity\Localite $localite)
+    public function setLocalites(\AppBundle\Entity\Localite $localites)
     {
-        $this->localite = $localite;
+        $this->localites = $localites;
 
         return $this;
     }
 
     /**
-     * Get localite
+     * Get localites
      *
      * @return \AppBundle\Entity\Localite
      */
-    public function getLocalite()
+    public function getLocalites()
     {
-        return $this->localite;
+        return $this->localites;
     }
 
     /**
-     * Set commune
+     * Set communes
      *
-     * @param \AppBundle\Entity\Commune $commune
+     * @param \AppBundle\Entity\Commune $communes
      *
      * @return Utilisateur
      */
-    public function setCommune(\AppBundle\Entity\Commune $commune)
+    public function setCommunes(\AppBundle\Entity\Commune $communes)
     {
-        $this->commune = $commune;
+        $this->communes = $communes;
 
         return $this;
     }
 
     /**
-     * Get commune
+     * Get communes
      *
      * @return \AppBundle\Entity\Commune
      */
-    public function getCommune()
+    public function getCommunes()
     {
-        return $this->commune;
+        return $this->communes;
     }
 
     /**
@@ -433,7 +432,7 @@ class Utilisateur
      */
     public function addInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internaute[] = $internaute;
+        $this->internautes[] = $internaute;
 
         return $this;
     }
@@ -445,17 +444,17 @@ class Utilisateur
      */
     public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internaute->removeElement($internaute);
+        $this->internautes->removeElement($internaute);
     }
 
     /**
-     * Get internaute
+     * Get internautes
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getInternaute()
+    public function getInternautes()
     {
-        return $this->internaute;
+        return $this->internautes;
     }
 
     /**
@@ -467,7 +466,7 @@ class Utilisateur
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataire[] = $prestataire;
+        $this->prestataires[] = $prestataire;
 
         return $this;
     }
@@ -479,18 +478,16 @@ class Utilisateur
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataire->removeElement($prestataire);
+        $this->prestataires->removeElement($prestataire);
     }
 
     /**
-     * Get prestataire
+     * Get prestataires
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataire()
+    public function getPrestataires()
     {
-        return $this->prestataire;
+        return $this->prestataires;
     }
-
-
 }

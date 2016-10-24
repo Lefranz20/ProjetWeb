@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Prestataire
@@ -71,55 +72,62 @@ class Prestataire
      */
     private $dateInscription;
 
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(length=128,unique=true)
+     */
+    private $slug;
+
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataire")
+     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataires")
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false,unique=true)
      *
      */
-    private $utilisateur;
+    private $utilisateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataire")
+     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataires")
      */
-    private $stage;
+    private $stages;
 
     /**
-     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataire")
+     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataires")
      */
-    private $promotion;
+    private $promotions;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataire")
+     * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataires")
      */
-    private $categorie_service;
+    private $categorie_services;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataire")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataires")
      */
-    private $commentaire;
+    private $commentaires;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataire")
+     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataires")
      */
-    private $image;
+    private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataire")
+     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataires")
      * @ORM\JoinTable(name="favori")
      */
-    private $internaute;
+    private $internautes;
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->stage = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->promotion = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categorie_service = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->internaute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categorie_services = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateInscription = new \DateTime();
     }
 
@@ -278,234 +286,6 @@ class Prestataire
     }
 
     /**
-     * Set utilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
-     *
-     * @return Prestataire
-     */
-    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateur
-     *
-     * @return \AppBundle\Entity\Utilisateur
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
-    }
-
-    /**
-     * Add stage
-     *
-     * @param \AppBundle\Entity\Stage $stage
-     *
-     * @return Prestataire
-     */
-    public function addStage(\AppBundle\Entity\Stage $stage)
-    {
-        $this->stage[] = $stage;
-
-        return $this;
-    }
-
-    /**
-     * Remove stage
-     *
-     * @param \AppBundle\Entity\Stage $stage
-     */
-    public function removeStage(\AppBundle\Entity\Stage $stage)
-    {
-        $this->stage->removeElement($stage);
-    }
-
-    /**
-     * Get stage
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getStage()
-    {
-        return $this->stage;
-    }
-
-    /**
-     * Add promotion
-     *
-     * @param \AppBundle\Entity\Promotion $promotion
-     *
-     * @return Prestataire
-     */
-    public function addPromotion(\AppBundle\Entity\Promotion $promotion)
-    {
-        $this->promotion[] = $promotion;
-
-        return $this;
-    }
-
-    /**
-     * Remove promotion
-     *
-     * @param \AppBundle\Entity\Promotion $promotion
-     */
-    public function removePromotion(\AppBundle\Entity\Promotion $promotion)
-    {
-        $this->promotion->removeElement($promotion);
-    }
-
-    /**
-     * Get promotion
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPromotion()
-    {
-        return $this->promotion;
-    }
-
-    /**
-     * Add categorieService
-     *
-     * @param \AppBundle\Entity\CategorieDeService $categorieService
-     *
-     * @return Prestataire
-     */
-    public function addCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
-    {
-        $this->categorie_service[] = $categorieService;
-
-        return $this;
-    }
-
-    /**
-     * Remove categorieService
-     *
-     * @param \AppBundle\Entity\CategorieDeService $categorieService
-     */
-    public function removeCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
-    {
-        $this->categorie_service->removeElement($categorieService);
-    }
-
-    /**
-     * Get categorieService
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategorieService()
-    {
-        return $this->categorie_service;
-    }
-
-    /**
-     * Add commentaire
-     *
-     * @param \AppBundle\Entity\Commentaire $commentaire
-     *
-     * @return Prestataire
-     */
-    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
-    {
-        $this->commentaire[] = $commentaire;
-
-        return $this;
-    }
-
-    /**
-     * Remove commentaire
-     *
-     * @param \AppBundle\Entity\Commentaire $commentaire
-     */
-    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
-    {
-        $this->commentaire->removeElement($commentaire);
-    }
-
-    /**
-     * Get commentaire
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCommentaire()
-    {
-        return $this->commentaire;
-    }
-
-    /**
-     * Add image
-     *
-     * @param \AppBundle\Entity\Image $image
-     *
-     * @return Prestataire
-     */
-    public function addImage(\AppBundle\Entity\Image $image)
-    {
-        $this->image[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \AppBundle\Entity\Image $image
-     */
-    public function removeImage(\AppBundle\Entity\Image $image)
-    {
-        $this->image->removeElement($image);
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Add internaute
-     *
-     * @param \AppBundle\Entity\Internaute $internaute
-     *
-     * @return Prestataire
-     */
-    public function addInternaute(\AppBundle\Entity\Internaute $internaute)
-    {
-        $this->internaute[] = $internaute;
-
-        return $this;
-    }
-
-    /**
-     * Remove internaute
-     *
-     * @param \AppBundle\Entity\Internaute $internaute
-     */
-    public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
-    {
-        $this->internaute->removeElement($internaute);
-    }
-
-    /**
-     * Get internaute
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getInternaute()
-    {
-        return $this->internaute;
-    }
-
-    /**
      * Set dateInscription
      *
      * @param \DateTime $dateInscription
@@ -527,5 +307,257 @@ class Prestataire
     public function getDateInscription()
     {
         return $this->dateInscription;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Prestataire
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set utilisateurs
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateurs
+     *
+     * @return Prestataire
+     */
+    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
+    {
+        $this->utilisateurs = $utilisateurs;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateurs
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUtilisateurs()
+    {
+        return $this->utilisateurs;
+    }
+
+    /**
+     * Add stage
+     *
+     * @param \AppBundle\Entity\Stage $stage
+     *
+     * @return Prestataire
+     */
+    public function addStage(\AppBundle\Entity\Stage $stage)
+    {
+        $this->stages[] = $stage;
+
+        return $this;
+    }
+
+    /**
+     * Remove stage
+     *
+     * @param \AppBundle\Entity\Stage $stage
+     */
+    public function removeStage(\AppBundle\Entity\Stage $stage)
+    {
+        $this->stages->removeElement($stage);
+    }
+
+    /**
+     * Get stages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStages()
+    {
+        return $this->stages;
+    }
+
+    /**
+     * Add promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     *
+     * @return Prestataire
+     */
+    public function addPromotion(\AppBundle\Entity\Promotion $promotion)
+    {
+        $this->promotions[] = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Remove promotion
+     *
+     * @param \AppBundle\Entity\Promotion $promotion
+     */
+    public function removePromotion(\AppBundle\Entity\Promotion $promotion)
+    {
+        $this->promotions->removeElement($promotion);
+    }
+
+    /**
+     * Get promotions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    /**
+     * Add categorieService
+     *
+     * @param \AppBundle\Entity\CategorieDeService $categorieService
+     *
+     * @return Prestataire
+     */
+    public function addCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
+    {
+        $this->categorie_services[] = $categorieService;
+
+        return $this;
+    }
+
+    /**
+     * Remove categorieService
+     *
+     * @param \AppBundle\Entity\CategorieDeService $categorieService
+     */
+    public function removeCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
+    {
+        $this->categorie_services->removeElement($categorieService);
+    }
+
+    /**
+     * Get categorieServices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategorieServices()
+    {
+        return $this->categorie_services;
+    }
+
+    /**
+     * Add commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     *
+     * @return Prestataire
+     */
+    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaires[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaires->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Prestataire
+     */
+    public function addImage(\AppBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \AppBundle\Entity\Image $image
+     */
+    public function removeImage(\AppBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add internaute
+     *
+     * @param \AppBundle\Entity\Internaute $internaute
+     *
+     * @return Prestataire
+     */
+    public function addInternaute(\AppBundle\Entity\Internaute $internaute)
+    {
+        $this->internautes[] = $internaute;
+
+        return $this;
+    }
+
+    /**
+     * Remove internaute
+     *
+     * @param \AppBundle\Entity\Internaute $internaute
+     */
+    public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
+    {
+        $this->internautes->removeElement($internaute);
+    }
+
+    /**
+     * Get internautes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInternautes()
+    {
+        return $this->internautes;
     }
 }

@@ -124,4 +124,8 @@ class Newsletter
     {
         return $this->typeDocument;
     }
+    public function __construct()
+    {
+        $this->datePublication = new \DateTime();
+    }
 }

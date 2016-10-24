@@ -71,15 +71,16 @@ class Promotion
     private $dateAffichageFin;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="promotion")
-     * @ORM\JoinColumn(nullable=false)
+     *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="promotions")
+     * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id",nullable=false)
      */
-    private $prestataire;
+    private $prestataires;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CategorieDeService",inversedBy="promotion")
+     * @ORM\ManyToOne(targetEntity="CategorieDeService",inversedBy="promotions")
+     * @ORM\JoinColumn(name="categories_service_id",referencedColumnName="id")
      */
-    private $categories_service;
+    private $categories_services;
 
 
     /**
@@ -261,50 +262,50 @@ class Promotion
     }
 
     /**
-     * Set prestataire
+     * Set prestataires
      *
-     * @param \AppBundle\Entity\Prestataire $prestataire
+     * @param \AppBundle\Entity\Prestataire $prestataires
      *
      * @return Promotion
      */
-    public function setPrestataire(\AppBundle\Entity\Prestataire $prestataire)
+    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires)
     {
-        $this->prestataire = $prestataire;
+        $this->prestataires = $prestataires;
 
         return $this;
     }
 
     /**
-     * Get prestataire
+     * Get prestataires
      *
      * @return \AppBundle\Entity\Prestataire
      */
-    public function getPrestataire()
+    public function getPrestataires()
     {
-        return $this->prestataire;
+        return $this->prestataires;
     }
 
     /**
-     * Set categoriesService
+     * Set categoriesServices
      *
-     * @param \AppBundle\Entity\CategorieDeService $categoriesService
+     * @param \AppBundle\Entity\CategorieDeService $categoriesServices
      *
      * @return Promotion
      */
-    public function setCategoriesService(\AppBundle\Entity\CategorieDeService $categoriesService = null)
+    public function setCategoriesServices(\AppBundle\Entity\CategorieDeService $categoriesServices = null)
     {
-        $this->categories_service = $categoriesService;
+        $this->categories_services = $categoriesServices;
 
         return $this;
     }
 
     /**
-     * Get categoriesService
+     * Get categoriesServices
      *
      * @return \AppBundle\Entity\CategorieDeService
      */
-    public function getCategoriesService()
+    public function getCategoriesServices()
     {
-        return $this->categories_service;
+        return $this->categories_services;
     }
 }

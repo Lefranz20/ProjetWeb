@@ -36,19 +36,17 @@ class Bloc
     private $description;
 
     /**
-     *@ORM\OneToMany(targetEntity="Position",mappedBy="bloc")
+     *@ORM\OneToMany(targetEntity="Position",mappedBy="blocs")
      */
-    private $position;
+    private $positions;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->position = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
 
     /**
      * Get id
@@ -117,7 +115,7 @@ class Bloc
      */
     public function addPosition(\AppBundle\Entity\Position $position)
     {
-        $this->position[] = $position;
+        $this->positions[] = $position;
 
         return $this;
     }
@@ -129,16 +127,16 @@ class Bloc
      */
     public function removePosition(\AppBundle\Entity\Position $position)
     {
-        $this->position->removeElement($position);
+        $this->positions->removeElement($position);
     }
 
     /**
-     * Get position
+     * Get positions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPosition()
+    public function getPositions()
     {
-        return $this->position;
+        return $this->positions;
     }
 }

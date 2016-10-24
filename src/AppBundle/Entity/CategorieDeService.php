@@ -50,29 +50,30 @@ class CategorieDeService
     private $valide;
 
     /**
-     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_service")
+     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_services")
+     * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id")
      *
      */
-    private $prestataire;
+    private $prestataires;
 
     /**
-     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_service")
+     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_services")
      */
-    private $promotion;
+    private $promotions;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_service")
+     * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_services")
+     * @ORM\JoinColumn(name="image_id",referencedColumnName="id")
      */
-    private $image;
-
+    private $images;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->promotion = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -190,7 +191,7 @@ class CategorieDeService
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataire[] = $prestataire;
+        $this->prestataires[] = $prestataire;
 
         return $this;
     }
@@ -202,17 +203,17 @@ class CategorieDeService
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataire->removeElement($prestataire);
+        $this->prestataires->removeElement($prestataire);
     }
 
     /**
-     * Get prestataire
+     * Get prestataires
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataire()
+    public function getPrestataires()
     {
-        return $this->prestataire;
+        return $this->prestataires;
     }
 
     /**
@@ -224,7 +225,7 @@ class CategorieDeService
      */
     public function addPromotion(\AppBundle\Entity\Promotion $promotion)
     {
-        $this->promotion[] = $promotion;
+        $this->promotions[] = $promotion;
 
         return $this;
     }
@@ -236,40 +237,40 @@ class CategorieDeService
      */
     public function removePromotion(\AppBundle\Entity\Promotion $promotion)
     {
-        $this->promotion->removeElement($promotion);
+        $this->promotions->removeElement($promotion);
     }
 
     /**
-     * Get promotion
+     * Get promotions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPromotion()
+    public function getPromotions()
     {
-        return $this->promotion;
+        return $this->promotions;
     }
 
     /**
-     * Set image
+     * Set images
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param \AppBundle\Entity\Image $images
      *
      * @return CategorieDeService
      */
-    public function setImage(\AppBundle\Entity\Image $image = null)
+    public function setImages(\AppBundle\Entity\Image $images = null)
     {
-        $this->image = $image;
+        $this->images = $images;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get images
      *
      * @return \AppBundle\Entity\Image
      */
-    public function getImage()
+    public function getImages()
     {
-        return $this->image;
+        return $this->images;
     }
 }
