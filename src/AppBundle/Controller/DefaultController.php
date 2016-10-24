@@ -14,21 +14,23 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 
-        return $this->render('Frontend/Index.html.twig');
+        return $this->render('::Index.html.twig');
     }
     /**
      * @Route("/apropos",name="apropos")
      */
     public function aproposAction(){
-        return $this->render('Frontend/apropos.html.twig');
+        return $this->render('::apropos.html.twig');
     }
 
     /**
      * @Route("/contact",name="contact")
      */
     public function contactAction(){
-        return $this->render('Frontend/contact.html.twig');
+        return $this->render('::contact.html.twig');
     }
+
+
 
     public function  bandeauAction(){
         return $this->render(':Blocs:bandeau.html.twig');
@@ -38,14 +40,8 @@ class DefaultController extends Controller
         return $this->render(':Blocs:recherche.html.twig');
     }
     public  function prestatairesAction(){
-        /*
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Prestataire');
-        $prestataires = $repo->findLastPrestataires();
-        */
 
         $prestataires = $this->getDoctrine()->getRepository('AppBundle:Prestataire')->findLastPrestataires();
-        dump($prestataires);
         return $this->render(':Blocs:prestataires.html.twig',array('prestaires'=>$prestataires));
     }
 }

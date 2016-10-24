@@ -44,6 +44,13 @@ class Internaute
     private $inscriptionNewsletter;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_inscription", type="datetime", length=255)
+     */
+    private $dateInscription;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internaute")
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
@@ -86,6 +93,7 @@ class Internaute
         $this->commentaire = new \Doctrine\Common\Collections\ArrayCollection();
         $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
         $this->position = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateInscription = new \DateTime();
     }
 
     /**
@@ -352,5 +360,29 @@ class Internaute
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set dateInscription
+     *
+     * @param \DateTime $dateInscription
+     *
+     * @return Internaute
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInscription
+     *
+     * @return \DateTime
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
     }
 }

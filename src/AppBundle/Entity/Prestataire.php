@@ -64,10 +64,18 @@ class Prestataire
      */
     private $numeroTva;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_inscription", type="datetime", length=255)
+     */
+    private $dateInscription;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataire")
-     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
+     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false,unique=true)
+     *
      */
     private $utilisateur;
 
@@ -112,6 +120,7 @@ class Prestataire
         $this->commentaire = new \Doctrine\Common\Collections\ArrayCollection();
         $this->image = new \Doctrine\Common\Collections\ArrayCollection();
         $this->internaute = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateInscription = new \DateTime();
     }
 
     /**
@@ -494,5 +503,29 @@ class Prestataire
     public function getInternaute()
     {
         return $this->internaute;
+    }
+
+    /**
+     * Set dateInscription
+     *
+     * @param \DateTime $dateInscription
+     *
+     * @return Prestataire
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInscription
+     *
+     * @return \DateTime
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
     }
 }

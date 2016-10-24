@@ -121,6 +121,7 @@ class Utilisateur
     {
         $this->internaute = new \Doctrine\Common\Collections\ArrayCollection();
         $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateInscription=new \DateTime();
     }
 
     /**
@@ -236,12 +237,14 @@ class Utilisateur
      *
      * @return Utilisateur
      */
+
     public function setDateInscription($dateInscription)
     {
         $this->dateInscription = $dateInscription;
 
         return $this;
     }
+
 
     /**
      * Get dateInscription
@@ -488,4 +491,6 @@ class Utilisateur
     {
         return $this->prestataire;
     }
+
+
 }
