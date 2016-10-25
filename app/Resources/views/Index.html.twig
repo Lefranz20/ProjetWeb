@@ -1,4 +1,10 @@
 {% extends 'layout.html.twig' %}
 {% block bandeau %}{{ render(controller('AppBundle:Default:bandeau')) }}{% endblock %}
 {% block recherche %}{{ render(controller('AppBundle:Default:recherche')) }}{% endblock %}
-{% block prestataires %}{{ render(controller('AppBundle:Default:prestataires')) }}{% endblock %}
+{% block prestataires %}
+    {{ render(controller('AppBundle:Default:prestataires')) }}
+
+    <hr/>
+    <h2 class="text-capitalize">Service du Mois </h2>
+    {{ render(controller('AppBundle:Default:serviceDuMois')) }}
+{% endblock %}
