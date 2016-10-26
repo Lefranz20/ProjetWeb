@@ -31,19 +31,6 @@ class DefaultController extends Controller
     }
 
 
-    /**
-     * @Route("/prestaires/listes",name="prestataires_liste")
-     */
-    public function prestataireListeAction(){
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Prestataire');
-        $prestataires = $repo->findAll();
-        if(!$prestataires){
-            $error = array('msg'=>'aucun prestataire trouvé.');
-            return $this->render('error-404.html.twig',['error'=>$error]);
-        }else{
-            return $this->render(':prestataire:list.html.twig',['prestataires'=>$prestataires]);
-        }
-    }
 
 
 

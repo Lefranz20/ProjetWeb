@@ -3,35 +3,27 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Web</th>
+            <th>N° TVA</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td class=""><a href="#">detail</a></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td class=""><a href="#"> detail</a></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td class=""><a href="#">detail</a></td>
-        </tr>
+        {% for p in prestataires %}
+            <tr>
+                <th scope="row">{{ p.id }}</th>
+                <td>{{ p.nom }}</td>
+                <td>{{ p.web }}</td>
+                <td>{{ p.numeroTva }}</td>
+                <td class=""><a href="{{ url('show_prestaire',{'slug' : p.slug}) }}">detail</a></td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+    {# navigation de la pagination #}
+    <div class="navigation">
+        {{ knp_pagination_render(prestataires) }}
+    </div>
 {% endblock %}

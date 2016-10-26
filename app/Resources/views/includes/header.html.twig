@@ -20,43 +20,12 @@
 
                     <div class="header-bottom">
                         <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
-                            <li class="active">
-                                <a href="{{ url('homepage') }}">Home</a>
-                            </li>
-
-                            <li >
-                                <a href="{{ url('prestataires_liste') }}">Prestataires</a>
-                            </li>
-
-                            <li class="has-mega-menu5 ">
-                                <a href="#">Services <i class="fa fa-chevron-down"></i></a>
-
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="#">Catégorie des services</a>
-
-                                        <ul>
-                                            <li><a href="faq.html">Catégorie 1</a></li>
-                                            <li><a href="invoice.html">Catégorie 2</a></li>
-                                            <li><a href="pricing.html">Catégorie 3</a></li>
-                                            <li><a href="grid.html">Catégorie 4</a></li>
-                                            <li><a href="testimonials.html">Catégorie 5</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li >
-                                <a href={{ url('contact') }}>Contact</a>
-                            </li>
-
-                            <li >
-                                <a href="{{ url('apropos') }}">A propos</a>
-                            </li>
-
-                            <li >
-                                <a href="#">Admin </a>
-                            </li>
+                            <li class="active"><a href="{{ url('homepage') }}">Home</a></li>
+                            <li><a href="{{ url('liste_prestataires') }}">Prestataires</a></li>
+                            <li><a href="#">Catégorie des services</a></li>
+                            <li><a href={{ url('contact') }}>Contact</a></li>
+                            <li><a href="{{ url('apropos') }}">A propos</a></li>
+                            <li><a href="#">Admin </a></li>
                         </ul>
 
                         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">

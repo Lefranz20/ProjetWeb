@@ -10,16 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PrestatairesController extends Controller {
 
+
     /**
-     * @Route("/prestataires",name="liste_prestataire")
+     * @Route("/prestataires",name="liste_prestataires")
      */
-    public function listAction()
-    {
-        return $this->render('list.html.twig');
+    public function prestataireListeAction(Request $request){
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Prestataire');
+        $prestataires = $repo->findAll();
+        if(!$prestataires){
+            $error = array('msg'=>'aucun prestataire trouvé.');
+            return $this->render('error-404.html.twig',['error'=>$error]);
+        }else{
+            $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate($prestataires, $request->query->getInt('page', 1),3);
+            return $this->render(':prestataire:list.html.twig',['prestataires'=>$pagination]);
+        }
     }
 
     /**
-     * @Route("/prestataire/{slug}",name="show_prestaire")
+     * @Route("/prestataires/{slug}",name="show_prestaire")
      */
     public function showAction($slug)
     {
@@ -29,22 +38,22 @@ class PrestatairesController extends Controller {
             $error = array('msg'=>'pas de détail pour ce prestataire.');
             return $this->render('error-404.html.twig',['error'=>$error]);
         }else{
-            return $this->render(':prestataire:show.html.twig');
+            return $this->render(':prestataire:show.html.twig',['prestataire'=>$pretataire]);
         }
     }
 
     /**
-     * @Route("/prestataire/ajout/{prestataireId}" , name="add_prestataire")
+     * @Route("/prestataires/ajout/{slug}" , name="add_prestataire")
      */
-    public function addAction($prestataireId)
+    public function addAction($slug)
     {
         return $this->render(':prestataire:add.html.twig');
     }
 
     /**
-     * @Route("/prestataire/update/{prestataireId}")
+     * @Route("/prestataires/update/{slug}")
      */
-    public function updateAction($prestataireId)
+    public function updateAction($slug)
     {
         return $this->render(':prestataire:update.html.twig');
     }
