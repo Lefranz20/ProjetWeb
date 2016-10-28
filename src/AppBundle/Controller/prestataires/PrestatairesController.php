@@ -23,7 +23,7 @@ class PrestatairesController extends Controller {
         }else{
             $paginator  = $this->get('knp_paginator');
             $pagination = $paginator->paginate($prestataires, $request->query->getInt('page', 1),3);
-            return $this->render(':prestataire:list.html.twig',['prestataires'=>$pagination]);
+            return $this->render(':prestataire:prestataire_liste.html.twig',['prestataires'=>$pagination]);
         }
     }
 
@@ -38,7 +38,7 @@ class PrestatairesController extends Controller {
             $error = array('msg'=>'pas de détail pour ce prestataire.');
             return $this->render('error-404.html.twig',['error'=>$error]);
         }else{
-            return $this->render(':prestataire:show.html.twig',['prestataire'=>$pretataire]);
+            return $this->render(':prestataire:prestataire_show.html.twig',['prestataire'=>$pretataire]);
         }
     }
 
@@ -47,7 +47,7 @@ class PrestatairesController extends Controller {
      */
     public function addAction($slug)
     {
-        return $this->render(':prestataire:add.html.twig');
+        return $this->render(':prestataire:prestataire_add.html.twig');
     }
 
     /**
@@ -55,6 +55,6 @@ class PrestatairesController extends Controller {
      */
     public function updateAction($slug)
     {
-        return $this->render(':prestataire:update.html.twig');
+        return $this->render('prestataire_update.html.twig');
     }
 } 

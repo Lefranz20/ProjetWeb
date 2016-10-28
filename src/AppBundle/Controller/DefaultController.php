@@ -32,10 +32,6 @@ class DefaultController extends Controller
 
 
 
-
-
-
-
     /* ================== ci-dessous les 4 blocs d'infos qui composent la page d'accueil ================== */
 
     /*
@@ -49,7 +45,13 @@ class DefaultController extends Controller
     *  2. ---------------- le bloc Recherche ----------------------------
     */
     public function rechercheAction(){
-        return $this->render(':blocs_home:recherche.html.twig');
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Utilisateur');
+        $utilisateurs = $repo->findBy(array('typeUtilisateur'=>'prestataire'));
+        if(!$utilisateurs){
+            /*message d'erreur*/
+        }else {
+            return $this->render(':blocs_home:recherche.html.twig', ['users' => $utilisateurs]);
+        }
     }
 
     /*

@@ -5,48 +5,68 @@
     - si recherche uniquement par Lieu alors prévoir une route << prestataire-search/{lieu} >>
     - si recherche uniquement par prestataire alors prévoir une route << type-de-service-search/{pretataire_id}>>#}
 
-<form class="filter" method="post" action="?">
-    <div class="row">
-        <div class="col-sm-12 col-md-4">
-            <div class="form-group">
-                <select class="form-control bs-select-hidden" title="Select Location">
-                    <option class="bs-title-option" value="">Services</option>
-                    <option>Bronx</option>
-                    <option>Brooklyn</option>
-                    <option>Manhattan</option>
-                    <option>Staten Island</option>
-                    <option>Queens</option>
-                </select>
+    <form class="filter bordered" method="post" action="?">
+        <div class="row ">
+            {#
+                {% for u in users %}
+                    {{ dump(u) }}
+                    {% for lo in u.localites %}
+                        {{ dump(lo) }} {# localité #}
+            #}
+            {#
+                    {% endfor %}
+                    {% for p in u.prestataires %}
+                        {{ dump(p) }} {# prestataire #}
+            #}
+            {#
+                        {% for categ in p.categorieServices %}
+                            {{ dump(categ) }} {# service #}
+            #}
+            {#
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            #}
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <input type="text" name="services" list="servicesName" class="form-control" placeholder="Entrer ou sélectionner un Service"/>
+                    <datalist id="servicesName">
+                        <option>Bronx</option>
+                        <option>Brooklyn</option>
+                        <option>Manhattan</option>
+                        <option>Staten Island</option>
+                        <option>Queens</option>
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <input type="text" name="loca" list="locaName" class="form-control" placeholder="Entrer ou sélectionner une Localité"/>
+                    <datalist id="locaName">
+                        <option>Service 1</option>
+                        <option>Service 2</option>
+                        <option>Service 3</option>
+                        <option>Service 4</option>
+                        <option>Service 5</option>
+                    </datalist>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <input type="text" name="prestaire" list="prestataireName" class="form-control" placeholder="Entrer ou sélectionner d'un prestataire"/>
+                    <datalist id="prestataireName">
+                        <option>Bronssssx</option>
+                        <option>Brooklyn</option>
+                        <option>Manhattan</option>
+                        <option>Staten Island</option>
+                        <option>Queens</option>
+                    </datalist>
+                </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="form-group">
-                <select class="form-control bs-select-hidden" title="Select Location">
-                    <option class="bs-title-option" value="">Localité</option>
-                    <option>Bronx</option>
-                    <option>Brooklyn</option>
-                    <option>Manhattan</option>
-                    <option>Staten Island</option>
-                    <option>Queens</option>
-                </select>
+        <div class="row">
+            <div class="col-sm-offset-8 col-sm-4 p15">
+                <button class="btn btn-primary" type="submit">Recherche</button>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="form-group">
-                <select class="form-control bs-select-hidden" title="Select Category">
-                    <option class="bs-title-option" value="">Prestataire</option>
-                    <option value="">Automotive</option>
-                    <option value="">Jobs</option>
-                    <option value="">Nightlife</option>
-                    <option value="">Services</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <hr/>
-    <div class="row">
-        <div class="col-sm-offset-8 col-sm-4">
-            <button class="btn btn-primary" type="submit">Recherche</button>
-        </div>
-    </div>
-</form>
+    </form>
