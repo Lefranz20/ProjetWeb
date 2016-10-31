@@ -3,63 +3,34 @@
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <div class="item-bg" style="background-image: url('assets/img/tmp/slider-2.jpg')"></div>
-                    <img src="assets/img/slider/fitness-s1-large.jpg" alt="">
 
+                <div class="item active ">
+                    <div class="item-bg" style="background-image: url('{{ asset('assets/img/slider/fitness-s2-large.jpg') }}')"></div>
+                    <img src="{{ asset('assets/img/slider/fitness-s2-large.jpg') }}" alt="">
                     <div class="carousel-caption">
                         <div class="hero-slider-content">
-                            <h1>Garder la Forme !</h1>
+                            <h1>Etirement ...</h1>
                         </div><!-- /.hero-slider-content -->
-
-                        <div class="hero-slider-actions">
-                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                            <a href="listing-detail.html"><i class="fa fa-search"></i></a>
-                            <a href="#"><i class="fa fa-bookmark-o"></i></a>
-                        </div><!-- /.hero-slider-actions -->
                     </div><!-- /.carousel-caption -->
                 </div><!-- /.item -->
 
-                <div class="item">
-                    <div class="item-bg" style="background-image: url('assets/img/tmp/slider-1.jpg')"></div>
-                    <img src="assets/img/slider/massage-s1-large.jpg" alt="">
-
-                    <div class="carousel-caption">
-                        <div class="hero-slider-content">
-                            <h1>Massage Thaï quoi de mieux !</h1>
-                        </div><!-- /.hero-slider-content -->
-
-                        <div class="hero-slider-actions">
-                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                            <a href="listing-detail.html"><i class="fa fa-search"></i></a>
-                            <a href="#"><i class="fa fa-bookmark-o"></i></a>
-                        </div><!-- /.hero-slider-actions -->
-                    </div><!-- /.carousel-caption -->
-                </div><!-- /.item -->
-
-                <div class="item">
-                    <div class="item-bg" style="background-image: url('assets/img/tmp/slider-3.jpg')"></div>
-                    <img src="assets/img/slider/yoga-s1-large.jpg" alt="">
-
-                    <div class="carousel-caption">
-                        <div class="hero-slider-content">
-                            <h1>Canaliser son Energie !</h1>
-                        </div><!-- /.hero-slider-content -->
-
-                        <div class="hero-slider-actions">
-                            <a href="#"><i class="fa fa-heart-o"></i></a>
-                            <a href="listing-detail.html"><i class="fa fa-search"></i></a>
-                            <a href="#"><i class="fa fa-bookmark-o"></i></a>
-                        </div><!-- /.hero-slider-actions -->
-                    </div><!-- /.carousel-caption -->
-                </div><!-- /.item -->
+                {% for s in sliders %}
+                    <div class="item">
+                        <div class="item-bg" style="background-image: url('{{(asset(s.lien)) }}')"></div>
+                        <img src="{{ asset(s.lien) }}" alt=""/>
+                        <div class="carousel-caption">
+                            <div class="hero-slider-content">
+                                <h1>{{ s.titre }}</h1>
+                            </div><!-- /.hero-slider-content -->
+                        </div><!-- /.carousel-caption -->
+                    </div><!-- /.item -->
+                {% endfor %}
             </div><!-- /.carousel-inner -->
 
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                 <i class="fa fa-long-arrow-left"></i>
             </a>
-
             <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
                 <i class="fa fa-long-arrow-right"></i>
             </a>

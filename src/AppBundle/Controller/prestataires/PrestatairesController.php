@@ -43,9 +43,9 @@ class PrestatairesController extends Controller {
     }
 
     /**
-     * @Route("/prestataires/ajout/{slug}" , name="add_prestataire")
+     * @Route("/prestataires/ajout" , name="prestataire_add")
      */
-    public function addAction($slug)
+    public function addAction(Request $request)
     {
         return $this->render(':prestataire:prestataire_add.html.twig');
     }

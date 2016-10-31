@@ -11,8 +11,9 @@ class PrestataireRepository extends EntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb->orderBy('p.dateInscription', 'DESC');
         $qb->setMaxResults($qty);
-        $query = $qb->getQuery();
-        $res = $query->getResult();
-      return $res;
+        return $qb
+                ->getQuery()
+                ->getResult();
     }
+
 }

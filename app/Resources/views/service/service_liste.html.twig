@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+{% block prestataires %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>description</th>
+            <th>prestataire</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for s in servicesValides %}
+            <tr>
+                <th scope="row">{{ s.id }}</th>
+                <td>{{ s.nom}}</td>
+                <td>{{ s.description }}</td>
+                <td>prestataire</td>
+                <td class=""><a href="{{ url('show_service',{'slug' : s.slug}) }}">search prestataire</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# navigation de la pagination #}
+    <div class="navigation">
+        {{ knp_pagination_render(servicesValides) }}
+    </div>
+{% endblock %}

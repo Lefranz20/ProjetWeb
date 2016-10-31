@@ -36,6 +36,13 @@ class Image
     private $lien;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
+
+    /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\CategorieDeService",mappedBy="images")
      */
     private $categorie_services;
@@ -180,5 +187,29 @@ class Image
     public function getPrestataires()
     {
         return $this->prestataires;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Image
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
     }
 }

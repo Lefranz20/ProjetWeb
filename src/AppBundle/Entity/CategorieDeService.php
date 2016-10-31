@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * CategorieDeService
@@ -48,6 +49,12 @@ class CategorieDeService
      * @ORM\Column(name="valide", type="boolean")
      */
     private $valide;
+
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(length=128,unique=true)
+     */
+    private $slug;
 
     /**
      *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_services")
@@ -272,5 +279,31 @@ class CategorieDeService
     public function getImages()
     {
         return $this->images;
+    }
+
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return CategorieDeService
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

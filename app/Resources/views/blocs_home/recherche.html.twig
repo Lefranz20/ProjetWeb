@@ -3,70 +3,68 @@
     le résultat de la recherche devra etre paginé
     - si recherche uniquement par type de service alors prévoir une route << prestataire-search/{service_id}>>
     - si recherche uniquement par Lieu alors prévoir une route << prestataire-search/{lieu} >>
-    - si recherche uniquement par prestataire alors prévoir une route << type-de-service-search/{pretataire_id}>>#}
+    - si recherche uniquement par prestataire alors prévoir une route << type-de-service-search/{pretataire_id}>>
+    #}
 
-    <form class="filter bordered" method="post" action="?">
-        <div class="row ">
-            {#
-                {% for u in users %}
-                    {{ dump(u) }}
-                    {% for lo in u.localites %}
-                        {{ dump(lo) }} {# localité #}
-            #}
-            {#
+{% set searchServices = [] %}
+{% set searchPrestataires = []%}
+{% set searchLocalites = [] %}
+
+{% for u in users %}
+    {% set searchLocalites = searchLocalites|merge([u.localites.localite]) %}{# liste des localités  des utilisateurs de type prestataire #}
+    {% for p in u.prestataires %}
+        {% set searchPrestataires = searchPrestataires|merge([p.nom])   %} {# liste des prestataires inscripts #}
+        {% for categ in p.categorieServices %}
+            {% set searchServices = searchServices|merge([categ.nom]) %} {# liste des services proposés par les prestataires #}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+<form class="filter bordered" method="post" action="{{ url('search_homepage') }}">
+    <div class="row ">
+        <div class="col-sm-12 col-md-4">
+            <h2>Services</h2>
+            <div class="form-group">
+                <input type="text" name="catServices" list="catServicesName" class="form-control" placeholder="Entrer ou sélectionner un Service"/>
+                <datalist id="catServicesName">
+                    {% for key in searchServices|keys %}
+                        <option name="sName" value="{{ searchServices[key] }}">{{ searchServices[key] }}</option>
                     {% endfor %}
-                    {% for p in u.prestataires %}
-                        {{ dump(p) }} {# prestataire #}
-            #}
-            {#
-                        {% for categ in p.categorieServices %}
-                            {{ dump(categ) }} {# service #}
-            #}
-            {#
-                        {% endfor %}
-                    {% endfor %}
-                {% endfor %}
-            #}
-            <div class="col-sm-12 col-md-4">
-                <div class="form-group">
-                    <input type="text" name="services" list="servicesName" class="form-control" placeholder="Entrer ou sélectionner un Service"/>
-                    <datalist id="servicesName">
-                        <option>Bronx</option>
-                        <option>Brooklyn</option>
-                        <option>Manhattan</option>
-                        <option>Staten Island</option>
-                        <option>Queens</option>
-                    </datalist>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <div class="form-group">
-                    <input type="text" name="loca" list="locaName" class="form-control" placeholder="Entrer ou sélectionner une Localité"/>
-                    <datalist id="locaName">
-                        <option>Service 1</option>
-                        <option>Service 2</option>
-                        <option>Service 3</option>
-                        <option>Service 4</option>
-                        <option>Service 5</option>
-                    </datalist>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <div class="form-group">
-                    <input type="text" name="prestaire" list="prestataireName" class="form-control" placeholder="Entrer ou sélectionner d'un prestataire"/>
-                    <datalist id="prestataireName">
-                        <option>Bronssssx</option>
-                        <option>Brooklyn</option>
-                        <option>Manhattan</option>
-                        <option>Staten Island</option>
-                        <option>Queens</option>
-                    </datalist>
-                </div>
+                </datalist>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-offset-8 col-sm-4 p15">
-                <button class="btn btn-primary" type="submit">Recherche</button>
+        <div class="col-sm-12 col-md-4">
+            <h2>Localités</h2>
+            <div class="form-group">
+                <input type="text" name="localite" list="localiteName" class="form-control" placeholder="Entrer ou sélectionner une Localité"/>
+                <datalist id="localiteName">
+                    {% for key in searchLocalites|keys %}
+                        {% if key > 0 %}
+                            {% if searchLocalites[key-1] != searchLocalites[key]  %}
+                                <option name="lName" value="{{ searchLocalites[key] }}">{{ searchLocalites[key] }}</option>
+                            {% endif %}
+                        {% else %}
+                            <option name="lName" value="{{ searchLocalites[key] }}">{{ searchLocalites[key] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </datalist>
             </div>
         </div>
-    </form>
+        <div class="col-sm-12 col-md-4">
+            <h2>Prestataires</h2>
+            <div class="form-group">
+                <input type="text" name="prestataire" list="prestataireName" class="form-control" placeholder="Entrer ou sélectionner un prestataire"/>
+                <datalist id="prestataireName">
+                    {% for key in searchPrestataires|keys %}
+                        <option name="pName" value="{{ searchPrestataires[key] }}">{{ searchPrestataires[key] }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-8 col-sm-4 p15">
+            <button class="btn btn-primary" type="submit">Recherche</button>
+        </div>
+    </div>
+</form>

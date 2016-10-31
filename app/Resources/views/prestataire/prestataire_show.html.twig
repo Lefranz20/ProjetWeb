@@ -48,8 +48,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <h2 id="reviews">Commentaires</h2>
                 {% block commentaires %}
                     <div class="reviews">
@@ -113,8 +111,17 @@
                     </div><!-- /.detail-actions -->
                 </div>
 
-                <h2><span class="text-secondary">Description</span></h2>
+                <h2><span class="text-secondary">Nos Services</span></h2>
                 <div class="background-white p20">
+                    <div class="detail-description">
+                        <ul>
+                            {% for s in prestataire.categorieServices %}
+                                <ul>
+                                    <li><a href="#">{{s.nom}}</a></li>
+                                </ul>
+                            {% endfor %}
+                        </ul>
+                    </div>
                     <div class="detail-description">
                         {{ prestataire.description }}
                     </div>
