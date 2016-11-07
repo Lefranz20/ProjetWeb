@@ -25,14 +25,15 @@ class Commune
     /**
      * @var string
      *
-     * @ORM\Column(name="commune", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $commune;
+    private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="communes")
+     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="commune")
      */
     private $utilisateurs;
+
 
     /**
      * Constructor
@@ -41,6 +42,7 @@ class Commune
     {
         $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -53,27 +55,27 @@ class Commune
     }
 
     /**
-     * Set commune
+     * Set nom
      *
-     * @param string $commune
+     * @param string $nom
      *
      * @return Commune
      */
-    public function setCommune($commune)
+    public function setNom($nom)
     {
-        $this->commune = $commune;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get commune
+     * Get nom
      *
      * @return string
      */
-    public function getCommune()
+    public function getNom()
     {
-        return $this->commune;
+        return $this->nom;
     }
 
     /**
@@ -108,5 +110,10 @@ class Commune
     public function getUtilisateurs()
     {
         return $this->utilisateurs;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 }

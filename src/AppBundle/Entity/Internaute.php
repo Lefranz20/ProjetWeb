@@ -55,15 +55,15 @@ class Internaute
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
      */
-    private $utilisateurs;
+    private $utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Abus",mappedBy="internautes")
+     * @ORM\OneToMany(targetEntity="Abus",mappedBy="internaute")
      */
     private $abus;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="internautes")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="internaute")
      */
     private $commentaires;
 
@@ -74,14 +74,14 @@ class Internaute
     private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internautes")
+     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internaute")
      * @ORM\JoinTable(name="favori")
      *
      */
-    private $prestataires;
+    private $prestataire;
 
     /**
-     *@ORM\OneToMany(targetEntity="Position",mappedBy="internautes")
+     *@ORM\OneToMany(targetEntity="Position",mappedBy="internaute")
      */
     private $positions;
 
@@ -91,12 +91,9 @@ class Internaute
      */
     public function __construct()
     {
-        $this->abus = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateInscription = new \DateTime();
     }
+
 
     /**
      * Get id
@@ -205,27 +202,27 @@ class Internaute
     }
 
     /**
-     * Set utilisateurs
+     * Set utilisateur
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurs
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return Internaute
      */
-    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs = $utilisateurs;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 
     /**
@@ -329,7 +326,7 @@ class Internaute
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires[] = $prestataire;
+        $this->prestataire[] = $prestataire;
 
         return $this;
     }
@@ -341,17 +338,17 @@ class Internaute
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires->removeElement($prestataire);
+        $this->prestataire->removeElement($prestataire);
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 
     /**

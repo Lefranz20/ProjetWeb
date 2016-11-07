@@ -55,7 +55,8 @@ class Image
     /**
      *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="images")
      */
-    private $prestataires;
+    private $prestataire;
+
 
 
 
@@ -118,6 +119,30 @@ class Image
     }
 
     /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Image
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
      * Set categorieServices
      *
      * @param \AppBundle\Entity\CategorieDeService $categorieServices
@@ -166,50 +191,26 @@ class Image
     }
 
     /**
-     * Set prestataires
+     * Set prestataire
      *
-     * @param \AppBundle\Entity\Prestataire $prestataires
+     * @param \AppBundle\Entity\Prestataire $prestataire
      *
      * @return Image
      */
-    public function setPrestataires(\AppBundle\Entity\Prestataire $prestataires = null)
+    public function setPrestataire(\AppBundle\Entity\Prestataire $prestataire = null)
     {
-        $this->prestataires = $prestataires;
+        $this->prestataire = $prestataire;
 
         return $this;
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \AppBundle\Entity\Prestataire
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
-    }
-
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Image
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
+        return $this->prestataire;
     }
 }

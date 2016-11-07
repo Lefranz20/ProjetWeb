@@ -66,8 +66,8 @@ class IndexController extends Controller
         $repo = $this->getDoctrine()->getRepository('AppBundle:Image');
         $images = $repo->findBy(array('typeImage'=>'slider'));
         if(!$images){
-            $php_errormsg = 'Aucune image pour le slider !';
-            return $this->render('error-404.html.twig',['error'=>$php_errormsg]);
+            $php_errormsg = ['msg'=>'les images du slider sont en cours de validation !'];
+            return $this->render(':blocs_home:error-blocs.html.twig',['error'=>$php_errormsg]);
         }else{
             return $this->render(':blocs_home:bandeau.html.twig',['sliders'=> $images]);
         }
@@ -83,7 +83,7 @@ class IndexController extends Controller
         /*$utilisateurs = $repo->findBy(array('typeUtilisateur'=>'prestataire'));*/
         $utilisateurs = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->search("prestataire");
         if(!$utilisateurs){
-            $php_errormsg = ['msg'=>'Acun prestataire inscrit pour le moment !'];
+            $php_errormsg = ['msg'=>'le compte des prestataires sont en cours de validation !'];
             return $this->render(':blocs_home:error-blocs.html.twig',['error'=>$php_errormsg]);
         }else {
             return $this->render(':blocs_home:recherche.html.twig', ['users' => $utilisateurs]);
@@ -116,7 +116,7 @@ class IndexController extends Controller
         $repo = $this->getDoctrine()->getRepository('AppBundle:CategorieDeService');
         $serviceDuMois = $repo->findOneBy(array('enAvant'=>'1'));
         if(!$serviceDuMois){
-            $php_errormsg = ['msg'=>'Service du Mois en cours de validation ...'];
+            $php_errormsg = ['msg'=>'le service du mois est en cours de validation !'];
             return $this->render(':blocs_home:error-blocs.html.twig',['error'=>$php_errormsg]);
         }else{
             return $this->render(':blocs_home:service.html.twig',['serviceDuMois'=>$serviceDuMois]);

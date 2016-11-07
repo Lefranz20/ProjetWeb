@@ -17,7 +17,7 @@ class ServicesController extends Controller {
         $repo = $this->getDoctrine()->getRepository('AppBundle:CategorieDeService');
         $servicesValides = $repo->findBy(array('valide'=>'1'));
         if(!$servicesValides){
-            $php_errormsg ="Aucun service  validé par l'Administrateur pour le moment";
+            $php_errormsg =["msg"=>"Aucun service  validé par l'Administrateur pour le moment"];
             return $this->render('error-404.html.twig',['error'=>$php_errormsg]);
         }else{
             $paginator = $this->get('knp_paginator');

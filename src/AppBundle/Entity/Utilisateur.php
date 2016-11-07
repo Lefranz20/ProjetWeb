@@ -22,19 +22,6 @@ class Utilisateur
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mot_de_passe", type="string", length=255)
-     */
-    private $motDePasse;
 
     /**
      * @var string
@@ -68,49 +55,51 @@ class Utilisateur
     /**
      * @var int
      *
-     * @ORM\Column(name="nombre_essai", type="integer")
+     * @ORM\Column(name="nombre_essai", type="integer",nullable=true)
+     *
      */
     private $nombreEssai;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="banni", type="boolean")
-     */
-    private $banni;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="inscription_conf", type="boolean")
+     * @ORM\Column(name="inscription_conf", type="boolean",nullable=true)
+     *
      */
     private $inscriptionConf;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ConnexionData",inversedBy="utilisateurs",cascade={"remove"})
+     * @ORM\JoinColumn(name="connexion_data_id",referencedColumnName="id",nullable=false)
+     */
+    private $connexionDatas;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs",cascade={"persist"})
      *@ORM\JoinColumn(name="code_postal_id",referencedColumnName="id",nullable=false)
      */
-    private $codePostals;
+    private $codePostal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs",cascade={"persist"})
      *@ORM\JoinColumn(name="localite_id",referencedColumnName="id",nullable=false)
      */
-    private $localites;
+    private $localite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateurs",cascade={"persist"})
      * @ORM\JoinColumn(name="commune_id",referencedColumnName="id",nullable=false)
      */
-    private $communes;
+    private $commune;
 
     /**
-     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateur")
      */
     private $internautes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateur")
      */
     private $prestataires;
 
@@ -120,10 +109,10 @@ class Utilisateur
      */
     public function __construct()
     {
-        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+
         $this->dateInscription = new \DateTime();
     }
+
 
     /**
      * Get id
@@ -133,54 +122,6 @@ class Utilisateur
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Utilisateur
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set motDePasse
-     *
-     * @param string $motDePasse
-     *
-     * @return Utilisateur
-     */
-    public function setMotDePasse($motDePasse)
-    {
-        $this->motDePasse = $motDePasse;
-
-        return $this;
-    }
-
-    /**
-     * Get motDePasse
-     *
-     * @return string
-     */
-    public function getMotDePasse()
-    {
-        return $this->motDePasse;
     }
 
     /**
@@ -304,30 +245,6 @@ class Utilisateur
     }
 
     /**
-     * Set banni
-     *
-     * @param boolean $banni
-     *
-     * @return Utilisateur
-     */
-    public function setBanni($banni)
-    {
-        $this->banni = $banni;
-
-        return $this;
-    }
-
-    /**
-     * Get banni
-     *
-     * @return boolean
-     */
-    public function getBanni()
-    {
-        return $this->banni;
-    }
-
-    /**
      * Set inscriptionConf
      *
      * @param boolean $inscriptionConf
@@ -352,75 +269,99 @@ class Utilisateur
     }
 
     /**
-     * Set codePostals
+     * Set connexionDatas
      *
-     * @param \AppBundle\Entity\CodePostal $codePostals
+     * @param \AppBundle\Entity\ConnexionData $connexionDatas
      *
      * @return Utilisateur
      */
-    public function setCodePostals(\AppBundle\Entity\CodePostal $codePostals)
+    public function setConnexionDatas(\AppBundle\Entity\ConnexionData $connexionDatas)
     {
-        $this->codePostals = $codePostals;
+        $this->connexionDatas = $connexionDatas;
 
         return $this;
     }
 
     /**
-     * Get codePostals
+     * Get connexionDatas
+     *
+     * @return \AppBundle\Entity\ConnexionData
+     */
+    public function getConnexionDatas()
+    {
+        return $this->connexionDatas;
+    }
+
+    /**
+     * Set codePostal
+     *
+     * @param \AppBundle\Entity\CodePostal $codePostal
+     *
+     * @return Utilisateur
+     */
+    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal)
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    /**
+     * Get codePostal
      *
      * @return \AppBundle\Entity\CodePostal
      */
-    public function getCodePostals()
+    public function getCodePostal()
     {
-        return $this->codePostals;
+        return $this->codePostal;
     }
 
     /**
-     * Set localites
+     * Set localite
      *
-     * @param \AppBundle\Entity\Localite $localites
+     * @param \AppBundle\Entity\Localite $localite
      *
      * @return Utilisateur
      */
-    public function setLocalites(\AppBundle\Entity\Localite $localites)
+    public function setLocalite(\AppBundle\Entity\Localite $localite)
     {
-        $this->localites = $localites;
+        $this->localite = $localite;
 
         return $this;
     }
 
     /**
-     * Get localites
+     * Get localite
      *
      * @return \AppBundle\Entity\Localite
      */
-    public function getLocalites()
+    public function getLocalite()
     {
-        return $this->localites;
+        return $this->localite;
     }
 
     /**
-     * Set communes
+     * Set commune
      *
-     * @param \AppBundle\Entity\Commune $communes
+     * @param \AppBundle\Entity\Commune $commune
      *
      * @return Utilisateur
      */
-    public function setCommunes(\AppBundle\Entity\Commune $communes)
+    public function setCommune(\AppBundle\Entity\Commune $commune)
     {
-        $this->communes = $communes;
+        $this->commune = $commune;
 
         return $this;
     }
 
     /**
-     * Get communes
+     * Get commune
      *
      * @return \AppBundle\Entity\Commune
      */
-    public function getCommunes()
+    public function getCommune()
     {
-        return $this->communes;
+        return $this->commune;
     }
 
     /**
@@ -490,4 +431,5 @@ class Utilisateur
     {
         return $this->prestataires;
     }
+
 }

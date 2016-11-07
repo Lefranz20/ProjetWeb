@@ -57,14 +57,14 @@ class CategorieDeService
     private $slug;
 
     /**
-     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_services")
+     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_service")
      * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id")
      *
      */
-    private $prestataires;
+    private $prestataire;
 
     /**
-     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_services")
+     *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_service")
      */
     private $promotions;
 
@@ -74,12 +74,13 @@ class CategorieDeService
      */
     private $images;
 
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->prestataires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestataire = new \Doctrine\Common\Collections\ArrayCollection();
         $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -190,6 +191,30 @@ class CategorieDeService
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return CategorieDeService
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add prestataire
      *
      * @param \AppBundle\Entity\Prestataire $prestataire
@@ -198,7 +223,7 @@ class CategorieDeService
      */
     public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires[] = $prestataire;
+        $this->prestataire[] = $prestataire;
 
         return $this;
     }
@@ -210,17 +235,17 @@ class CategorieDeService
      */
     public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
     {
-        $this->prestataires->removeElement($prestataire);
+        $this->prestataire->removeElement($prestataire);
     }
 
     /**
-     * Get prestataires
+     * Get prestataire
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPrestataires()
+    public function getPrestataire()
     {
-        return $this->prestataires;
+        return $this->prestataire;
     }
 
     /**
@@ -279,31 +304,5 @@ class CategorieDeService
     public function getImages()
     {
         return $this->images;
-    }
-
-
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return CategorieDeService
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

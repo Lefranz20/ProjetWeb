@@ -84,52 +84,47 @@ class Prestataire
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false,unique=true)
      *
      */
-    private $utilisateurs;
+    private $utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Stage",mappedBy="prestataire")
      */
     private $stages;
 
     /**
-     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Promotion",mappedBy="prestataire")
      */
     private $promotions;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataires")
+     * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataire")
      */
-    private $categorie_services;
+    private $categorie_service;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataire")
      */
     private $commentaires;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataires")
+     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataire")
      */
     private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataires")
+     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataire")
      * @ORM\JoinTable(name="favori")
      */
-    private $internautes;
+    private $internaute;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->stages = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->promotions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categorie_services = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->internautes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateInscription = new \DateTime();
     }
+
 
     /**
      * Get id
@@ -334,27 +329,27 @@ class Prestataire
     }
 
     /**
-     * Set utilisateurs
+     * Set utilisateur
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateurs
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
      * @return Prestataire
      */
-    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilisateurs = $utilisateurs;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get utilisateurs
+     * Get utilisateur
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateurs()
+    public function getUtilisateur()
     {
-        return $this->utilisateurs;
+        return $this->utilisateur;
     }
 
     /**
@@ -434,7 +429,7 @@ class Prestataire
      */
     public function addCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
     {
-        $this->categorie_services[] = $categorieService;
+        $this->categorie_service[] = $categorieService;
 
         return $this;
     }
@@ -446,17 +441,17 @@ class Prestataire
      */
     public function removeCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
     {
-        $this->categorie_services->removeElement($categorieService);
+        $this->categorie_service->removeElement($categorieService);
     }
 
     /**
-     * Get categorieServices
+     * Get categorieService
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategorieServices()
+    public function getCategorieService()
     {
-        return $this->categorie_services;
+        return $this->categorie_service;
     }
 
     /**
@@ -536,7 +531,7 @@ class Prestataire
      */
     public function addInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes[] = $internaute;
+        $this->internaute[] = $internaute;
 
         return $this;
     }
@@ -548,16 +543,16 @@ class Prestataire
      */
     public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
     {
-        $this->internautes->removeElement($internaute);
+        $this->internaute->removeElement($internaute);
     }
 
     /**
-     * Get internautes
+     * Get internaute
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getInternautes()
+    public function getInternaute()
     {
-        return $this->internautes;
+        return $this->internaute;
     }
 }

@@ -24,12 +24,12 @@ class Localite
     /**
      * @var string
      *
-     * @ORM\Column(name="localite", type="string", length=255, unique=true)
+     * @ORM\Column(name="nom", type="string", length=255, unique=true)
      */
-    private $localite;
+    private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="localites")
+     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="localite")
      */
     private $utilisateurs;
 
@@ -40,6 +40,9 @@ class Localite
     {
         $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
+
 
     /**
      * Get id
@@ -52,27 +55,27 @@ class Localite
     }
 
     /**
-     * Set localite
+     * Set nom
      *
-     * @param string $localite
+     * @param string $nom
      *
      * @return Localite
      */
-    public function setLocalite($localite)
+    public function setNom($nom)
     {
-        $this->localite = $localite;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get localite
+     * Get nom
      *
      * @return string
      */
-    public function getLocalite()
+    public function getNom()
     {
-        return $this->localite;
+        return $this->nom;
     }
 
     /**
@@ -107,5 +110,10 @@ class Localite
     public function getUtilisateurs()
     {
         return $this->utilisateurs;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 }

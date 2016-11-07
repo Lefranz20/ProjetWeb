@@ -36,7 +36,7 @@ class Bloc
     private $description;
 
     /**
-     *@ORM\OneToMany(targetEntity="Position",mappedBy="blocs")
+     *@ORM\OneToMany(targetEntity="Position",mappedBy="bloc")
      */
     private $positions;
 
