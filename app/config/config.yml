@@ -55,11 +55,13 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
+    spool:     { type: memory }
     transport: "%mailer_transport%"
     host:      "%mailer_host%"
-    username:  "%mailer_user%"
+    username:  "%mailer_username%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
+    auth_mode: "%mailer_auth_mode%"
+    port:      "%mailer_port%"
 
 # Stof\DoctrineExtensionsBundle configuration
 stof_doctrine_extensions:

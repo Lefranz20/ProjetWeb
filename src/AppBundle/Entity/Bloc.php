@@ -37,6 +37,7 @@ class Bloc
 
     /**
      *@ORM\OneToMany(targetEntity="Position",mappedBy="bloc")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $positions;
 

@@ -84,8 +84,6 @@ class Stage
     private $prestataire;
 
 
-
-
     /**
      * Get id
      *

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Utilisateur
@@ -21,6 +22,13 @@ class Utilisateur
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
 
 
     /**
@@ -62,6 +70,11 @@ class Utilisateur
 
 
     /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(length=128,unique=true)
+     */
+    private $userSlug;
+    /**
      * @var bool
      *
      * @ORM\Column(name="inscription_conf", type="boolean",nullable=true)
@@ -94,14 +107,14 @@ class Utilisateur
     private $commune;
 
     /**
-     * @ORM\OneToMany(targetEntity="Internaute",mappedBy="utilisateur")
+     * @ORM\OneToOne(targetEntity="Internaute",mappedBy="utilisateurs")
      */
     private $internautes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prestataire",mappedBy="utilisateur")
+     * @ORM\OneToOne(targetEntity="Prestataire",mappedBy="utilisateur")
      */
-    private $prestataires;
+    private $prestataire;
 
 
     /**
@@ -122,6 +135,30 @@ class Utilisateur
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Utilisateur
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
     }
 
     /**
@@ -245,6 +282,30 @@ class Utilisateur
     }
 
     /**
+     * Set userSlug
+     *
+     * @param string $userSlug
+     *
+     * @return Utilisateur
+     */
+    public function setUserSlug($userSlug)
+    {
+        $this->userSlug = $userSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get userSlug
+     *
+     * @return string
+     */
+    public function getUserSlug()
+    {
+        return $this->userSlug;
+    }
+
+    /**
      * Set inscriptionConf
      *
      * @param boolean $inscriptionConf
@@ -365,33 +426,23 @@ class Utilisateur
     }
 
     /**
-     * Add internaute
+     * Set internautes
      *
-     * @param \AppBundle\Entity\Internaute $internaute
+     * @param \AppBundle\Entity\Internaute $internautes
      *
      * @return Utilisateur
      */
-    public function addInternaute(\AppBundle\Entity\Internaute $internaute)
+    public function setInternautes(\AppBundle\Entity\Internaute $internautes = null)
     {
-        $this->internautes[] = $internaute;
+        $this->internautes = $internautes;
 
         return $this;
     }
 
     /**
-     * Remove internaute
-     *
-     * @param \AppBundle\Entity\Internaute $internaute
-     */
-    public function removeInternaute(\AppBundle\Entity\Internaute $internaute)
-    {
-        $this->internautes->removeElement($internaute);
-    }
-
-    /**
      * Get internautes
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \AppBundle\Entity\Internaute
      */
     public function getInternautes()
     {
@@ -399,37 +450,31 @@ class Utilisateur
     }
 
     /**
-     * Add prestataire
+     * Set prestataire
      *
      * @param \AppBundle\Entity\Prestataire $prestataire
      *
      * @return Utilisateur
      */
-    public function addPrestataire(\AppBundle\Entity\Prestataire $prestataire)
+    public function setPrestataire(\AppBundle\Entity\Prestataire $prestataire = null)
     {
-        $this->prestataires[] = $prestataire;
+        $this->prestataire = $prestataire;
 
         return $this;
     }
 
     /**
-     * Remove prestataire
+     * Get prestataire
      *
-     * @param \AppBundle\Entity\Prestataire $prestataire
+     * @return \AppBundle\Entity\Prestataire
      */
-    public function removePrestataire(\AppBundle\Entity\Prestataire $prestataire)
+    public function getPrestataire()
     {
-        $this->prestataires->removeElement($prestataire);
+        return $this->prestataire;
     }
 
-    /**
-     * Get prestataires
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrestataires()
+    public function __toString()
     {
-        return $this->prestataires;
+        return $this->getUserSlug();
     }
-
 }

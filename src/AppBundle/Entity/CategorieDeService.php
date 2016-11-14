@@ -58,19 +58,20 @@ class CategorieDeService
 
     /**
      *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_service")
-     * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id",nullable=true)
      *
      */
     private $prestataire;
 
     /**
      *@ORM\OneToMany(targetEntity="Promotion",mappedBy="categories_service")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $promotions;
 
     /**
      * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_services")
-     * @ORM\JoinColumn(name="image_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id",referencedColumnName="id",nullable=true)
      */
     private $images;
 

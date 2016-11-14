@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
@@ -37,6 +38,12 @@ class Internaute
     private $prenom;
 
     /**
+     * @Gedmo\Slug(fields={"nom","prenom"})
+     * @ORM\Column(length=128,unique=true)
+     */
+    private $internauteSlug;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="inscription_newsletter", type="boolean")
@@ -51,11 +58,11 @@ class Internaute
     private $dateInscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="internautes")
+     * @ORM\OneToOne(targetEntity="Utilisateur",inversedBy="internautes")
      * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
      */
-    private $utilisateur;
+    private $utilisateurs;
 
     /**
      * @ORM\OneToMany(targetEntity="Abus",mappedBy="internaute")
@@ -68,20 +75,21 @@ class Internaute
     private $commentaires;
 
     /**
-     *@ORM\OneToOne(targetEntity="Image",inversedBy="internautes")
-     * @ORM\JoinColumn(name="image_id",referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Image",mappedBy="internautes")
+     *
      */
     private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Prestataire",mappedBy="internaute")
+     * @ORM\ManyToMany(targetEntity="Prestataire",inversedBy="internaute")
+     * @ORM\JoinColumn(nullable=true)
      * @ORM\JoinTable(name="favori")
      *
      */
     private $prestataire;
 
     /**
-     *@ORM\OneToMany(targetEntity="Position",mappedBy="internaute")
+     * @ORM\OneToMany(targetEntity="Position",mappedBy="internaute")
      */
     private $positions;
 
@@ -154,6 +162,30 @@ class Internaute
     }
 
     /**
+     * Set internauteSlug
+     *
+     * @param string $internauteSlug
+     *
+     * @return Internaute
+     */
+    public function setInternauteSlug($internauteSlug)
+    {
+        $this->internauteSlug = $internauteSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get internauteSlug
+     *
+     * @return string
+     */
+    public function getInternauteSlug()
+    {
+        return $this->internauteSlug;
+    }
+
+    /**
      * Set inscriptionNewsletter
      *
      * @param boolean $inscriptionNewsletter
@@ -202,27 +234,27 @@ class Internaute
     }
 
     /**
-     * Set utilisateur
+     * Set utilisateurs
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     * @param \AppBundle\Entity\Utilisateur $utilisateurs
      *
      * @return Internaute
      */
-    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    public function setUtilisateurs(\AppBundle\Entity\Utilisateur $utilisateurs)
     {
-        $this->utilisateur = $utilisateur;
+        $this->utilisateurs = $utilisateurs;
 
         return $this;
     }
 
     /**
-     * Get utilisateur
+     * Get utilisateurs
      *
      * @return \AppBundle\Entity\Utilisateur
      */
-    public function getUtilisateur()
+    public function getUtilisateurs()
     {
-        return $this->utilisateur;
+        return $this->utilisateurs;
     }
 
     /**
@@ -383,5 +415,10 @@ class Internaute
     public function getPositions()
     {
         return $this->positions;
+    }
+
+    public function __toString()
+    {
+        return $this->getInternauteSlug();
     }
 }

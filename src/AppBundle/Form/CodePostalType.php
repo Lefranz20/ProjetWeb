@@ -3,7 +3,9 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -14,7 +16,8 @@ class CodePostalType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
-      $builder ->add('cp');
+      $builder ->add('cp',TextType::class);
+
               // ->add('utilisateurs',CodePostalType::class,array('entry_type'=>UtilisateurType::class,'allow_add'=>true));
     }
 

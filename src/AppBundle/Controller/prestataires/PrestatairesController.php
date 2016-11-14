@@ -2,17 +2,25 @@
 
 namespace AppBundle\Controller\prestataires;
 
+use AppBundle\Entity\Prestataire;
+use AppBundle\Entity\Utilisateur;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 
-
+/**
+ * Prestataires controller.
+ *
+ * @Route("/prestataires")
+ */
 class PrestatairesController extends Controller {
 
 
     /**
-     * @Route("/prestataires",name="liste_prestataires")
+     * @Route("/",name="liste_prestataires")
      */
     public function prestataireListeAction(Request $request){
         $repo = $this->getDoctrine()->getRepository('AppBundle:Prestataire');
@@ -28,12 +36,12 @@ class PrestatairesController extends Controller {
     }
 
     /**
-     * @Route("/prestataires/{slug}",name="show_prestaire")
+     * @Route("/prestataire/{slug}",name="show_prestaire")
      */
     public function showAction($slug)
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Prestataire');
-        $pretataire = $repo->findOneBy(array('slug'=>$slug));
+        $pretataire = $repo->findOneBy(array('pretataireSlug'=>$slug));
         if(!$pretataire){
             $error = array('msg'=>'pas de détail pour ce prestataire.');
             return $this->render('error-404.html.twig',['error'=>$error]);
@@ -43,18 +51,36 @@ class PrestatairesController extends Controller {
     }
 
     /**
-     * @Route("/prestataires/ajout" , name="prestataire_add")
+     * @Route("/new/{userSlug}" , name="new_prestataire",methods={"POST","GET"})
+     * @ParamConverter("user",class="AppBundle:Utilisateur")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function addAction(Request $request)
+    public function newAction(Request $request, Utilisateur $user)
     {
-        return $this->render(':prestataire:prestataire_add.html.twig');
+        //return die($user);
+        $prestataire = new Prestataire();
+        $form = $this->createForm('AppBundle\Form\PrestataireType',$prestataire);
+        $form->handleRequest($request);
+        $session = $request->getSession();
+        $session->set('Prestataire_name',$user->getNom());
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $prestataire->setUtilisateur($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($prestataire);
+            $em->flush();
+            return $this->redirectToRoute('liste_prestataires');
+        }
+        return $this->render(':prestataire:prestataire_add.html.twig', array('prestataire' => $prestataire,'form'=>$form->createView()));
     }
 
     /**
-     * @Route("/prestataires/update/{slug}")
+     * @Route("/home",name="prestataire_home")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function updateAction($slug)
+    public function homeAction()
     {
-        return $this->render('prestataire_update.html.twig');
+        return $this->render(':prestataire:prestataire_home.html.twig');
     }
-} 
+
+}

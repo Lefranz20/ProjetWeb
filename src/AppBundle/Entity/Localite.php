@@ -24,7 +24,7 @@ class Localite
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, unique=true)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
@@ -34,15 +34,21 @@ class Localite
     private $utilisateurs;
 
     /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CodePostal",inversedBy="localite")
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Commune",mappedBy="localite")
+     */
+    private $commune;
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
-
 
     /**
      * Get id
@@ -110,6 +116,54 @@ class Localite
     public function getUtilisateurs()
     {
         return $this->utilisateurs;
+    }
+
+    /**
+     * Set codePostal
+     *
+     * @param \AppBundle\Entity\CodePostal $codePostal
+     *
+     * @return Localite
+     */
+    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal = null)
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    /**
+     * Get codePostal
+     *
+     * @return \AppBundle\Entity\CodePostal
+     */
+    public function getCodePostal()
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * Set commune
+     *
+     * @param \AppBundle\Entity\Commune $commune
+     *
+     * @return Localite
+     */
+    public function setCommune(\AppBundle\Entity\Commune $commune = null)
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return \AppBundle\Entity\Commune
+     */
+    public function getCommune()
+    {
+        return $this->commune;
     }
 
     public function __toString()

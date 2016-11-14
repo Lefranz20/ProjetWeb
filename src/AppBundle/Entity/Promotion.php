@@ -78,7 +78,7 @@ class Promotion
 
     /**
      * @ORM\ManyToOne(targetEntity="CategorieDeService",inversedBy="promotions")
-     * @ORM\JoinColumn(name="categories_service_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="categories_service_id",referencedColumnName="id",nullable=true)
      */
     private $categories_service;
 

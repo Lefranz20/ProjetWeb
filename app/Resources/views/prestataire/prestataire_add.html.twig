@@ -1,8 +1,38 @@
 {% extends 'layout.html.twig' %}
 {% block prestataires %}
-    <table class="table table-responsive table-hover">
-        <tr>
-            <td>Id</td>
-        </tr>
-    </table>
+    <div class="col-xs-offset-1 col-xs-7">
+        <span class="text-capitalize btn-primary">{{app.session.get('Prestataire_name')}}</span>
+        <h1>Bienvenue sur Annuaire Bien être </h1>
+        <p>vous êtes inscrit en tant que prestataire. veuillez compléter votre fiche de Renseignement</p>
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.nomEntreprise,'Nom de l\'Etablissement') }}
+            {{ form_widget(form.nomEntreprise) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.web) }}
+            {{ form_widget(form.web) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.emailDeContact) }}
+            {{ form_widget(form.emailDeContact) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.telephone) }}
+            {{ form_widget(form.telephone) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.numeroTva) }}
+            {{ form_widget(form.numeroTva) }}
+        </div>
+
+        <hr/>
+        <input type="submit" value="create" class="btn btn-primary"/>
+    </div>
+    {{ form_end(form) }}
+    </div>
 {% endblock %}

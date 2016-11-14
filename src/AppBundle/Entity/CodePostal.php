@@ -30,11 +30,20 @@ class CodePostal
     private $cp;
 
     /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Commune",mappedBy="codePostal")
+     */
+    private $commune;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Localite",mappedBy="codePostal")
+     */
+    private $localite;
+
+    /**
      * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="codePostal")
      *
      */
     private $utilisateurs;
-
 
     /**
      * Constructor
@@ -43,8 +52,6 @@ class CodePostal
     {
         $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-
 
     /**
      * Get id
@@ -78,6 +85,54 @@ class CodePostal
     public function getCp()
     {
         return $this->cp;
+    }
+
+    /**
+     * Set commune
+     *
+     * @param \AppBundle\Entity\Commune $commune
+     *
+     * @return CodePostal
+     */
+    public function setCommune(\AppBundle\Entity\Commune $commune = null)
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * Get commune
+     *
+     * @return \AppBundle\Entity\Commune
+     */
+    public function getCommune()
+    {
+        return $this->commune;
+    }
+
+    /**
+     * Set localite
+     *
+     * @param \AppBundle\Entity\Localite $localite
+     *
+     * @return CodePostal
+     */
+    public function setLocalite(\AppBundle\Entity\Localite $localite = null)
+    {
+        $this->localite = $localite;
+
+        return $this;
+    }
+
+    /**
+     * Get localite
+     *
+     * @return \AppBundle\Entity\Localite
+     */
+    public function getLocalite()
+    {
+        return $this->localite;
     }
 
     /**

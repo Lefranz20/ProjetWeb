@@ -24,13 +24,12 @@ class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="type_image", type="string", length=255)
+     * @ORM\Column(name="type_image", type="string", length=255,nullable=true)
      */
     private $typeImage;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="lien", type="string", length=255)
      */
     private $lien;
@@ -44,11 +43,14 @@ class Image
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\CategorieDeService",mappedBy="images")
+     *
      */
     private $categorie_services;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Internaute",mappedBy="images")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Internaute",inversedBy="images")
+     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id",nullable=true)
+     *
      */
     private $internautes;
 
@@ -56,7 +58,6 @@ class Image
      *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="images")
      */
     private $prestataire;
-
 
 
 

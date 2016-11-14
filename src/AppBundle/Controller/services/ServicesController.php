@@ -27,11 +27,18 @@ class ServicesController extends Controller {
     }
 
     /**
-     * @Route("/services/{slug}",name="show_service")
+     * @Route("/services/{slug}", name="show_service")
      */
     public  function showAction($slug)
     {
-
+        $repo = $this->getDoctrine()->getRepository('AppBundle:CategorieDeService');
+        $categService = $repo->findOneBy(array('slug'=>$slug));
+        if(!$categService){
+            $error = array('msg'=>'pas de détail pour ce service');
+            return $this->render('error-404.html.twig',['error'=>$error]);
+        }else{
+            return $this->render(':service:service_show.html.twig',['categorieService'=>$categService]);
+        }
     }
 
     /**

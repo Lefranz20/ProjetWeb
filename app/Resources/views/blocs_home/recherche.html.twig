@@ -9,15 +9,15 @@
 {% set searchServices = [] %}
 {% set searchPrestataires = []%}
 {% set searchLocalites = [] %}
-
 {% for u in users %}
-    {% set searchLocalites = searchLocalites|merge([u.localites.localite]) %}{# liste des localités  des utilisateurs de type prestataire #}
-    {% for p in u.prestataires %}
-        {% set searchPrestataires = searchPrestataires|merge([p.nom])   %} {# liste des prestataires inscripts #}
-        {% for categ in p.categorieServices %}
+    {{ dump(u) }}
+    {% set searchLocalites = searchLocalites|merge([u.localite.nom]) %}{# liste des localités  des utilisateurs de type prestataire #}
+    {% set searchPrestataires = searchPrestataires|merge([u.prestataire.nomEntreprise])   %} {# liste des prestataires inscripts #}
+        {{ dump(u.prestataire) }}
+    {% for categ in u.prestataire.categorieService %}
+            {{ dump(categ) }}
             {% set searchServices = searchServices|merge([categ.nom]) %} {# liste des services proposés par les prestataires #}
         {% endfor %}
-    {% endfor %}
 {% endfor %}
 
 <form class="filter bordered" method="post" action="{{ url('search_homepage') }}">

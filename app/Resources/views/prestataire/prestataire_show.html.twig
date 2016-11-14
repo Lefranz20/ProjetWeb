@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row detail-content">
             <div class="col-sm-7">
-                <h2>{{ prestataire.nom }}</h2>
+                <h2>{{ prestataire.nomEntreprise }}</h2>
                 <div class="background-white p20">
 
                     <!-- Nav tabs -->
@@ -115,7 +115,7 @@
                 <div class="background-white p20">
                     <div class="detail-description">
                         <ul>
-                            {% for s in prestataire.categorieServices %}
+                            {% for s in prestataire.categorieService %}
                                 <ul>
                                     <li><a href="#">{{s.nom}}</a></li>
                                 </ul>
@@ -150,12 +150,12 @@
 
                 </div>
 
-                <h2>Contacter {{ prestataire.nom }}</h2>
+                <h2>Contacter {{ prestataire.nomEntreprise }}</h2>
 
                 <div class="detail-enquire-form background-white p20">
                     <form method="post" action="?">
                         <div class="form-group">
-                            <label for="">Nom</label>
+                            <label for="">Nom </label>
                             <input type="text" class="form-control" name="" id="">
                         </div><!-- /.form-group -->
 

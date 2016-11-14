@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+
 /**
  * Prestataire
  *
@@ -26,9 +27,9 @@ class Prestataire
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom_entreprise", type="string", length=255)
      */
-    private $nom;
+    private $nomEntreprise;
 
     /**
      * @var text
@@ -66,6 +67,13 @@ class Prestataire
     private $numeroTva;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="logo", type="string", length=255,nullable=true)
+     */
+    private $logo;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_inscription", type="datetime", length=255)
@@ -73,15 +81,15 @@ class Prestataire
     private $dateInscription;
 
     /**
-     * @Gedmo\Slug(fields={"nom"})
+     * @Gedmo\Slug(fields={"nomEntreprise"})
      * @ORM\Column(length=128,unique=true)
      */
-    private $slug;
+    private $pretataireSlug;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur",inversedBy="prestataires")
-     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false,unique=true)
+     * @ORM\OneToOne(targetEntity="Utilisateur",inversedBy="prestataire")
+     * @ORM\JoinColumn(name="utilisateur_id",referencedColumnName="id",nullable=false)
      *
      */
     private $utilisateur;
@@ -98,6 +106,7 @@ class Prestataire
 
     /**
      * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataire")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $categorie_service;
 
@@ -112,7 +121,7 @@ class Prestataire
     private $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Internaute",inversedBy="prestataire")
+     * @ORM\ManyToMany(targetEntity="Internaute",mappedBy="prestataire")
      * @ORM\JoinTable(name="favori")
      */
     private $internaute;
@@ -125,7 +134,6 @@ class Prestataire
         $this->dateInscription = new \DateTime();
     }
 
-
     /**
      * Get id
      *
@@ -137,27 +145,27 @@ class Prestataire
     }
 
     /**
-     * Set nom
+     * Set nomEntreprise
      *
-     * @param string $nom
+     * @param string $nomEntreprise
      *
      * @return Prestataire
      */
-    public function setNom($nom)
+    public function setNomEntreprise($nomEntreprise)
     {
-        $this->nom = $nom;
+        $this->nomEntreprise = $nomEntreprise;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get nomEntreprise
      *
      * @return string
      */
-    public function getNom()
+    public function getNomEntreprise()
     {
-        return $this->nom;
+        return $this->nomEntreprise;
     }
 
     /**
@@ -281,6 +289,30 @@ class Prestataire
     }
 
     /**
+     * Set logo
+     *
+     * @param string $logo
+     *
+     * @return Prestataire
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
      * Set dateInscription
      *
      * @param \DateTime $dateInscription
@@ -302,30 +334,6 @@ class Prestataire
     public function getDateInscription()
     {
         return $this->dateInscription;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Prestataire
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -554,5 +562,36 @@ class Prestataire
     public function getInternaute()
     {
         return $this->internaute;
+    }
+
+
+
+    /**
+     * Set pretataireSlug
+     *
+     * @param string $pretataireSlug
+     *
+     * @return Prestataire
+     */
+    public function setPretataireSlug($pretataireSlug)
+    {
+        $this->pretataireSlug = $pretataireSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get pretataireSlug
+     *
+     * @return string
+     */
+    public function getPretataireSlug()
+    {
+        return $this->pretataireSlug;
+    }
+
+    public function __toString()
+    {
+        return $this->getPretataireSlug();
     }
 }

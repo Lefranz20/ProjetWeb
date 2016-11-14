@@ -30,13 +30,13 @@ class Position
 
     /**
      *@ORM\ManyToOne(targetEntity="Bloc",inversedBy="positions")
-     * @ORM\JoinColumn(name="bloc_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="bloc_id",referencedColumnName="id",nullable=true)
      */
     private $bloc;
 
     /**
      * @ORM\ManyToOne(targetEntity="Internaute",inversedBy="positions")
-     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id",nullable=true)
      */
     private $internaute;
 

@@ -44,7 +44,7 @@ class Abus
 
     /**
      *@ORM\ManyToOne(targetEntity="Internaute",inversedBy="abus")
-     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id")
+     * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id",nullable=false)
      */
     private $internaute;
 
