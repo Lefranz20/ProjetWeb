@@ -108,7 +108,7 @@ class Prestataire
      * @ORM\ManyToMany(targetEntity="CategorieDeService", inversedBy="prestataire")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $categorie_service;
+    private $categorieService;
 
     /**
      * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="prestataire")
@@ -437,7 +437,7 @@ class Prestataire
      */
     public function addCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
     {
-        $this->categorie_service[] = $categorieService;
+        $this->categorieService[] = $categorieService;
 
         return $this;
     }
@@ -449,7 +449,7 @@ class Prestataire
      */
     public function removeCategorieService(\AppBundle\Entity\CategorieDeService $categorieService)
     {
-        $this->categorie_service->removeElement($categorieService);
+        $this->categorieService->removeElement($categorieService);
     }
 
     /**
@@ -459,7 +459,7 @@ class Prestataire
      */
     public function getCategorieService()
     {
-        return $this->categorie_service;
+        return $this->categorieService;
     }
 
     /**

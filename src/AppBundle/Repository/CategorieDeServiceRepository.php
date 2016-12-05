@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class CategorieDeServiceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findPrestataireByServices($service)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.nom = :nom')
+            ->leftJoin('s.prestataire','p')
+            ->addSelect('p')
+            ->setParameter('nom',Trim($service));
+        return $qb
+            ->getQuery()
+            ->getResult();
+
+
+    }
 }

@@ -1,0 +1,34 @@
+{% extends '::Index.html.twig' %}
+{% block bandeau %}{{ parent() }}{% endblock %}
+{% block prestataires %} {% endblock %}
+{% block recherche %}
+    <table class="table table-hover filter bordered">
+        <thead>
+        <tr  class="row ">
+            <th class="col-sm-2 ">Nom de l'Entreprise</th>
+            <th class="col-sm-6 text-center">Présentation</th>
+            <th class="col-sm-3 text-center">Web</th>
+            {#<th class="col-sm-2 text-center">logo</th>#}
+            <th class="col-sm-1 text-center">detail</th>
+        </tr>
+        </thead>
+        <tbody >
+
+        {% for cat in resultatRecherche %}
+            {% for p in cat.prestataire  %}
+                <tr class="row">
+                    <td class="col-sm-2">{{ p.nomEntreprise }}</td>
+                    <td class="col-sm-6">{{ p.description }}</td>
+                    <td class="col-sm-3">{{ p.web }}</td>
+                    {#<td class="col-sm-2">{{ p.logo}}</td>#}
+                    <td class="col-sm-1 text-center"><a href="{{ url('show_prestaire',{'slug' : p.pretataireSlug}) }}"><i class="fa fa-2x fa-search"></i></a></td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {# navigation de la pagination #}
+    <div class="navigation">
+        {{ knp_pagination_render(resultatRecherche) }}
+    </div>
+{% endblock %}

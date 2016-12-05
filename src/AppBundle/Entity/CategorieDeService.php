@@ -57,7 +57,7 @@ class CategorieDeService
     private $slug;
 
     /**
-     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorie_service")
+     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorieService")
      * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id",nullable=true)
      *
      */

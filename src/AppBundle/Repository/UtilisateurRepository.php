@@ -6,16 +6,22 @@ use Doctrine\ORM\EntityRepository;
 
 class UtilisateurRepository extends EntityRepository
 {
-    public function search($typeUser){
+    public function FindUserByLocalite( $userType, $localite )
+    {
         $qb = $this->createQueryBuilder('u');
-        $qb->where('u.typeUtilisateur = :t')
-            ->leftJoin('u.localite','region')
-            ->addSelect('region')
-            ->setParameter('t',$typeUser);
+        $qb->where('u.typeUtilisateur = :typeUser')
+            ->innerJoin('u.localite','l','WITH','l.nom = :localite')
+            ->leftJoin('u.prestataire','p')
+            ->addSelect('p')
+            ->addSelect('l')
+            ->setParameters(array('typeUser'=>Trim($userType),'localite' =>Trim($localite)));
+            //->setParameter();
         return $qb
             ->getQuery()
             ->getResult();
+           // ->getArrayResult();
+
+
 
     }
-
 }

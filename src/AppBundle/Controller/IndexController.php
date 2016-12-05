@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController extends Controller
 {
@@ -33,27 +35,6 @@ class IndexController extends Controller
     }
 
 
-    /**
-     * @Route("/search" , name="search_homepage", methods = {"POST" , "GET"})
-     */
-    public function searchByAllAction(Request $request)
-    {
-        $pName = $request->get('prestataire');
-        $lName = $request->get('localite');
-        $sName = $request->get('catServices');
-        $resultat = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->search('prestataire');
-        /* liste des prestataire si et seulement si service  et/ou localité introduits*/
-       /* return $this->render(':prestataire:prestataire_liste.html.twig');*/
-        /*ensuite vient ici en dessous la liste des service du prestataire si et si prestataire indiqué*/
-
-        /*si les trois champ remplis: on affiche tous les prestataire du service choisi, tous les prestataires
-        de la localité choisie et enfin tous les services du prestataire choisi*/
-        return $this ->render('contact/contact.html.twig',['resultat'=>$resultat]);
-    }
-
-
-
-
 
 
     /* ================== ci-dessous les 4 blocs d'infos qui composent la page d'accueil ================== */
@@ -77,18 +58,70 @@ class IndexController extends Controller
     /*
     *  2. ---------------- le bloc Recherche ----------------------------
     */
-    public function rechercheAction()
+
+    /**
+     * @Route("/search" , name="search_homepage")
+     */
+    public function rechercheAction(Request $request)
     {
 
-        /*$utilisateurs = $repo->findBy(array('typeUtilisateur'=>'prestataire'));*/
-        $utilisateurs = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->search("prestataire");
-        if(!$utilisateurs){
+        $userPrestataires = $this->getDoctrine()->getRepository('AppBundle:Prestataire')->FindByService();
+
+        if(!$userPrestataires)
+        {
             $php_errormsg = ['msg'=>'le compte des prestataires sont en cours de validation !'];
             return $this->render(':blocs_home:error-blocs.html.twig',['error'=>$php_errormsg]);
-        }else {
-            return $this->render(':blocs_home:recherche.html.twig', ['users' => $utilisateurs]);
         }
+        else {
+            return $this->render(':blocs_home:recherche.html.twig', ['usersPrestataires' => $userPrestataires]);
+        }
+
     }
+
+    /**
+     * @Route("/search-result",name="search_result_homepage")
+     *
+     */
+    public function rechercheResultatAction(Request $request)
+    {
+
+        $recherche = array();
+        //if($request->isXmlHttpRequest()){
+        if($request->isMethod("POST")){
+            $prestataire = $request->get('prestataire', null);
+            $localite = $request->get('localite', null);
+            $catServices = $request->get('catServices', null);
+
+            if(null !== $prestataire && null !== $localite && null !== $catServices){
+
+            }
+            if($prestataire){
+                $resultatRecherche = $this->getDoctrine()->getRepository('AppBundle:Prestataire')->FindByService($prestataire);
+                // return $this->json($resultatRecherche);
+                $paginator = $this->get('knp_paginator');
+                $pagination = $paginator->paginate($resultatRecherche,$request->query->getInt('page',1),3);
+                return $this->render(':s:serviceByPrestataireListe.html.twig',['resultatRecherche'=>$pagination]);
+            }
+            if($localite){
+                $resultatRecherche = $this->getDoctrine()->getRepository('AppBundle:Utilisateur')->FindUserByLocalite('prestataire',$localite);
+                // return $this->json($resultatRecherche);
+                $paginator = $this->get('knp_paginator');
+                $pagination = $paginator->paginate($resultatRecherche,$request->query->getInt('page',1),3);
+                return $this->render(':s:prestataireByLocaliteListe.html.twig',['resultatRecherche'=>$pagination]);
+            }
+            if($catServices){
+                $resultatRecherche = $this->getDoctrine()->getRepository('AppBundle:CategorieDeService')->findPrestataireByServices($catServices);
+                // return $this->json($resultatRecherche);
+                $paginator = $this->get('knp_paginator');
+                $pagination = $paginator->paginate($resultatRecherche,$request->query->getInt('page',1),3);
+                return $this->render(':s:prestataireByServiceListe.html.twig',['resultatRecherche'=>$pagination]);
+            }
+
+
+        }
+        return $this->render('::Index.html.twig');
+    }
+
 
     /*
     *  3. ---------------- le bloc Prestataires (4 derniers prestataires)--
@@ -125,4 +158,5 @@ class IndexController extends Controller
 
     }
     /* ======================================= FIN ============================================================ */
+
 }

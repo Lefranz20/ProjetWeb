@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ServicesController extends Controller {
 
     /**
-     * @Route("/services", name="liste_services")
+     * @Route("/services", name="liste_services_valide")
      */
-    public function serviceListeAction(Request $request)
+    public function serviceListeValideAction(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:CategorieDeService');
         $servicesValides = $repo->findBy(array('valide'=>'1'));
@@ -41,20 +41,6 @@ class ServicesController extends Controller {
         }
     }
 
-    /**
-     * @Route("/services/ajout",name="service_ajout")
-     */
-    public function addServiceAction(Request $request)
-    {
 
-    }
-
-    /**
-     * @Route("/service/update/{slug}",name="service_update")
-     */
-    public function updateServiceAction()
-    {
-
-    }
 
 } 

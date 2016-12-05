@@ -1,13 +1,10 @@
 {% extends 'layout.html.twig' %}
 {% block bandeau %}{{ render(controller('AppBundle:Index:bandeau')) }}{% endblock %}
-{% block recherche %}
-    <h2>Recherche</h2>
-    {{ render(controller('AppBundle:Index:recherche')) }}
-{% endblock %}
+{% block recherche %}{{ render(controller('AppBundle:Index:recherche')) }}{% endblock %}
+
 {% block prestataires %}
     <h2> Nouveaux prestataires </h2>
     {{ render(controller('AppBundle:Index:prestataires')) }}
-
     <hr/>
     <h2>Service du Mois </h2>
     {{ render(controller('AppBundle:Index:serviceDuMois')) }}

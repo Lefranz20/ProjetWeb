@@ -4,7 +4,7 @@ $(document).ready(function() {
     /**
      * Bootstrap Select
      */
-    $('select').selectpicker();
+   // $('select').selectpicker();  commenté par Francois le 14/11/16
 
     /**
      * Background image
