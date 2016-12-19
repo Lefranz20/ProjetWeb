@@ -7,21 +7,21 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class CommuneType extends AbstractType {
+class ProvinceType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder ->add('nom');
+        $builder ->add('provinceNom');
     }
 
     public function getBlockPrefix()
     {
-        return 'appbundle_commune';
+        return 'appbundle_province';
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver ->setDefaults(array('data_class' => 'AppBundle\Entity\Commune'));
+        $resolver ->setDefaults(array('data_class' => 'AppBundle\Entity\Province'));
     }
 
 } 

@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Commune
+ * Province
  *
- * @ORM\Table(name="commune")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CommuneRepository")
+ * @ORM\Table(name="province")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProvinceRepository")
  */
-class Commune
+class Province
 {
     /**
      * @var int
@@ -25,22 +25,18 @@ class Commune
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="province_nom", type="string", length=255)
      */
-    private $nom;
+    private $provinceNom;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CodePostal",inversedBy="commune")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CodePostal",mappedBy="province")
      */
-    private $codePostal;
+    private $codePostals;
+
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Localite",inversedBy="commune")
-     */
-    private $localite;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="commune")
+     * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="province")
      */
     private $utilisateurs;
 
@@ -50,6 +46,7 @@ class Commune
      */
     public function __construct()
     {
+        $this->codePostals = new \Doctrine\Common\Collections\ArrayCollection();
         $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -63,76 +60,39 @@ class Commune
         return $this->id;
     }
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Commune
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
 
     /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set codePostal
+     * Add codePostal
      *
      * @param \AppBundle\Entity\CodePostal $codePostal
      *
-     * @return Commune
+     * @return Province
      */
-    public function setCodePostal(\AppBundle\Entity\CodePostal $codePostal = null)
+    public function addCodePostal(\AppBundle\Entity\CodePostal $codePostal)
     {
-        $this->codePostal = $codePostal;
+        $this->codePostals[] = $codePostal;
 
         return $this;
     }
 
     /**
-     * Get codePostal
+     * Remove codePostal
      *
-     * @return \AppBundle\Entity\CodePostal
+     * @param \AppBundle\Entity\CodePostal $codePostal
      */
-    public function getCodePostal()
+    public function removeCodePostal(\AppBundle\Entity\CodePostal $codePostal)
     {
-        return $this->codePostal;
+        $this->codePostals->removeElement($codePostal);
     }
 
     /**
-     * Set localite
+     * Get codePostals
      *
-     * @param \AppBundle\Entity\Localite $localite
-     *
-     * @return Commune
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setLocalite(\AppBundle\Entity\Localite $localite = null)
+    public function getCodePostals()
     {
-        $this->localite = $localite;
-
-        return $this;
-    }
-
-    /**
-     * Get localite
-     *
-     * @return \AppBundle\Entity\Localite
-     */
-    public function getLocalite()
-    {
-        return $this->localite;
+        return $this->codePostals;
     }
 
     /**
@@ -140,7 +100,7 @@ class Commune
      *
      * @param \AppBundle\Entity\Utilisateur $utilisateur
      *
-     * @return Commune
+     * @return Province
      */
     public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
     {
@@ -169,8 +129,35 @@ class Commune
         return $this->utilisateurs;
     }
 
+
+    /**
+     * Set provinceNom
+     *
+     * @param string $provinceNom
+     *
+     * @return Province
+     */
+    public function setProvinceNom($provinceNom)
+    {
+        $this->provinceNom = $provinceNom;
+
+        return $this;
+    }
+
+    /**
+     * Get provinceNom
+     *
+     * @return string
+     */
+    public function getProvinceNom()
+    {
+        return $this->provinceNom;
+    }
+
     public function __toString()
     {
-        return $this->getNom();
+        return $this->getProvinceNom();
     }
+
+
 }

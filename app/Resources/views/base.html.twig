@@ -20,14 +20,9 @@
 </head>
 <body>
 <div class="page-wrapper">
-    {% block header %}{# non utilisé #}{% endblock %}
-    {% block body %}
-        {#
-            contenu principal:
-                - 1 colne de gauche divisée en 2 blocs (identification + catégories des services)
-                - 1 colne centrale divisé en trois blocs (Bandeau,Recherche et Pavés prestataire)
-        #}
-    {% endblock %}
+    {% block header %}{# nav ici #}{% endblock %}
+    {% block connectedUserNav %}{# menu de navigation si l'utilisateur est connecté #} {% endblock %}
+    {% block body %}{% endblock %}
     {% block footer %}{# pied de page ici#}{% endblock %}
 
     {% block javascripts %}

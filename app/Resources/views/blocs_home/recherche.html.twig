@@ -12,7 +12,7 @@
 {% set searchServices = [] %}
 
 {% for p in usersPrestataires %}
-    {% set searchLocalites = searchLocalites|merge([p.utilisateur.localite.nom]) %}{# liste des localités de tous les prestataire #}
+    {% set searchLocalites = searchLocalites|merge([p.utilisateur.localite.localiteNom]) %}{# liste des localités de tous les prestataire #}
 
     {% for categ in p.categorieService %}
         {% set searchServices = searchServices|merge([categ.nom]) %}{# liste des services pour chaque prestataire#}

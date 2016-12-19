@@ -1,22 +1,24 @@
-{% extends 'layout.html.twig' %}
-{% block prestataires %}
+{% extends '::Index.html.twig' %}
+{% block bandeau %}{% endblock %}
+
+{% block principal %}
+    <h1>Liste des services</h1>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Nom</th>
             <th>description</th>
-            <th>prestataire</th>
+            <th>Utilisateurs</th>
+            <th>détail</th>
         </tr>
         </thead>
         <tbody>
         {% for s in servicesValides %}
             <tr>
-                <th scope="row">{{ s.id }}</th>
                 <td>{{ s.nom}}</td>
                 <td>{{ s.description }}</td>
                 <td>prestataire</td>
-                <td class=""><a href="{{ url('show_service',{'slug' : s.slug}) }}">search prestataire</a></td>
+                <td class=""><a href="{{ url('show_service',{'slug' : s.slug}) }}"><i class="fa  fa-search"></i>prestataire</a></td>
             </tr>
         {% endfor %}
         </tbody>

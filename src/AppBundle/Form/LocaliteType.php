@@ -15,7 +15,7 @@ class LocaliteType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder,array $options)
     {
      // $builder ->add('nom',TextType::class,array('label_attr'=>array('class'=>'label'),'attr'=>array('class'=>'form-control')));
-    $builder->add('nom',TextType::class);
+    $builder->add('localiteNom',TextType::class);
     }
 
     public function getBlockPrefix()

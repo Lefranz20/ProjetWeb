@@ -21,6 +21,5 @@ class CategorieDeServiceRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
 
-
     }
 }

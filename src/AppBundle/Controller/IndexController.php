@@ -2,11 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ConnexionData;
+use AppBundle\Entity\Utilisateur;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class IndexController extends Controller
 {
@@ -33,7 +36,6 @@ class IndexController extends Controller
     {
         return $this->render(':contact:contact.html.twig');
     }
-
 
 
 
@@ -92,9 +94,9 @@ class IndexController extends Controller
             $localite = $request->get('localite', null);
             $catServices = $request->get('catServices', null);
 
-            if(null !== $prestataire && null !== $localite && null !== $catServices){
+/*            if(null !== $prestataire && null !== $localite && null !== $catServices){
 
-            }
+            }*/
             if($prestataire){
                 $resultatRecherche = $this->getDoctrine()->getRepository('AppBundle:Prestataire')->FindByService($prestataire);
                 // return $this->json($resultatRecherche);

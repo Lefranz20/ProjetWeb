@@ -30,7 +30,6 @@ class Utilisateur
      */
     private $nom;
 
-
     /**
      * @var string
      *
@@ -89,22 +88,22 @@ class Utilisateur
     private $connexionDatas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="CodePostal",inversedBy="utilisateurs")
      *@ORM\JoinColumn(name="code_postal_id",referencedColumnName="id",nullable=false)
      */
     private $codePostal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Localite",inversedBy="utilisateurs")
      *@ORM\JoinColumn(name="localite_id",referencedColumnName="id",nullable=false)
      */
     private $localite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commune",inversedBy="utilisateurs",cascade={"persist"})
-     * @ORM\JoinColumn(name="commune_id",referencedColumnName="id",nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Province",inversedBy="utilisateurs")
+     * @ORM\JoinColumn(name="province_id",referencedColumnName="id",nullable=false)
      */
-    private $commune;
+    private $province;
 
     /**
      * @ORM\OneToOne(targetEntity="Internaute",mappedBy="utilisateurs")
@@ -402,27 +401,27 @@ class Utilisateur
     }
 
     /**
-     * Set commune
+     * Set province
      *
-     * @param \AppBundle\Entity\Commune $commune
+     * @param \AppBundle\Entity\Province $province
      *
      * @return Utilisateur
      */
-    public function setCommune(\AppBundle\Entity\Commune $commune)
+    public function setProvince(\AppBundle\Entity\Province $province)
     {
-        $this->commune = $commune;
+        $this->province = $province;
 
         return $this;
     }
 
     /**
-     * Get commune
+     * Get province
      *
-     * @return \AppBundle\Entity\Commune
+     * @return \AppBundle\Entity\Province
      */
-    public function getCommune()
+    public function getProvince()
     {
-        return $this->commune;
+        return $this->province;
     }
 
     /**

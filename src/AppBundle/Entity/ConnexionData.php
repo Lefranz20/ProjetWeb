@@ -53,4 +53,5 @@ class ConnexionData extends BaseUser
     {
         return $this->utilisateurs;
     }
+
 }

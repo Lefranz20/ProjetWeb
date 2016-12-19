@@ -1,0 +1,55 @@
+
+{% extends'::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block principal %}{# Bloc principal  #}
+
+    {% block fos_user_content %}
+        <h1>Connexion</h1>
+
+        {% if error %}
+            <div class="text-danger"><span class="glyphicon glyphicon-asterisk"></span> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group has-feedback">
+                        <label for="username">{{ 'security.login.username'|trans }}</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
+                        <i class="form-control-feedback glyphicon glyphicon-user "></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group has-feedback">
+                        <label for="password">{{ 'security.login.password'|trans }}</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control" />
+                        <i class="form-control-feedback glyphicon glyphicon-lock "></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            </div>
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class=" btn btn-primary" />
+        </form>
+        <div class="account">
+            <ul class="header-nav-secondary nav nav-pills">
+                <li>
+                    <a href="{{ url('fos_user_registration_register') }}">{{ 'security.login.create_account'|trans }}</a>
+                </li>
+                <li>
+                    <a class="" href="{{ path('fos_user_resetting_request') }}">{{ 'security.login.password_forgot'|trans }}</a>
+                </li>
+            </ul>
+        </div><!-- Account -->
+    {% endblock fos_user_content %}
+{% endblock %}
+
+
+
+

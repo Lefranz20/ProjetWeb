@@ -10,7 +10,7 @@ class UtilisateurRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.typeUtilisateur = :typeUser')
-            ->innerJoin('u.localite','l','WITH','l.nom = :localite')
+            ->innerJoin('u.localite','l','WITH','l.localiteNom = :localite')
             ->leftJoin('u.prestataire','p')
             ->addSelect('p')
             ->addSelect('l')

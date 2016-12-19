@@ -1,0 +1,9 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-11">
+            {% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+        </div>
+    </div>
+{% endblock fos_user_content %}

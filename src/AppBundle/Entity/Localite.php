@@ -24,9 +24,9 @@ class Localite
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="localite_nom", type="string", length=255)
      */
-    private $nom;
+    private $localiteNom;
 
     /**
      * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="localite")
@@ -34,14 +34,10 @@ class Localite
     private $utilisateurs;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CodePostal",inversedBy="localite")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CodePostal",inversedBy="localites")
      */
     private $codePostal;
 
-    /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Commune",mappedBy="localite")
-     */
-    private $commune;
     /**
      * Constructor
      */
@@ -60,29 +56,7 @@ class Localite
         return $this->id;
     }
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Localite
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
 
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
 
     /**
      * Add utilisateur
@@ -143,31 +117,32 @@ class Localite
     }
 
     /**
-     * Set commune
+     * Set localiteNom
      *
-     * @param \AppBundle\Entity\Commune $commune
+     * @param string $localiteNom
      *
      * @return Localite
      */
-    public function setCommune(\AppBundle\Entity\Commune $commune = null)
+    public function setLocaliteNom($localiteNom)
     {
-        $this->commune = $commune;
+        $this->localiteNom = $localiteNom;
 
         return $this;
     }
 
     /**
-     * Get commune
+     * Get localiteNom
      *
-     * @return \AppBundle\Entity\Commune
+     * @return string
      */
-    public function getCommune()
+    public function getLocaliteNom()
     {
-        return $this->commune;
+        return $this->localiteNom;
     }
 
     public function __toString()
     {
-        return $this->getNom();
+        return $this->getLocaliteNom();
     }
+
 }

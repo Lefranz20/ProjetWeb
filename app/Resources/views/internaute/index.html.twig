@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Internautes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Inscriptionnewsletter</th>
+                <th>Dateinscription</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for internaute in internautes %}
+            <tr>
+                <td><a href="{{ path('internaute_show', { 'id': internaute.id }) }}">{{ internaute.id }}</a></td>
+                <td>{{ internaute.nom }}</td>
+                <td>{{ internaute.prenom }}</td>
+                <td>{% if internaute.inscriptionNewsletter %}Yes{% else %}No{% endif %}</td>
+                <td>{% if internaute.dateInscription %}{{ internaute.dateInscription|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('internaute_show', { 'id': internaute.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('internaute_edit', { 'id': internaute.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('internaute_new') }}">Create a new internaute</a>
+        </li>
+    </ul>
+{% endblock %}

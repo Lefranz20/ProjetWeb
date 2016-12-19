@@ -57,7 +57,7 @@ class PrestatairesController extends Controller {
      */
     public function newAction(Request $request, Utilisateur $user)
     {
-        //return die($user);
+       // return die($user->getTypeUtilisateur());
         $prestataire = new Prestataire();
         $form = $this->createForm('AppBundle\Form\PrestataireType',$prestataire);
         $form->handleRequest($request);
@@ -69,18 +69,42 @@ class PrestatairesController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($prestataire);
             $em->flush();
-            return $this->redirectToRoute('liste_prestataires');
+            return $this->redirectToRoute('homepage');
         }
         return $this->render(':prestataire:prestataire_add.html.twig', array('prestataire' => $prestataire,'form'=>$form->createView()));
     }
 
+
     /**
-     * @Route("/home",name="prestataire_home")
+     * @Route("/home",name="user_home")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function homeAction()
+    public function homeAction(Request $request)
     {
-        return $this->render(':prestataire:prestataire_home.html.twig');
+
+        $userData = $this->getDoctrine()->getRepository('AppBundle:ConnexionData')->findOneBy(array('id'=>$this->getUser()));
+        /** @var Utilisateur $u */
+        $u = $userData->getUtilisateurs();
+        if($u)
+        {
+            // permet d'afficher dans la vue la navigation Utilisateur en fonction du type d'utilisateur
+            return $this->render('::Index.html.twig');
+
+        }
+        return $this->redirectToRoute('new_utilisateur');
+
     }
+
+    /**
+     * @Route("/{pretataireSlug}/services",name="nav_prestataire_service")
+     * @ParamConverter("p",class="AppBundle:Prestataire")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     */
+    public function AdminServiceByPrestataire(Request $request, Prestataire $p)
+    {
+        return die($p->getNomEntreprise());
+    }
+
 
 }

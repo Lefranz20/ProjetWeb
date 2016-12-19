@@ -30,14 +30,14 @@ class CodePostal
     private $cp;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Commune",mappedBy="codePostal")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Province",inversedBy="codePostals")
      */
-    private $commune;
+    private $province;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Localite",mappedBy="codePostal")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Localite",mappedBy="codePostal")
      */
-    private $localite;
+    private $localites;
 
     /**
      * @ORM\OneToMany(targetEntity="Utilisateur",mappedBy="codePostal")
@@ -87,53 +87,6 @@ class CodePostal
         return $this->cp;
     }
 
-    /**
-     * Set commune
-     *
-     * @param \AppBundle\Entity\Commune $commune
-     *
-     * @return CodePostal
-     */
-    public function setCommune(\AppBundle\Entity\Commune $commune = null)
-    {
-        $this->commune = $commune;
-
-        return $this;
-    }
-
-    /**
-     * Get commune
-     *
-     * @return \AppBundle\Entity\Commune
-     */
-    public function getCommune()
-    {
-        return $this->commune;
-    }
-
-    /**
-     * Set localite
-     *
-     * @param \AppBundle\Entity\Localite $localite
-     *
-     * @return CodePostal
-     */
-    public function setLocalite(\AppBundle\Entity\Localite $localite = null)
-    {
-        $this->localite = $localite;
-
-        return $this;
-    }
-
-    /**
-     * Get localite
-     *
-     * @return \AppBundle\Entity\Localite
-     */
-    public function getLocalite()
-    {
-        return $this->localite;
-    }
 
     /**
      * Add utilisateur
@@ -167,6 +120,66 @@ class CodePostal
     public function getUtilisateurs()
     {
         return $this->utilisateurs;
+    }
+
+
+
+    /**
+     * Add localite
+     *
+     * @param \AppBundle\Entity\Localite $localite
+     *
+     * @return CodePostal
+     */
+    public function addLocalite(\AppBundle\Entity\Localite $localite)
+    {
+        $this->localites[] = $localite;
+
+        return $this;
+    }
+
+    /**
+     * Remove localite
+     *
+     * @param \AppBundle\Entity\Localite $localite
+     */
+    public function removeLocalite(\AppBundle\Entity\Localite $localite)
+    {
+        $this->localites->removeElement($localite);
+    }
+
+    /**
+     * Get localites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocalites()
+    {
+        return $this->localites;
+    }
+
+    /**
+     * Set province
+     *
+     * @param \AppBundle\Entity\Province $province
+     *
+     * @return CodePostal
+     */
+    public function setProvince(\AppBundle\Entity\Province $province = null)
+    {
+        $this->province = $province;
+
+        return $this;
+    }
+
+    /**
+     * Get province
+     *
+     * @return \AppBundle\Entity\Province
+     */
+    public function getProvince()
+    {
+        return $this->province;
     }
 
     public function __toString()

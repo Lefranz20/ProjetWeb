@@ -1,0 +1,6 @@
+{% extends "::layout.html.twig" %}
+{% block principal %}
+    {% block fos_user_content %}
+        {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock %}

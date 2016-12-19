@@ -2,6 +2,15 @@
 {% block bandeau %}{{ render(controller('AppBundle:Index:bandeau')) }}{% endblock %}
 {% block recherche %}{{ render(controller('AppBundle:Index:recherche')) }}{% endblock %}
 
+{% block connectedUserNav %}
+    {% if (app.user) %}
+        {% if (app.user.utilisateurs) %}
+            {% if (app.user.utilisateurs.typeUtilisateur == 'prestataire') %}
+                {% include ':includes:prestataire_menu.html.twig' %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
 {% block prestataires %}
     <h2> Nouveaux prestataires </h2>
     {{ render(controller('AppBundle:Index:prestataires')) }}
