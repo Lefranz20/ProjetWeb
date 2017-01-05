@@ -1,21 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'index.html.twig' %}
+{% block bandeau %}{% endblock %}
+{% block principal %}
+    <div class="row filter bordered">
+        <div class="col-xs-offset-1 col-xs-7 ">
+            <h1 class=" text-primary">Modifier les données de l'établissement</h1>
+            {{ form_start(edit_form) }}
+            <div class="form-group ">
+                {{ form_label(edit_form.nomEntreprise,'Nom  de l\'établissement') }}
+                {{ form_widget(edit_form.nomEntreprise) }}
+            </div>
+            <div class="form-group ">
+                {{ form_label(edit_form.description,'Description') }}
+                {{ form_widget(edit_form.description) }}
+            </div>
+            <div class="form-group ">
+                {{ form_label(edit_form.web,'Web') }}
+                {{ form_widget(edit_form.web) }}
+            </div>
+            <div class="form-group ">
+                {{ form_label(edit_form.emailDeContact,'Email de contact') }}
+                {{ form_widget(edit_form.emailDeContact) }}
+            </div>
+            <div class="form-group ">
+                {{ form_label(edit_form.telephone,'Numéro de téléphone') }}
+                {{ form_widget(edit_form.telephone) }}
+            </div>
+            <div class="form-group ">
+                {{ form_label(edit_form.numeroTva,'Numéro de TVA') }}
+                {{ form_widget(edit_form.numeroTva) }}
+            </div>
+            <hr/>
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
+            </div>
+            {{ form_end(edit_form) }}
 
-{% block body %}
-    <h1>Prestataire edit</h1>
+{#            <ul>
+                <li>
+                    <a href="{{ path('liste_prestataires') }}">Back to the list</a>
+                </li>
+           <li>
+                    {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                </li>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('prestataire_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            </ul>
+            #}
+        </div>
+    </div>
 {% endblock %}

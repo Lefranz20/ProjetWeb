@@ -6,7 +6,13 @@
             <h1 class=" text-primary text-center">Profil de {{ app.user }}.</h1>
             <p>Veuillez compléter votre profil</p>
             {{ form_start(form) }}
-
+            {#
+                 {{ form_widget(form) }}
+            <div class="form-group">
+                {{ form_label(form.connexionDatas,'Connexion Data') }}
+                {{ form_widget(form.connexionDatas) }}
+            </div>
+            #}
             <div class="form-group ">
                 {{ form_label(form.nom,'Nom de l\'utilisateur') }}
                 {{ form_widget(form.nom) }}
@@ -41,6 +47,13 @@
             </div>
 
             {{ form_end(form) }}
+            {#
+                <ul>
+                    <li>
+                        <a href="{{ path('utilisateur_index') }}">Back to the list</a>
+                    </li>
+                </ul>
+            #}
         </div>
     </div>
 {% endblock %}

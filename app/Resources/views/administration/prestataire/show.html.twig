@@ -1,64 +1,43 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Prestataire</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ prestataire.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ prestataire.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ prestataire.description }}</td>
-            </tr>
-            <tr>
-                <th>Web</th>
-                <td>{{ prestataire.web }}</td>
-            </tr>
-            <tr>
-                <th>Emaildecontact</th>
-                <td>{{ prestataire.emailDeContact }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ prestataire.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Numerotva</th>
-                <td>{{ prestataire.numeroTva }}</td>
-            </tr>
-            <tr>
-                <th>Logo</th>
-                <td>{{ prestataire.logo }}</td>
-            </tr>
-            <tr>
-                <th>Dateinscription</th>
-                <td>{% if prestataire.dateInscription %}{{ prestataire.dateInscription|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ prestataire.slug }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('prestataire_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('prestataire_edit', { 'id': prestataire.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+{% extends 'index.html.twig' %}
+{% block bandeau %}{% endblock %}
+{% block principal %}
+    <div class="row filter bordered">
+        <div class="col-xs-offset-1 col-xs-7 ">
+            <h1 class=" text-primary">Données de l'Etablissement</h1>
+            <div class="p15">
+                <label class="text-capitalize">nom :</label>
+                {{ prestataire.nomEntreprise}}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize">description :</label>
+                {{ prestataire.description }}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize ">web :</label>
+                {{ prestataire.web }}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize ">email de contact :</label>
+                {{ prestataire.emailDeContact }}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize ">téléphone :</label>
+                {{ prestataire.telephone }}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize ">numero de TVA :</label>
+                {{ prestataire.numeroTva }}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize">logo :</label>
+                {{ prestataire.logo }}
+            </div>
+            <div class="p15">
+                <label class="text-capitalize ">Date d'inscription :</label>
+                {% if prestataire.dateInscription %}{{ prestataire.dateInscription|date('Y-m-d H:i:s') }}{% endif %}
+            </div>
+            <hr/>
+            <a href="{{ path('p_edit', { 'pretataireSlug': prestataire.pretataireSlug }) }}">Modifier</a>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'index.html.twig' %}
+{% block bandeau %}{% endblock %}
+{% block principal %}
+    <div class="row filter bordered">
+        <div class="col-xs-offset-1 col-xs-7">
+            <h1 class=" text-primary text-center"><i class="fa fa-2x fa-street-view"></i>Modifier ses coordonnées</h1>
+            {{ form_start(edit_form) }}
+            <div class="form-group ">
+                {{ form_label(edit_form.nom,'Nom et prénom de l\'utilisateur') }}
+                {{ form_widget(edit_form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.rue,'Rue') }}
+                {{ form_widget(edit_form.rue) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.rueNumero,'Rue N°') }}
+                {{ form_widget(edit_form.rueNumero) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.codePostal) }}
+                {{ form_widget (edit_form.codePostal)}}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.localite) }}
+                {{ form_widget(edit_form.localite) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.province) }}
+                {{ form_widget(edit_form.province) }}
+            </div>
+            <hr/>
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
+            </div>
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+{% endblock %}

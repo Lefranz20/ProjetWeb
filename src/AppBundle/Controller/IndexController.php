@@ -94,9 +94,6 @@ class IndexController extends Controller
             $localite = $request->get('localite', null);
             $catServices = $request->get('catServices', null);
 
-/*            if(null !== $prestataire && null !== $localite && null !== $catServices){
-
-            }*/
             if($prestataire){
                 $resultatRecherche = $this->getDoctrine()->getRepository('AppBundle:Prestataire')->FindByService($prestataire);
                 // return $this->json($resultatRecherche);
