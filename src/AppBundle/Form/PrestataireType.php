@@ -9,6 +9,7 @@
 namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,8 @@ class PrestataireType extends AbstractType {
                 ->add('web',null,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')))
                 ->add('emailDeContact',EmailType::class,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')))
                 ->add('telephone',null,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')))
-                ->add('numeroTva',null,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')));
+                ->add('numeroTva',null,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')))
+                ->add('logo_file',FileType::class,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')));
 
     }
 

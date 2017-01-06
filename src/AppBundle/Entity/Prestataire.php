@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
@@ -12,6 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="prestataire")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PrestataireRepository")
+ * @Vich\Uploadable
  */
 class Prestataire
 {
@@ -65,6 +68,15 @@ class Prestataire
      * @ORM\Column(name="numero_tva", type="string", length=255)
      */
     private $numeroTva;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="image_logo", fileNameProperty="logo")
+     *
+     * @var File
+     */
+    private $logoFile;
 
     /**
      * @var string
@@ -127,7 +139,7 @@ class Prestataire
      */
     public function __construct()
     {
-        $this->dateInscription = new \DateTime();
+        //$this->dateInscription = new \DateTime();
     }
 
     /**
@@ -285,6 +297,34 @@ class Prestataire
     }
 
     /**
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Prestataire
+     */
+    public function setLogoFile(File $image = null)
+    {
+        $this->logoFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->dateInscription = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getLogoFile()
+    {
+        return $this->logoFile;
+    }
+
+
+    /**
      * Set logo
      *
      * @param string $logo
@@ -301,7 +341,7 @@ class Prestataire
     /**
      * Get logo
      *
-     * @return string
+     * @return string|null
      */
     public function getLogo()
     {

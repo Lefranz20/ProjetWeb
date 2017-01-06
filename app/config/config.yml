@@ -40,6 +40,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         image_slider: /assets/img/slider/
+        image_logo: /assets/img/logo/
 
 # Doctrine Configuration
 doctrine:
@@ -64,8 +65,8 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-   # auth_mode: "%mailer_auth_mode%"
-   # port:      "%mailer_port%"
+    auth_mode: "%mailer_auth_mode%"
+    port:      "%mailer_port%"
 
 knp_menu:
     # use "twig: false" to disable the Twig extension and the TwigRenderer
@@ -103,7 +104,13 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
-
+        image_logo:
+            uri_prefix:         /assets/img/logo
+            upload_destination: '%kernel.root_dir%/../web/assets/img/logo'
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'

@@ -5,8 +5,7 @@
         <div class="col-xs-offset-1 col-xs-7 ">
             <h1 class=" text-primary">Données de l'Etablissement</h1>
             <div class="p15">
-                <label class="text-capitalize">nom :</label>
-                {{ prestataire.nomEntreprise}}
+               <h1 class="page-title"> {{ prestataire.nomEntreprise}}</h1>
             </div>
             <div class="p15">
                 <label class="text-capitalize">description :</label>
@@ -21,23 +20,23 @@
                 {{ prestataire.emailDeContact }}
             </div>
             <div class="p15">
-                <label class="text-capitalize ">téléphone :</label>
+                <label class="text-capitalize  ">téléphone :</label>
                 {{ prestataire.telephone }}
             </div>
             <div class="p15">
-                <label class="text-capitalize ">numero de TVA :</label>
+                <label class="text-capitalize">numero de TVA :</label>
                 {{ prestataire.numeroTva }}
             </div>
             <div class="p15">
                 <label class="text-capitalize">logo :</label>
-                {{ prestataire.logo }}
+                <img class="img-thumbnail img-responsive" src="{{asset(image_logo ~ prestataire.logo)  }}" alt="Logo" height="200" width="200"/>
             </div>
             <div class="p15">
                 <label class="text-capitalize ">Date d'inscription :</label>
                 {% if prestataire.dateInscription %}{{ prestataire.dateInscription|date('Y-m-d H:i:s') }}{% endif %}
             </div>
             <hr/>
-            <a href="{{ path('p_edit', { 'pretataireSlug': prestataire.pretataireSlug }) }}">Modifier</a>
+            <a href="{{ path('p_edit', { 'pretataireSlug': prestataire.pretataireSlug }) }}">Editer <i class="fa fa-2x fa-pencil"></i></a>
         </div>
     </div>
 {% endblock %}

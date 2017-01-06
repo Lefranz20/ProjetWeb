@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Prestataires controller.
  *
- * @Route("/{pretataireSlug}")
+ * @Route("/prestataire")
  * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
  */
 class PrestatairesController extends Controller {
@@ -22,12 +22,12 @@ class PrestatairesController extends Controller {
     /**
      * Finds and displays a prestataire entity.
      *
-     * @Route("/", name="p_show")
+     * @Route("/{pretataireSlug}", name="p_show")
      * @Method("GET")
      */
     public function showAction(Prestataire $prestataire)
     {
-        dump($prestataire);
+
         $deleteForm = $this->createDeleteForm($prestataire);
 
         return $this->render(':administration/prestataire:show.html.twig', array(
@@ -39,7 +39,7 @@ class PrestatairesController extends Controller {
     /**
      * Displays a form to edit an existing prestataire entity.
      *
-     * @Route("/edit", name="p_edit")
+     * @Route("/{pretataireSlug}/edit", name="p_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Prestataire $prestataire)
@@ -65,7 +65,7 @@ class PrestatairesController extends Controller {
     /**
      * Deletes a prestataire entity.
      *
-     * @Route("/delete", name="prestataire_delete")
+     * @Route("/{pretataireSlug}/delete", name="prestataire_delete")
      * @Method("DELETE")
      */
 

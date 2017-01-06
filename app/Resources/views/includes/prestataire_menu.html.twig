@@ -1,13 +1,13 @@
 <div class="header-top">
     <div class="header-content">
         <ul class=" nav nav-pills collapse navbar-collapse">
-            <li><a href="{{ url('categoriedeservice_index') }}">Mes services</a> </li>
+            <li><a href="{{ url('categoriedeservice_index',{'pretataireSlug':app.user.utilisateurs.prestataire}) }}">Mes services</a> </li>
             <li><a href="#">Mes promotions</a> </li>
             <li><a href="#">Mes stages</a> </li>
             <li><a href="#">Mon Profil</a>
                 <ul class="sub-menu">
                     <li><a href="{{ url('utilisateur_show',{'userSlug':app.user.utilisateurs}) }}">Mes coordonées</a> </li>
-                    <li><a href="{{ url('p_show',{'pretataireSlug':app.user.utilisateurs.prestataire}) }}">Données de l'entreprise</a> </li>
+                    <li><a href="{{ url('p_show',{'pretataireSlug':app.user.utilisateurs.prestataire}) }}">Données de l'établissement</a> </li>
                 </ul>
             </li>
         </ul>

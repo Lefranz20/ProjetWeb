@@ -41,7 +41,7 @@
                 {% if utilisateur.inscriptionConf %}OUI{% else %}NON{% endif %}
             </div>
             <hr/>
-            <div class=""><a href="{{ path('utilisateur_edit', { 'userSlug': utilisateur.userSlug }) }}">Modifier</a></div>
+            <div class=""><a href="{{ path('utilisateur_edit', { 'userSlug': utilisateur.userSlug }) }}">Editer <i class="fa fa-2x fa-pencil"></i></a></div>
         </div>
     </div>
 {% endblock %}

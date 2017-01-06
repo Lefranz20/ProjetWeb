@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @ORM\Table(name="categorie_de_service")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategorieDeServiceRepository")
- *  @Vich\Uploadable
+ * @Vich\Uploadable
  */
 class CategorieDeService
 {
@@ -90,7 +90,7 @@ class CategorieDeService
     private $slug;
 
     /**
-     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorieService")
+     *@ORM\ManyToMany(targetEntity="Prestataire",mappedBy="categorieService",cascade={"persist"})
      * @ORM\JoinColumn(name="prestataire_id",referencedColumnName="id",nullable=true)
      *
      */
@@ -407,5 +407,10 @@ class CategorieDeService
     public function getSlider()
     {
         return $this->slider;
+    }
+
+    public function __toString()
+    {
+        return $this->getSlug();
     }
 }

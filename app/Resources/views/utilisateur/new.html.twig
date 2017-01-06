@@ -8,7 +8,7 @@
             {{ form_start(form) }}
 
             <div class="form-group ">
-                {{ form_label(form.nom,'Nom de l\'utilisateur') }}
+                {{ form_label(form.nom,'Nom et prénom de l\'utilisateur') }}
                 {{ form_widget(form.nom) }}
             </div>
             <div class="form-group ">
@@ -27,17 +27,17 @@
                 {{ form_label(form.codePostal) }}
                 {{ form_widget (form.codePostal)}}
             </div>
-            <div>
-                {{ form_label(form.province) }}
-                {{ form_widget(form.province) }}
-            </div>
             <div class="form-group">
                 {{ form_label(form.localite) }}
                 {{ form_widget(form.localite) }}
             </div>
+            <div>
+                {{ form_label(form.province) }}
+                {{ form_widget(form.province) }}
+            </div>
             <hr/>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
             </div>
 
             {{ form_end(form) }}
