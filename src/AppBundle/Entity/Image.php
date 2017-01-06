@@ -45,19 +45,19 @@ class Image
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\CategorieDeService",mappedBy="images")
      *
      */
-    private $categorie_services;
+   // private $categorie_services;
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Internaute",inversedBy="images")
      * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id",nullable=true)
      *
      */
-    private $internautes;
+   // private $internautes;
 
     /**
      *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="images")
      */
-    private $prestataire;
+    //private $prestataire;
 
 
 
@@ -213,5 +213,10 @@ class Image
     public function getPrestataire()
     {
         return $this->prestataire;
+    }
+
+    public function __toString()
+    {
+        return $this->getLien();
     }
 }

@@ -13,14 +13,13 @@
                         </div><!-- /.hero-slider-content -->
                     </div><!-- /.carousel-caption -->
                 </div><!-- /.item -->
-
                 {% for s in sliders %}
                     <div class="item">
-                        <div class="item-bg" style="background-image: url('{{(asset(s.lien)) }}')"></div>
-                        <img src="{{ asset(s.lien) }}" alt=""/>
+                        <div class="item-bg" style="background-image: url('{{(asset(image_slider ~ s.imageName)) }}')"></div>
+                        <img src="{{ asset(image_slider ~ s.imageName) }}" alt=""/> {# image_slider est une varible globale #}
                         <div class="carousel-caption">
                             <div class="hero-slider-content">
-                                <h1>{{ s.titre }}</h1>
+                                <h1>{{ s.nom }}</h1>
                             </div><!-- /.hero-slider-content -->
                         </div><!-- /.carousel-caption -->
                     </div><!-- /.item -->

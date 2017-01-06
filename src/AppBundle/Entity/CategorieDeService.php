@@ -4,12 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * CategorieDeService
  *
  * @ORM\Table(name="categorie_de_service")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategorieDeServiceRepository")
+ *  @Vich\Uploadable
  */
 class CategorieDeService
 {
@@ -37,16 +40,46 @@ class CategorieDeService
     private $description;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="slider", type="boolean",nullable=true)
+     */
+    private $slider;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="image_slider", fileNameProperty="imageName")
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(name="image_name",type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(name="updated_at",type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
      * @var bool
      *
-     * @ORM\Column(name="en_avant", type="boolean")
+     * @ORM\Column(name="en_avant", type="boolean",nullable=true)
      */
     private $enAvant;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="valide", type="boolean")
+     * @ORM\Column(name="valide", type="boolean",nullable=true)
      */
     private $valide;
 
@@ -68,13 +101,6 @@ class CategorieDeService
      * @ORM\JoinColumn(nullable=true)
      */
     private $promotions;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Image",inversedBy="categorie_services")
-     * @ORM\JoinColumn(name="image_id",referencedColumnName="id",nullable=true)
-     */
-    private $images;
-
 
     /**
      * Constructor
@@ -284,26 +310,102 @@ class CategorieDeService
     }
 
     /**
-     * Set images
      *
-     * @param \AppBundle\Entity\Image $images
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
      * @return CategorieDeService
      */
-    public function setImages(\AppBundle\Entity\Image $images = null)
+    public function setImageFile(File $image = null)
     {
-        $this->images = $images;
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
 
     /**
-     * Get images
-     *
-     * @return \AppBundle\Entity\Image
+     * @return File|null
      */
-    public function getImages()
+    public function getImageFile()
     {
-        return $this->images;
+        return $this->imageFile;
+    }
+
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     *
+     * @return CategorieDeService
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string|null
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return CategorieDeService
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set slider
+     *
+     * @param boolean $slider
+     *
+     * @return CategorieDeService
+     */
+    public function setSlider($slider)
+    {
+        $this->slider = $slider;
+
+        return $this;
+    }
+
+    /**
+     * Get slider
+     *
+     * @return boolean
+     */
+    public function getSlider()
+    {
+        return $this->slider;
     }
 }

@@ -46,8 +46,8 @@ class IndexController extends Controller
      */
     public function  bandeauAction(Request $request)
     {
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Image');
-        $images = $repo->findBy(array('typeImage'=>'slider'));
+        $repo = $this->getDoctrine()->getRepository('AppBundle:CategorieDeService');
+        $images = $repo->findBy(array('slider'=>true));
         if(!$images){
             $php_errormsg = ['msg'=>'les images du slider sont en cours de validation !'];
             return $this->render(':blocs_home:error-blocs.html.twig',['error'=>$php_errormsg]);

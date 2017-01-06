@@ -115,10 +115,6 @@ class Prestataire
      */
     private $commentaires;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Image",mappedBy="prestataire")
-     */
-    private $images;
 
     /**
      * @ORM\ManyToMany(targetEntity="Internaute",mappedBy="prestataire")
@@ -496,39 +492,7 @@ class Prestataire
         return $this->commentaires;
     }
 
-    /**
-     * Add image
-     *
-     * @param \AppBundle\Entity\Image $image
-     *
-     * @return Prestataire
-     */
-    public function addImage(\AppBundle\Entity\Image $image)
-    {
-        $this->images[] = $image;
 
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \AppBundle\Entity\Image $image
-     */
-    public function removeImage(\AppBundle\Entity\Image $image)
-    {
-        $this->images->removeElement($image);
-    }
-
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
 
     /**
      * Add internaute

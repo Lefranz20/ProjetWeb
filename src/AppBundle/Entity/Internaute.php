@@ -78,7 +78,7 @@ class Internaute
      * @ORM\OneToOne(targetEntity="Image",mappedBy="internautes")
      *
      */
-    private $images;
+   // private $images;
 
     /**
      * @ORM\ManyToMany(targetEntity="Prestataire",inversedBy="internaute")
@@ -325,29 +325,6 @@ class Internaute
         return $this->commentaires;
     }
 
-    /**
-     * Set images
-     *
-     * @param \AppBundle\Entity\Image $images
-     *
-     * @return Internaute
-     */
-    public function setImages(\AppBundle\Entity\Image $images = null)
-    {
-        $this->images = $images;
-
-        return $this;
-    }
-
-    /**
-     * Get images
-     *
-     * @return \AppBundle\Entity\Image
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
 
     /**
      * Add prestataire

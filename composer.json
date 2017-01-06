@@ -32,7 +32,8 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "whiteoctober/breadcrumbs-bundle": "^1.2",
-        "knplabs/knp-menu-bundle": "^2.0"
+        "knplabs/knp-menu-bundle": "^2.0",
+        "vich/uploader-bundle": "^1.4"
 
     },
     "require-dev": {
