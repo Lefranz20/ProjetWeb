@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Stage
@@ -34,6 +35,12 @@ class Stage
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(length=128,unique=true)
+     */
+    private $stageSlug;
 
     /**
      * @var string
@@ -308,5 +315,34 @@ class Stage
     public function getPrestataire()
     {
         return $this->prestataire;
+    }
+
+    /**
+     * Set stageSlug
+     *
+     * @param string $stageSlug
+     *
+     * @return Stage
+     */
+    public function setStageSlug($stageSlug)
+    {
+        $this->stageSlug = $stageSlug;
+
+        return $this;
+    }
+
+    /**
+     * Get stageSlug
+     *
+     * @return string
+     */
+    public function getStageSlug()
+    {
+        return $this->stageSlug;
+    }
+
+    public function __toString()
+    {
+        return $this->getStageSlug();
     }
 }

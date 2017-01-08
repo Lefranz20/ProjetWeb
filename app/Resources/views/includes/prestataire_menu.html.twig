@@ -2,8 +2,8 @@
     <div class="header-content">
         <ul class=" nav nav-pills collapse navbar-collapse">
             <li><a href="{{ url('categoriedeservice_index',{'pretataireSlug':app.user.utilisateurs.prestataire}) }}">Mes services</a> </li>
-            <li><a href="#">Mes promotions</a> </li>
-            <li><a href="#">Mes stages</a> </li>
+            <li><a href="{{ url('promotion_index',{'pretataireSlug':app.user.utilisateurs.prestataire}) }}">Mes promotions</a> </li>
+            <li><a href="{{ url('stage_index',{'pretataireSlug':app.user.utilisateurs.prestataire}) }}">Mes stages</a> </li>
             <li><a href="#">Mon Profil</a>
                 <ul class="sub-menu">
                     <li><a href="{{ url('utilisateur_show',{'userSlug':app.user.utilisateurs}) }}">Mes coordonées</a> </li>
