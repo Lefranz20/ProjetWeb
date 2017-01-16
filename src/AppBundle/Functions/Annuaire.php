@@ -17,7 +17,7 @@ class  Annuaire {
     function __construct(TokenStorage $t){
         $this->token = $t;
     }
-    public function RetrieveSlug ()
+    public function RetrieveSlug ($typeUser)
     {
         if (null === $token = $this->token->getToken()) {
             return;
@@ -27,8 +27,15 @@ class  Annuaire {
             // e.g. anonymous authentication
             return;
         }
+        if($user->getUtilisateurs()->getTypeUtilisateur()=== $typeUser)
+        {
+            return $user->getUtilisateurs()->getPrestataire()->getPretataireSlug();
+        }
+        if($user->getUtilisateurs()->getTypeUtilisateur()=== $typeUser)
+        {
+            return $user->getUtilisateurs()->getInternautes()->getInternauteSlug();
+        }
 
-        return $user->getUtilisateurs()->getPrestataire()->getPretataireSlug();
     }
 
 } 

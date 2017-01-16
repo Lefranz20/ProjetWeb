@@ -3,26 +3,27 @@
 
 {% block principal %}
     <h1>Liste des services</h1>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>description</th>
-            <th>Utilisateurs</th>
-            <th>détail</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for s in servicesValides %}
-            <tr>
-                <td>{{ s.nom}}</td>
-                <td>{{ s.description }}</td>
-                <td>prestataire</td>
-                <td class=""><a href="{{ url('show_service',{'slug' : s.slug}) }}"><i class="fa  fa-search"></i>prestataire</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% for s in servicesValides %}
+        <div class="card-row">
+            <div class="card-row-inner">
+                <div class="card-row-image" data-background-image="{{ image_slider ~ s.imageName }}" style="background-image: url(&quot;assets/img/tmp/product-1.jpg&quot;);">
+                    <div class="card-row-label">
+                        <span>Bien être ...</span>
+                    </div><!-- /.card-row-label -->
+                    <a href="{{ url('show_service',{'slug' : s.slug}) }}">
+                        <div class="card-row-price">
+                            PROMOTION ! <i class="fa fa-hand-o-up"></i>
+                        </div><!-- -->
+                    </a>
+                </div><!-- /.card-row-image -->
+                <div class="card-row-body">
+                    <h2 class="card-row-title">{{ s.nom }}</h2>
+                    <div class="card-row-content"><p>{{  s.description }}</p></div><!-- /.card-row-content -->
+                </div><!-- /.card-row-body -->
+            </div><!-- /.card-row-inner -->
+        </div>
+    {% endfor %}
+
     {# navigation de la pagination #}
     <div class="navigation">
         {{ knp_pagination_render(servicesValides) }}

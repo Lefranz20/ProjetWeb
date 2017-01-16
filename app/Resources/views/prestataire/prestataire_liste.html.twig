@@ -1,7 +1,7 @@
 {% extends '::Index.html.twig' %}
 {% block bandeau %}{% endblock %}
 {% block principal %}
-    <table class="table table-hover">
+{#    <table class="table table-hover">
         <thead>
         <tr>
             <th>Nom de l'Entreprise</th>
@@ -20,7 +20,30 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table>#}
+    <div class="row">
+        {% for p in prestataires %}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <a href="{{ path('show_prestaire',{'slug' : p.pretataireSlug})}}">
+                    {#<div class="card-simple" data-background-image='{{ asset('assets/img/tmp/product-1.jpg')}}' style="background-image: url('{{asset('assets/img/tmp/product-1.jpg') }}');">#}
+                    <div class="card-simple" data-background-image='{{ asset(image_logo ~ p.logo)}}' style="background-image: url('{{asset('assets/img/tmp/product-1.jpg') }}');">
+                        <div class="card-simple-background">
+                            <div class="card-simple-content">
+                                <div class="card-simple-rating"><h2>{{ p.nomEntreprise }}</h2></div>
+                                <div class="card-simple-actions"><h2>{{ p.web  }}</h2></div>
+                            </div>
+                            <div class="card-simple-label"><span>TVA:{{ p.numeroTva }}</span></div>
+                        </div>
+                        <div class="card-simple-price">
+                            <span>plus de détail >></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
     {# navigation de la pagination #}
     <div class="navigation">
         {{ knp_pagination_render(prestataires) }}
