@@ -20,6 +20,42 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UtilisateurController extends Controller
 {
+    /*
+     *
+        vérifications des données et profils des utilsateurs
+        permet d'afficher dans la vue la navigation Utilisateur en fonction du type d'utilisateur
+    */
+
+    /**
+     * @Route("/home",name="user_home")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function homeAction(Request $request)
+    {
+
+        $currentUser = $this->getUser()->getUtilisateurs();
+       // dump($currentUser);die();
+        if($currentUser)
+        {
+           //dump($this->get('app.functions.annuaire')->RetrieveSlug());die();
+            if($this->get('app.functions.annuaire')->RetrieveSlug())
+            {
+                return $this->render('::Index.html.twig');
+            }
+            if($currentUser->getTypeUtilisateur()=== "prestataire")
+            {
+                return $this->redirectToRoute('new_prestataire',array('userSlug'=>$currentUser->getUserSlug()));
+            }
+            if($currentUser->getTypeUtilisateur()=== "internaute")
+            {
+
+                return $this->redirectToRoute('internaute_new',array('userSlug'=>$currentUser->getUserSlug()));
+            }
+
+        }
+        return $this->redirectToRoute('new_utilisateur');
+
+    }
 
     /**
      *@Route("/new",name="new_utilisateur",methods={"POST","GET"})
@@ -119,56 +155,6 @@ class UtilisateurController extends Controller
         return $this->redirectToRoute('homepage');
     }
 
-    /**
-     * Lists all utilisateur entities.
-     *
-     * @Route("/", name="utilisateur_index")
-     * @Method("GET")
-     */
-    /*
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $utilisateurs = $em->getRepository('AppBundle:Utilisateur')->findAll();
-
-        return $this->render('utilisateur/index.html.twig', array(
-            'utilisateurs' => $utilisateurs,
-        ));
-    }
-*/
-
-/*
-
-    /**
-     * Creates a new utilisateur entity.
-     *
-     * @Route("/new", name="utilisateur_new")
-     * @Method({"GET", "POST"})
-     */
-
-    /*
-    public function newAction(Request $request)
-    {
-        //$utilisateur = new Utilisateur();
-        //$form = $this->createForm('AppBundle\Form\UtilisateurType', $utilisateur);
-        //$form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($utilisateur);
-            $em->flush($utilisateur);
-
-            return $this->redirectToRoute('utilisateur_show', array('id' => $utilisateur->getId()));
-        }
-
-        return $this->render('utilisateur/new.html.twig', array(
-            'utilisateur' => $utilisateur,
-            'form' => $form->createView(),
-        ));
-    }
-
-    */
 
     /**
      * Creates a form to delete a utilisateur entity.
@@ -186,7 +172,6 @@ class UtilisateurController extends Controller
             ->getForm()
             ;
     }
-
 
 
     /**

@@ -17,7 +17,7 @@
         <tbody>
         {% for internaute in internautes %}
             <tr>
-                <td><a href="{{ path('internaute_show', { 'id': internaute.id }) }}">{{ internaute.id }}</a></td>
+                <td><a href="{{ path('internaute_show', { 'internauteSlug': internaute.internauteSlug }) }}">{{ internaute.id }}</a></td>
                 <td>{{ internaute.nom }}</td>
                 <td>{{ internaute.prenom }}</td>
                 <td>{% if internaute.inscriptionNewsletter %}Yes{% else %}No{% endif %}</td>
@@ -25,10 +25,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('internaute_show', { 'id': internaute.id }) }}">show</a>
+                            <a href="{{ path('internaute_show', { 'internauteSlug': internaute.internauteSlug }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('internaute_edit', { 'id': internaute.id }) }}">edit</a>
+                            <a href="{{ path('internaute_edit', { 'internauteSlug': internaute.internauteSlug }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -39,7 +39,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('internaute_new') }}">Create a new internaute</a>
+            <a href="{{ path('internaute_new',{'userSlug':app.user.utilisateurs}) }}">Create a new internaute</a>
         </li>
     </ul>
 {% endblock %}

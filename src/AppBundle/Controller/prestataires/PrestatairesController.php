@@ -76,35 +76,15 @@ class PrestatairesController extends Controller {
 
 
     /**
-     * @Route("/home",name="user_home")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     */
-    public function homeAction(Request $request)
-    {
-
-        $userData = $this->getDoctrine()->getRepository('AppBundle:ConnexionData')->findOneBy(array('id'=>$this->getUser()));
-        /** @var Utilisateur $u */
-        $u = $userData->getUtilisateurs();
-        if($u)
-        {
-            // permet d'afficher dans la vue la navigation Utilisateur en fonction du type d'utilisateur
-            return $this->render('::Index.html.twig');
-
-        }
-        return $this->redirectToRoute('new_utilisateur');
-
-    }
-
-    /**
      * @Route("/{pretataireSlug}/services",name="nav_prestataire_service")
      * @ParamConverter("p",class="AppBundle:Prestataire")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      */
-    public function AdminServiceByPrestataire(Request $request, Prestataire $p)
+/*    public function AdminServiceByPrestataire(Request $request, Prestataire $p)
     {
         return die($p->getNomEntreprise());
-    }
+    }*/
 
 
 }

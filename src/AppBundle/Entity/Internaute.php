@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 
 /**
@@ -11,6 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="internaute")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\InternauteRepository")
+ * @Vich\Uploadable
  */
 class Internaute
 {
@@ -44,9 +48,25 @@ class Internaute
     private $internauteSlug;
 
     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="image_logo", fileNameProperty="avatar")
+     *
+     * @var File
+     */
+    private $avatarFile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="avatar", type="string", length=255,nullable=true)
+     */
+    private $avatar;
+
+    /**
      * @var bool
      *
-     * @ORM\Column(name="inscription_newsletter", type="boolean")
+     * @ORM\Column(name="inscription_newsletter", type="boolean",nullable=true)
      */
     private $inscriptionNewsletter;
 
@@ -78,7 +98,7 @@ class Internaute
      * @ORM\OneToOne(targetEntity="Image",mappedBy="internautes")
      *
      */
-   // private $images;
+   /* private $images;*/
 
     /**
      * @ORM\ManyToMany(targetEntity="Prestataire",inversedBy="internaute")
@@ -90,6 +110,7 @@ class Internaute
 
     /**
      * @ORM\OneToMany(targetEntity="Position",mappedBy="internaute")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $positions;
 
@@ -99,7 +120,7 @@ class Internaute
      */
     public function __construct()
     {
-        $this->dateInscription = new \DateTime();
+      // $this->dateInscription = new \DateTime();
     }
 
 
@@ -392,6 +413,57 @@ class Internaute
     public function getPositions()
     {
         return $this->positions;
+    }
+
+
+    /**
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Internaute
+     */
+    public function setAvatarFile(File $image = null)
+    {
+        $this->avatarFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->dateInscription = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     *
+     * @return Internaute
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string|null
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 
     public function __toString()

@@ -52,7 +52,7 @@ class Image
      * @ORM\JoinColumn(name="internaute_id",referencedColumnName="id",nullable=true)
      *
      */
-   // private $internautes;
+    private $internautes;
 
     /**
      *@ORM\ManyToOne(targetEntity="Prestataire",inversedBy="images")

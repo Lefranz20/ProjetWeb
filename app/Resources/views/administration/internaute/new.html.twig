@@ -1,0 +1,32 @@
+
+{% extends 'layout.html.twig' %}
+{% block prestataires %}
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-7">
+            <h1>Bienvenue sur Annuaire Bien être </h1>
+            <p>vous êtes inscrit en tant que Internaute. veuillez compléter votre fiche de Renseignement</p>
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.nom,'Nom') }}
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.prenom,'Prénom') }}
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.avatar_file,'Votre avatar') }}
+                {{ form_widget(form.avatar_file) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.inscriptionNewsletter,'inscription à la Newsletter') }}
+                {{ form_widget(form.inscriptionNewsletter) }}
+            </div>
+            <hr/>
+            <div>
+                <input type="submit" value="create" class="btn btn-primary"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

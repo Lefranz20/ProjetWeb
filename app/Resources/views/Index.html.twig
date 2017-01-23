@@ -6,7 +6,13 @@
     {% if (app.user) %}
         {% if (app.user.utilisateurs) %}
             {% if (app.user.utilisateurs.typeUtilisateur == 'prestataire') %}
-                {% include ':includes:prestataire_menu.html.twig' %}
+                {% if (app.user.utilisateurs.prestataire)  %}
+                    {% include ':includes:prestataire_menu.html.twig' %}
+                {% endif %}
+            {% elseif(app.user.utilisateurs.typeUtilisateur == 'internaute') %}
+                {% if (app.user.utilisateurs.internautes)  %}
+                    {% include ':includes:internaute_menu.html.twig' %}
+                {% endif %}
             {% endif %}
         {% endif %}
     {% endif %}

@@ -38,7 +38,7 @@ class Promotion
     /**
      * @var string
      *
-     * @ORM\Column(name="document", type="string", length=255)
+     * @ORM\Column(name="document", type="string", length=255,nullable=true)
      */
     private $document;
 
