@@ -1,0 +1,34 @@
+{% extends 'index.html.twig' %}
+{% block bandeau %}{% endblock %}
+{% block principal %}
+    <div class="filter bordered">
+        <h1 class=" text-primary">Promotion</h1>
+        <table class="table-hover table-responsive">
+            <tr class="row">
+                <th class="col-sm-2">Titre :</th>
+                <td class="col-sm-10 page-title bg-primary text-center text-capitalize">{{ promotion.nom }}</td>
+            </tr>
+            <tr class="row">
+                <th class="col-sm-2">Description :</th>
+                <td class="col-sm-10">{{ promotion.description }}</td>
+            </tr>
+            <tr class="row">
+                <th class="col-sm-2">Flyer de la promotion :</th>
+                <td class="col-sm-10">{{ promotion.document }}</td>
+            </tr>
+            <tr class="row">
+                <th class="col-sm-2">Début de la promotion</th>
+                <td class="col-sm-10">{% if promotion.dateDebut %}{{ promotion.dateDebut|date('d-m-Y') }}{% endif %}</td>
+            </tr>
+            <tr class="row">
+                <th class="col-sm-2">Fin de la promotion</th>
+                <td class="col-sm-10">{% if promotion.dateFin %}{{ promotion.dateFin|date('d-m-Y') }}{% endif %}</td>
+            </tr>
+{#            <tr class="row">
+                <th class="col-sm-2">Document :</th>
+                <td class="col-sm-10"><img src="{{ asset() }}" alt="service" width="500" height="300"><figure class="text-secondary"> Chemin: {{ asset(image_slider ~ categorieDeService.imageName) }}</figure> </td>
+            </tr>
+            #}
+        </table>
+    </div>
+{% endblock %}

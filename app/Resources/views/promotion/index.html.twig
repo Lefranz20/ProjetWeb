@@ -1,0 +1,31 @@
+{% extends 'index.html.twig' %}
+{% block bandeau %}{% endblock %}
+{% block principal %}
+    <div class="row filter bordered">
+        <h1 class="text-primary">Liste des Promotions</h1>
+        <table class="table table-responsive table-striped">
+            <tr class="row">
+                <th class="col-sm-2">Titre</th>
+                <th class="col-sm-2 text-right">Début promotion</th>
+                <th class="col-sm-2 text-right">Fin promotion</th>
+                <th class="col-sm-2 text-right">Début affichage</th>
+                <th class="col-sm-2 text-right">Fin affichage</th>
+                <th class="col-sm-2 text-right">Actions</th>
+            </tr>
+            {% for promotion in promotions %}
+                <tr class="row">
+                    <td class="col-sm-2">{{ promotion.nom }}</td>
+                    <td class="col-sm-2">{{ promotion.dateDebut|date('d-M-y') }}</td>
+                    <td class="col-sm-2">{{ promotion.dateFin|date('d-M-y') }}</td>
+                    <td class="col-sm-2">{{ promotion.dateAffichageDebut|date('d-M-y') }}</td>
+                    <td class="col-sm-2">{{ promotion.dateAffichageFin|date('d-M-y')}}</td>
+                </tr>
+
+            {% endfor %}
+        </table>
+        {# navigation de la pagination #}
+        <div class="navigation">
+            {{ knp_pagination_render(promotions) }}
+        </div>
+    </div>
+{% endblock %}

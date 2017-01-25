@@ -23,7 +23,11 @@ class InternauteType extends AbstractType
      $builder
          ->add('nom',TextType::class,array('label_attr'=> array('class'=>'form-label'),'attr'=>array('class'=>'form-control')))
          ->add('prenom',TextType::class,array('label_attr' =>array('class'=>'form-label'),'attr' => array('class' => 'form-control')))
-         ->add('inscriptionNewsletter',ChoiceType::class,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')))
+         ->add('inscriptionNewsletter',ChoiceType::class,array(
+             'label_attr'=>array('class'=>'form-label'),
+             'attr'=>array('class'=>'form-control'),
+             'choices'=>array('Oui'=>true,'Non'=>false)
+         ))
          ->add('avatar_file',FileType::class,array('label_attr'=>array('class'=>'form-label'),'attr'=>array('class'=>'form-control')));
 
     }

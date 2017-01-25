@@ -1,18 +1,27 @@
 {% extends '::Index.html.twig' %}
 {% block bandeau %}{% endblock %}
-{% block recherche %}
-    <div class="container">
-        <h1 class="text-capitalize text-secondary">Détail du service</h1>
-        <table class="table table-hover">
-            <tr class="row">
-                <th class="col-sm-3">désignation du service</th>
-                <th class="col-sm-9">Description</th>
-            </tr>
-            <tr class="row">
-                <td class="col-sm-3">{{ categorieService.nom }}</td>
-                <td class="col-sm-9">{{ categorieService.description }}</td>
-            </tr>
-        </table>
-    </div><!-- /.container -->
+{% block principal %}
+    <div class="card-row">
+        <div class="card-row-inner">
+            <div class="card-row-image" data-background-image="{{ image_slider ~ categorieService.imageName }}" style="background-image: url(&quot;assets/img/tmp/product-1.jpg&quot;);">
+                <div class="card-row-label">
+                    <span>Bien être ...</span>
+                </div><!-- /.card-row-label -->
+                {% for p in categorieService.promotions %} {# boucle sur le service en promotion #}
+                    {% if(p.id) %} {#si un service en promotion, on affiche l'étiquette promotion sur le service en question#}
+                        <a href="{{ url('promotion_show_front',{'id' :p.id}) }}"> {#lien vers la promotion#}
+                            <div class="card-row-price">
+                                PROMOTION ! <i class="fa fa-hand-o-up"></i>
+                            </div><!-- -->
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div><!-- /.card-row-image -->
+            <div class="card-row-body">
+                <h2 class="card-row-title">{{ categorieService.nom }}</h2>
+                <div class="card-row-content"><p>{{  categorieService.description }}</p></div><!-- /.card-row-content -->
+            </div><!-- /.card-row-body -->
+        </div><!-- /.card-row-inner -->
+    </div>
 {% endblock %}
-{% block prestataires %}{% endblock %}
+

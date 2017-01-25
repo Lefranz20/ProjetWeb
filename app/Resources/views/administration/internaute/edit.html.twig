@@ -1,21 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends 'index.html.twig' %}
+{% block bandeau %}{% endblock %}
+{% block principal %}
+    <div class="row filter bordered">
+        <div class="col-xs-offset-1 col-xs-7">
+            <h1 class=" text-primary text-center"><i class="fa fa-2x fa-street-view"></i>Modifier son profil</h1>
+            {{ form_start(edit_form) }}
+            <div class="form-group ">
+                {{ form_label(edit_form.nom,'Nom') }}
+                {{ form_widget(edit_form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.prenom,'Prénom') }}
+                {{ form_widget(edit_form.prenom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.inscriptionNewsletter,'inscription à la Newsletter') }}
+                {{ form_widget(edit_form.inscriptionNewsletter) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(edit_form.avatar_file,'avatar du profil(image)') }}
+                {{ form_widget(edit_form.avatar_file) }}
+            </div>
 
-{% block body %}
-    <h1>Internaute edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('internaute_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <hr/>
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-primary" />
+            </div>
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
 {% endblock %}

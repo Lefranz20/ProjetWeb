@@ -77,7 +77,7 @@ class InternauteController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('internaute_edit', array('internauteSlug' => $this->get('app.functions.annuaire')->RetrieveSlug()));
+            return $this->redirectToRoute('internaute_show', array('internauteSlug' => $this->get('app.functions.annuaire')->RetrieveSlug()));
         }
 
         return $this->render(':administration/internaute:edit.html.twig', array(

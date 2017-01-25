@@ -10,11 +10,15 @@
                     <div class="card-row-label">
                         <span>Bien être ...</span>
                     </div><!-- /.card-row-label -->
-                    <a href="{{ url('show_service',{'slug' : s.slug}) }}">
-                        <div class="card-row-price">
-                            PROMOTION ! <i class="fa fa-hand-o-up"></i>
-                        </div><!-- -->
-                    </a>
+                    {% for p in s.promotions %} {# boucle sur le service en promotion #}
+                        {% if(p.id) %} {#si un service en promotion, on affiche l'étiquette promotion sur le service en question#}
+                            <a href="{{ url('promotion_show_front',{'id' :p.id}) }}"> {#lien vers la promotion#}
+                                <div class="card-row-price">
+                                    PROMOTION ! <i class="fa fa-hand-o-up"></i>
+                                </div><!-- -->
+                            </a>
+                        {% endif %}
+                    {% endfor %}
                 </div><!-- /.card-row-image -->
                 <div class="card-row-body">
                     <h2 class="card-row-title">{{ s.nom }}</h2>

@@ -116,7 +116,7 @@
                         <ul>
                             {% for s in prestataire.categorieService %}
                                 <ul>
-                                    <li><a href="#">{{s.nom}}</a></li>
+                                    <li><a href="{{ url('show_service',{'slug':s.slug}) }}">{{s.nom}}</a></li>
                                 </ul>
                             {% endfor %}
                         </ul>

@@ -1,31 +1,10 @@
 {% extends '::Index.html.twig' %}
 {% block bandeau %}{% endblock %}
 {% block principal %}
-{#    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nom de l'Entreprise</th>
-            <th>Web</th>
-            <th>N° TVA</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        {% for p in prestataires %}
-            <tr>
-                <td>{{ p.nomEntreprise }}</td>
-                <td>{{ p.web }}</td>
-                <td>{{ p.numeroTva }}</td>
-                <td class=""><a href="{{ url('show_prestaire',{'slug' : p.pretataireSlug}) }}">detail</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>#}
     <div class="row">
         {% for p in prestataires %}
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <a href="{{ path('show_prestaire',{'slug' : p.pretataireSlug})}}">
-                    {#<div class="card-simple" data-background-image='{{ asset('assets/img/tmp/product-1.jpg')}}' style="background-image: url('{{asset('assets/img/tmp/product-1.jpg') }}');">#}
                     <div class="card-simple" data-background-image='{{ asset(image_logo ~ p.logo)}}' style="background-image: url('{{asset('assets/img/tmp/product-1.jpg') }}');">
                         <div class="card-simple-background">
                             <div class="card-simple-content">
